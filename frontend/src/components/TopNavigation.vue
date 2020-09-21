@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-navbar type="dark" variant="secondary">
-      <b-navbar-brand href="#">나랑노랑</b-navbar-brand>
+      <b-navbar-brand @click="onRoute('Main')">나랑노랑</b-navbar-brand>
 
       <b-navbar-nav class="ml-auto">
 
@@ -42,7 +42,7 @@
         </b-card-body>
 
         <b-list-group>
-          <b-list-group-item v-b-modal.bookshelves>내 서재</b-list-group-item>
+          <b-list-group-item v-b-modal.mb @click="onRoute('MyBook')">내 서재</b-list-group-item>
           <b-list-group-item href="#">Not yet...</b-list-group-item>
           <b-list-group-item href="#">Not yet...</b-list-group-item>
         </b-list-group>
@@ -51,7 +51,7 @@
       <template v-slot:footer="{}">
        <div class="d-flex bg-dark text-light align-items-center px-3 py-2">
         <strong class="mr-auto">나랑노랑</strong>
-        <b-button v-b-modal.cs-center>
+        <b-button v-b-modal.cs @click="onRoute('CS')">
           <b-icon icon="headset" aria-hidden="true"></b-icon> 고객센터
         </b-button>
        </div>
@@ -59,76 +59,21 @@
 
     </b-sidebar>
 
-    <!-- 내 서재 -->
-    <b-modal id="bookshelves" size="lg" scrollable title="우리아이 책장" no-close-on-backdrop>
-      <b-card no-body style="min-height: 500px;">
-        
-      </b-card>
-
-      <template v-slot:modal-footer="{ cancel }">
-        <b-button @click="cancel()">
-          닫기
-        </b-button>
-      </template>
-    </b-modal>
-
-    <!-- 고객샌터 -->
-    <b-modal id="cs-center" size="lg" scrollable title="고객센터 / 도움말" no-close-on-backdrop>
-      <b-card no-body style="min-height: 500px;">
-        <b-tabs card>
-          <b-tab title-link-class="text-dark" title="자주 묻는 질문">
-
-            <div class="accordion" role="tablist" v-for="(accordion, i) in accordions" :key="i">
-              <b-card no-body class="mb-1">
-                <b-card-header header-tag="header" class="p-1" role="tab">
-                  <b-button block v-b-toggle="`accordion-${i}`">Accordion {{i}}</b-button>
-                </b-card-header>
-                <b-collapse :id="`accordion-${i}`" accordion="my-accordion" role="tabpanel">
-                  <b-card-body>
-                    <b-card-text>{{i}} {{ text }}</b-card-text>
-                  </b-card-body>
-                </b-collapse>
-              </b-card>
-            </div>
-
-          </b-tab>
-          <b-tab title-link-class="text-dark" title="1 : 1 문의">
-            <b-card-text>Not yet</b-card-text>
-          </b-tab>
-        </b-tabs>
-      </b-card>
-
-      <template v-slot:modal-footer="{ cancel }">
-        <b-button @click="cancel()">
-          닫기
-        </b-button>
-      </template>
-    </b-modal>
-
   </div>
 </template>
 
 <script>
+
 export default {
   name: "TopNavigation",
   data() {
     return {   
-      accordions: 5,
-      text: `
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
-        richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor
-        brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon
-        tempor, sunt aliqua put a bird on it squid single-origin coffee nulla
-        assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore
-        wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher
-        vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic
-        synth nesciunt you probably haven't heard of them accusamus labore VHS.
-      `,
-        
     }
   },
   methods: {
-
+    onRoute(name) {
+      this.$router.push({name: name}, () => {})
+    }
   }
 }
 </script>
