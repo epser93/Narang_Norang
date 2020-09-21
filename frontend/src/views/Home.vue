@@ -3,8 +3,7 @@
     <top-navigation/>
 
         <div id="example">
-          <carousel-3d @after-slide-change="onAfterSlideChange" @before-slide-change="onBeforeSlideChange" @last-slide="onLastSlide"
-            :space="360" :width="240" :height="360" :border="3" :perspective="0" :scaling="0">
+          <carousel-3d :space="360" :width="240" :height="360" :border="3" :perspective="0" :scaling="0">
             
             <slide v-for="(slide, i) in slides" :key="i" :index="i">
               <figure>
@@ -14,19 +13,6 @@
 
           </carousel-3d>
         </div>
-
-    <!-- <div id="example">
-      <carousel-3d @after-slide-change="onAfterSlideChange" @before-slide-change="onBeforeSlideChange" @last-slide="onLastSlide" :disable3d="true"
-        :space="250" :width="240" :height="360" :border="3" :perspective="0" :scaling="0">
-
-        <slide v-for="(slide, i) in slides" :key="i" :index="i">
-          <figure>
-            <img src="https://placehold.it/360x270">
-          </figure>
-        </slide>
-
-      </carousel-3d>
-    </div> -->
       
   </div>
 </template>
@@ -44,7 +30,7 @@ export default {
   },
   data() {
     return {
-      slides: 7
+      slides: 8
     }
   },
 }
