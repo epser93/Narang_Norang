@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
 
 
-font_name = fm.FontProperties(fname="c:/Windows/Fonts/malgun.ttf").get_name()
+font_name = fm.FontProperties(fname="./fonts/arial.ttf").get_name()
 matplotlib.rc('font', family=font_name, size=14)
 
 
