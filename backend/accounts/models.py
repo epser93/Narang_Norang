@@ -9,8 +9,12 @@ class User(AbstractUser):
     balance = models.IntegerField(default=0)
     favorite = models.ManyToManyField(Fairytale)
 
+    def __str__(self):
+        return self.username
+
 
 class Subscribe(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    start_date = models.DateField(auto_now=True)
+    start_date = models.DateField(auto_now_add=True)
     end_date = models.DateField()
+    
