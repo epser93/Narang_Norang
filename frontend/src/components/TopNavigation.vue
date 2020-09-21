@@ -1,13 +1,27 @@
 <template>
   <div>
-    <b-navbar type="dark" variant="secondary">
-      <b-navbar-brand @click="onRoute('Main')">나랑노랑</b-navbar-brand>
+    <!-- NavBar -->
+    <b-navbar>
 
+      <!-- 나랑노랑 -->
+      <b-navbar-brand class="main-narang-norang" @click="onRoute('Main')">
+        <div class="row ml-4">
+          <p class="blue-narang mb-0">나랑</p>
+          <p class="yellow-norang mb-0">노랑</p>
+        </div>
+      </b-navbar-brand>
+      
+      <!-- 나랑노랑 Logo-Image -->
+      <b-navbar-brand class="mr-auto ml-auto">
+        <img src="../assets/img/나랑노랑.png" alt="" style="width: 80px;">
+      </b-navbar-brand>
+
+      <!-- SideBar Nav -->
       <b-navbar-nav class="ml-auto">
-
-				<b-button v-b-toggle.sidebar-right class="my-2 my-sm-0"><b-icon icon="list"></b-icon></b-button>
-        
+				<b-button v-b-toggle.sidebar-right class="my-2 my-sm-0 mr-3"><b-icon icon="list" scale="2.5"></b-icon></b-button>       
       </b-navbar-nav>
+
+    <!-- End NavBar -->
     </b-navbar>
 
     <b-sidebar id="sidebar-right" right shadow backdrop-variant="dark" backdrop> 
@@ -79,4 +93,29 @@ export default {
 </script>
 
 <style>
+.main-narang-norang {
+  font-family: 'Jua', sans-serif;
+  margin-right: 15vw;
+}
+
+.blue-narang {
+  color: #89aef3;
+  font-size: 40px;
+}
+
+.yellow-norang {
+  color: #f9da45;
+  font-size: 40px;
+}
+
+.btn-secondary {
+  color: grey;
+  background-color: white;
+  border: none;
+}
+
+.btn-secondary:hover {
+  background-color: #f9da45;
+  border: none;
+}
 </style>
