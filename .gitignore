@@ -7,6 +7,13 @@ train2014/
 augmentation/
 checkpoints/train/
 
+
+## dataset ##
+tts/Tacotron-Korean/datasets/kss/
+tts/Tacotron-Korean/logs-tacotron/
+tts/Tacotron-Korean/training/
+
+
 # Created by https://www.toptal.com/developers/gitignore/api/django,python,visualstudiocode,venv
 # Edit at https://www.toptal.com/developers/gitignore?templates=django,python,visualstudiocode,venv
 
