@@ -7,10 +7,16 @@ import os
 class Genre(models.Model):
     name = models.CharField(max_length=20)
 
+    def __str__(self):
+        return self.name
+
 
 class Writer(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     name = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.name
 
 
 class Fairytale(models.Model):
@@ -21,6 +27,10 @@ class Fairytale(models.Model):
     date = models.DateField()
     writer = models.ForeignKey(Writer, on_delete=models.SET_NULL, related_name='fairytales', null=True)
     Genre = models.ForeignKey(Genre, on_delete=models.SET_NULL, related_name='fairytales', null=True)
+
+    def __str__(self):
+        return self.title
+
 
     # 이미지 삭제 함수
     def image_delete(self):
@@ -38,3 +48,6 @@ class BookMark(models.Model):
     fairytale = models.ForeignKey(Fairytale, on_delete=models.CASCADE)
     page = models.IntegerField()
     last_date = models.DateField(auto_now=True)
+
+    def __str__(self):
+        return self.fairytale
