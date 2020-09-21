@@ -117,7 +117,7 @@ def get_output_base_path(checkpoint_path):
 def run_eval(args):
   synth = Synthesizer()
   synth.load(args.checkpoint)
-  base_path = get_output_base_path(args.checkpoint)
+  base_path = get_output_base_path(args.checkpoint) + '/story/'
   for i, text in enumerate(sentences):
     jamo = ''.join(list(hangul_to_jamo(text)))
     path = '%s-%d.wav' % (base_path, i)
