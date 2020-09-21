@@ -64,6 +64,7 @@ def train(log_dir, args):
       feeder.start_in_session(sess)
 
       while not coord.should_stop():
+          
         start_time = time.time()
         step, loss, opt, mel_loss, linear_loss = \
           sess.run([global_step, model.loss, model.optimize, model.mel_loss, model.linear_loss])
@@ -72,6 +73,9 @@ def train(log_dir, args):
         message = 'Step %-7d [%.03f sec/step, loss=%.05f, avg_loss=%.05f, mel_loss=%.5f, linear_loss=%.5f]' % (
           step, time_window.average, loss, loss_window.average, mel_loss, linear_loss)
         log(message, slack=(step % args.checkpoint_interval == 0))
+        
+        if step > 200000 :
+          break
 
         if step % args.summary_interval == 0:
           log('Writing summary at step: %d' % step)
@@ -104,7 +108,7 @@ def main():
   parser.add_argument('--model', default='tacotron')
   parser.add_argument('--restore_step', type=int)
   parser.add_argument('--summary_interval', type=int, default=1000) # 100
-  parser.add_argument('--checkpoint_interval', type=int, default=10000) #1000
+  parser.add_argument('--checkpoint_interval', type=int, default=50000) #1000
   args = parser.parse_args()
   os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
   run_name = args.model + '/' + args.username
