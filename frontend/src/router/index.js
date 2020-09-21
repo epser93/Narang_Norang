@@ -5,12 +5,30 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/home',
+    path: '/',
     name: 'Home',
-    component: () => import('@/views/Home.vue')
+    component: () => import('@/views/Home.vue'),
+    redirect: '/main',
+    children: [
+      {
+        path: 'main',
+        name: 'Main',
+        component: () => import('@/views/navigation/Main')
+      },
+      {
+        path: 'mybook',
+        name: 'MyBook',
+        component: () => import('@/views/navigation/MyBookShelves')
+      },
+      {
+        path: 'help',
+        name: 'CS',
+        component: () => import('@/views/navigation/CustomerService')
+      },
+    ]
   },
   {
-    path: '/',
+    path: '/login',
     name: 'Login',
     component: () => import('@/views/Login.vue')
   },
