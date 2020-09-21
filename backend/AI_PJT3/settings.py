@@ -1,5 +1,6 @@
 import os
 import environ
+import datetime
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -168,6 +169,14 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
     ],
+}
+
+JWT_AUTH = { 
+    'JWT_SECRET_KEY': env('SECRET_KEY'), 
+    'JWT_ALGORITHM': 'HS256', 
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=1), 
+    'JWT_ALLOW_REFRESH': True, 
+    'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=7), 
 }
 
 REST_USE_JWT = True
