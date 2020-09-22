@@ -4,10 +4,35 @@
 		<carousel-3d :space="360" :width="240" :height="360" :border="3" :perspective="0" :scaling="0">
 			<slide v-for="(slide, i) in slides" :key="i" :index="i">
 				<figure>
-					<img src="https://placehold.it/240x360">
+					<img src="https://placehold.it/240x360" alt="" v-b-modal="`modal-${i}`" @click="setModal(i)">
 				</figure>
 			</slide>
 		</carousel-3d>
+
+		<b-modal :id="`modal-${mid}`" size="lg">
+			<b-container>
+				<b-row>
+					<b-col cols="6">
+						<img src="https://placehold.it/240x360" alt="" style="width: 100%;">
+					</b-col>
+
+					<b-col cols="6">
+						<b-card style="height: 100%;">
+
+
+							<template v-slot:footer>
+								<b-button block variant="secondary">책 읽기<b-icon class="ml-2" icon="caret-right-fill" scale="1.2"></b-icon></b-button>
+							</template>
+						</b-card>
+					</b-col>
+				</b-row>
+			</b-container>
+
+			<template v-slot:modal-footer="{ cancel }">
+				<b-button @click="cancel()">
+				</b-button>
+			</template>
+		</b-modal>
 	</div>
 </template>
 
@@ -22,9 +47,15 @@ export default {
   },
   data() {
     return {
-      slides: 8
+			slides: 8,
+			mid: null,
     }
-  },
+	},
+	methods: {
+		setModal(mid) {
+			this.mid = mid
+		}
+	}
 
 }
 </script>

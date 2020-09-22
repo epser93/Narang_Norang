@@ -1,7 +1,7 @@
 <template>
-  <b-card no-body style="min-height: 500px;">
-    <p>우리아이 책장</p>
-  </b-card>
+<div>
+  
+</div>
 </template>
 
 <script>
