@@ -13,7 +13,7 @@ from allauth.socialaccount.providers.kakao.views import KakaoOAuth2Adapter
 from rest_auth.registration.views import SocialLoginView
 
 client_id = settings.env('CLIENT_ID')
-if settings.env('Debug'):
+if settings.DEBUG:
     redirect_uri = "http://127.0.0.1:8000/api/accounts/login/callback"
 else:
     redirect_uri = 'https://j3c206.p.ssafy.io/api/accounts/login/callback'
