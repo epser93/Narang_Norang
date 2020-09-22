@@ -14,7 +14,7 @@ from rest_auth.registration.views import SocialLoginView
 
 client_id = settings.env('CLIENT_ID')
 redirect_uri = "http://127.0.0.1:8000/api/accounts/login/callback"
-
+# https://j3c206.p.ssafy.io/api/accounts/login/callback
 # 인증 code 요청
 @api_view(['GET', 'POST', 'PUT', 'DELETE'])
 def kakao_login(request):

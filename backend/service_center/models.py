@@ -28,6 +28,17 @@ class QnA(models.Model):
     def __str__(self):
         return self.title
 
+    def create(self, data, user):
+        self.title = data['title']
+        self.content = data['content']
+        self.user = user
+        self.save()
+
+    def update(self, data):
+        self.title = data['title']
+        self.content = data['content']
+        self.save()
+
 
 class QnaReply(models.Model):
     qna = models.ForeignKey(QnA, on_delete=models.CASCADE, related_name='qna_reply')

@@ -1,9 +1,9 @@
 from rest_framework import serializers
+from accounts.serializers import UserSerializer
 from .models import QnA
 
 class QnAListSerializer(serializers.ModelSerializer):
+    user = UserSerializer(required=False)
     class Meta:
         model = QnA
-        depth = 1
-        fields ='__all__'
-
+        fields =['id', 'title', 'content', 'create_date', 'is_answer', 'user']
