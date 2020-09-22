@@ -28,6 +28,11 @@ const routes = [
     ]
   },
   {
+    path: '/ebook',
+    name: 'Ebook',
+    component: () => import('@/views/Ebook.vue')
+  },
+  {
     path: '/login',
     name: 'Login',
     component: () => import('@/views/Login.vue')
