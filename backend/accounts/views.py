@@ -13,8 +13,10 @@ from allauth.socialaccount.providers.kakao.views import KakaoOAuth2Adapter
 from rest_auth.registration.views import SocialLoginView
 
 client_id = settings.env('CLIENT_ID')
-redirect_uri = "http://127.0.0.1:8000/api/accounts/login/callback"
-# https://j3c206.p.ssafy.io/api/accounts/login/callback
+if settings.env('Debug'):
+    redirect_uri = "http://127.0.0.1:8000/api/accounts/login/callback"
+else:
+    redirect_uri = 'https://j3c206.p.ssafy.io/api/accounts/login/callback'
 # 인증 code 요청
 @api_view(['GET', 'POST', 'PUT', 'DELETE'])
 def kakao_login(request):
@@ -33,7 +35,5 @@ class KakaoLogin(SocialLoginView):
     adapter_class = KakaoOAuth2Adapter
 
 
-@api_view(['GET', 'POST', 'PUT', 'DELETE'])
-def user_data(request):
-    print(request.user)
-    return Response(True)
+class UserAPI(APIView):
+    pass
