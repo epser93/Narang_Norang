@@ -13,6 +13,7 @@
     "bootstrap-vue": "^2.17.0",
     "core-js": "^3.6.5",
     "flipbook-vue": "^0.9.0",
+    "v-mask": "^2.2.3",
     "vue": "^2.6.11",
     "vue-carousel-3d": "^0.2.0",
     "vue-google-login": "^2.0.5",

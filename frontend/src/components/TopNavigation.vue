@@ -13,7 +13,7 @@
       
       <!-- 나랑노랑 Logo-Image -->
       <b-navbar-brand class="mr-auto ml-auto">
-        <img src="../assets/img/나랑노랑.png" alt="" style="width: 80px;">
+        <img src="../assets/img/나랑노랑.png" alt="" style="width: 100px;">
       </b-navbar-brand>
 
       <!-- SideBar Nav -->
@@ -24,15 +24,16 @@
     <!-- End NavBar -->
     </b-navbar>
 
+  <!-- SideBar -->
     <b-sidebar id="sidebar-right" right shadow backdrop-variant="dark" backdrop> 
-
+      <!-- Greeting Area -->
       <b-card no-body style="min-height: 100%;">
         <b-card-text class="mt-4 mb-0">
           <b-avatar class="mr-3"></b-avatar>
           <span class="mr-auto"> ~ 님 환영합니다.</span>
           <hr>
         </b-card-text>
-
+        <!-- Voice Notice Area -->
         <b-card-body class="p-2">
           <b-container>
             <strong>현재 목소리 - 엄마</strong>
@@ -55,14 +56,13 @@
             </b-row>
           </b-container>
         </b-card-body>
-
+        <!-- Menu Area -->
         <b-list-group>
           <b-list-group-item v-b-modal.mb @click="onRoute('MyBook')">내 서재</b-list-group-item>
-          <!-- <b-list-group-item href="#">Not yet...</b-list-group-item> -->
-          <!-- <b-list-group-item href="#">Not yet...</b-list-group-item> -->
+          <b-list-group-item v-b-model.mb @click="onRoute('UserInfo')">설정</b-list-group-item>
         </b-list-group>
       </b-card>
-
+      <!-- Footer Area -->
       <template v-slot:footer="{}">
        <div class="d-flex align-items-center px-3 py-2">
         <div class="row ml-1">
