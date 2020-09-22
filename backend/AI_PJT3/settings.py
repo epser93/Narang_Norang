@@ -1,5 +1,6 @@
 import os
 import environ
+import datetime
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -40,6 +41,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'rest_auth.registration',
+    'allauth.socialaccount.providers.kakao',
 
     # myapp
     'accounts',
@@ -49,6 +51,17 @@ INSTALLED_APPS = [
 ]
 
 SITE_ID = 1
+
+# Provider specific settings
+SOCIALACCOUNT_PROVIDERS = {
+    'kakao': {
+        'APP': {
+            'client_id': env('CLIENT_ID'), # REST API 키
+            'secret': env('SECRET'), # kakao developers에서 등록한 앱 ID
+            'key': ''
+        }
+    }
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -149,11 +162,24 @@ AUTH_USER_MODEL = 'accounts.User'
 
 # DRF auth settings
 REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',
-    ]
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+    ],
 }
 
+JWT_AUTH = { 
+    'JWT_SECRET_KEY': env('SECRET_KEY'), 
+    'JWT_ALGORITHM': 'HS256', 
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=1), 
+    'JWT_ALLOW_REFRESH': True, 
+    'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=7), 
+}
+
+REST_USE_JWT = True
 CORS_ORIGIN_ALLOW_ALL = True
 
 # 이미지 파일 관리
