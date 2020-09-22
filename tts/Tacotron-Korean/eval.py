@@ -12,7 +12,7 @@ from util import audio, plot
 sentences = [
   '깊은 숲속 오두막 집에 아기돼지 삼형제가 살고 있었어요',
   '어느 날 엄마 돼지가 말했어요',
-  '애들아, 이젠 너희들도 다 컸으니까 각자 자기 집을 짓고 살도록 해라',
+  '애들아 이젠 너희들도 다 컸으니까 각자 자기 집을 짓고 살도록 해라',
   '엄마 돼지의 말대로 아기돼지 삼형제는 집을 떠나기로 했어요'
   '한참을 가다가 어느 갈림길에 이르렀지요'
   '나는 오른쪽으로 갈테야',
@@ -23,7 +23,7 @@ sentences = [
   '얼른 지어놓고 실컷 놀 수 있으니까',
   '놀기만 좋아하는 첫째 돼지는 근처에 있는 짚을 모아 대충 쌓아놓고 초가집을 완성했어요',
   '아이 귀찮아 간단하게 집 짓는 방법이 없을까',
-  '옳지, 나뭇가지로 지으면 되겠다',
+  '옳지 나뭇가지로 지으면 되겠다',
   '아이 귀찮아 간단하게 집 짓는 방법이 없을까',
   '옳지 나뭇가지로 지으면 되겠다',
   '게으른 둘째 돼지도 근처에 떨어져 있는 나뭇가지를 주워다가 엉성하게 집을 지었지요'
@@ -117,7 +117,7 @@ def get_output_base_path(checkpoint_path):
 def run_eval(args):
   synth = Synthesizer()
   synth.load(args.checkpoint)
-  base_path = get_output_base_path(args.checkpoint) + '/story/'
+  base_path = get_output_base_path(args.checkpoint)
   for i, text in enumerate(sentences):
     jamo = ''.join(list(hangul_to_jamo(text)))
     path = '%s-%d.wav' % (base_path, i)
