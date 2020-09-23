@@ -13,7 +13,8 @@
 | books/favorite/                                 | 즐겨찾기목록                                    |                                    |                      | 전체삭제             |
 | books/favorite/<book_id>/                       |                                                 | 즐겨찾기 생성                      |                      | 즐겨찾기 삭제        |
 | books/bookmark/<book_id>/                       | 페이지정보 읽기                                 |                                    | 페이지정보 수정      |                      |
-| service_center/FaQ/                             | 자주묻는 리스트                                 | 내용생성(관리자)                   | 내용수정(관리자)     | 내용삭제(관리자)     |
+| service_center/FaQ/                             | 자주묻는 리스트                                 | 내용생성(관리자)                   |                      |                      |
+| service_center/FaQ/<faq_id>                     | 상세글 조회                                     |                                    | 내용수정(관리자)     | 내용삭제(관리자)     |
 | service_center/category/                        | 카테고리 목록                                   | 카테고리생성(관리자)               | 카테고리수정(관리자) | 카테고리삭제(관리자) |
 | service_center/QnA/                             | 전체가져오기                                    | 생성                               |                      |                      |
 | service_center/QnA/<qna_id>/                    | qna상세정보                                     |                                    | QnA 수정             | QnA 삭제             |
@@ -177,6 +178,33 @@ https://j3c206.p.ssafy.io/api/books/fairytale/<int:id>/
     "writer": 1,
     "Genre": 1
 }
+```
+
+
+
+### 동화책 장르 리스트 조회 (GET)
+
+```
+https://j3c206.p.ssafy.io/api/books/genre/
+```
+
+- 응답
+
+```json
+[
+    {
+        "id": 1,
+        "name": "액션"
+    },
+    {
+        "id": 2,
+        "name": "이솝우화"
+    },
+    {
+        "id": 3,
+        "name": "드라마틱"
+    }
+]
 ```
 
 
@@ -370,4 +398,136 @@ https://j3c206.p.ssafy.io/api/books/favorite/<int:id>/
 or
 "이미 삭제되어 있습니다."
 ```
+
+
+
+### FaQ 리스트 전체 조회(GET)
+
+```
+https://j3c206.p.ssafy.io/api/service_center/FaQ/
+```
+
+- 응답
+
+```json
+[    
+	{
+        "id": 1,
+        "title": "1번",
+        "content": "1번",
+        "faq_category": {
+            "id": 1,
+            "name": "1번"
+        }
+    }
+]
+```
+
+
+
+### FaQ 생성하기 (POST)
+
+> 관리자만 가능
+
+```
+https://j3c206.p.ssafy.io/api/service_center/FaQ/
+```
+
+- body
+
+```json
+{
+    "title": "FaQ 제목",
+    "content": "FaQ 내용",
+    "faq_category" : 3(카테고리id)
+}
+```
+
+- 응답
+
+```json
+{
+    "id": 4,
+    "title": "FaQ 제목",
+    "content": "FaQ 내용",
+    "faq_category": {
+        "id": 3,
+        "name": "3번"
+    }
+}
+```
+
+
+
+### FaQ 수정하기(PUT)
+
+> 관리자만 가능
+
+```
+https://j3c206.p.ssafy.io/api/service_center/FaQ/<int:faq_id>/
+```
+
+- body
+
+```json
+{
+    "title": "FaQ 제목수정",
+    "content": "FaQ 내용수정",
+    "faq_category" : 2(카테고리id)
+}
+```
+
+- 응답
+
+```json
+{
+    "id": 4,
+    "title": "FaQ 제목수정",
+    "content": "FaQ 내용수정",
+    "faq_category": {
+        "id": 2,
+        "name": "2번"
+    }
+}
+```
+
+
+
+### FaQ 삭제하기 (DELETE)
+
+> 관리자만 가능
+
+```
+https://j3c206.p.ssafy.io/api/service_center/FaQ/<int:faq_id>/
+```
+
+- 응답
+
+```json
+"삭제완료"
+```
+
+
+
+### FaQ Detail 조회 (GET)
+
+```
+https://j3c206.p.ssafy.io/api/service_center/FaQ/<int:faq_id>/
+```
+
+- 응답
+
+```json
+{
+    "id": 2,
+    "title": "2번",
+    "content": "2번",
+    "faq_category": {
+        "id": 2,
+        "name": "2번"
+    }
+}
+```
+
+
 
