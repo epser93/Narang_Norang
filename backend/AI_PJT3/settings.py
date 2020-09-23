@@ -155,7 +155,6 @@ if DEBUG:
     STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 else:
     STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
-STATIC_URL = '/static/'
 
 # 유저모델은 accounts.의 User로 설정
 AUTH_USER_MODEL = 'accounts.User'
