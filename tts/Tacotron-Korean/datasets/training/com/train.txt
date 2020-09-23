@@ -1,0 +1,150 @@
+comspec-00001.npy|com-00001.npy|274|그는 괜찮은 척하려고 애쓰는 것 같았다
+comspec-00002.npy|com-00002.npy|281|그녀의 사랑을 얻기 위해 애썼지만 헛수고였다
+comspec-00003.npy|com-00003.npy|289|용돈을 아껴 써라
+comspec-00004.npy|com-00004.npy|257|그는 아내를 많이 아낀다
+comspec-00005.npy|com-00005.npy|233|그 애 전화번호 알아
+comspec-00006.npy|com-00006.npy|265|차에 대해 잘 아세요
+comspec-00007.npy|com-00007.npy|346|거기 도착하면 나한테 알려 줘
+comspec-00008.npy|com-00008.npy|337|그들은 내가 시험에 떨어졌다고 알려 왔다
+comspec-00009.npy|com-00009.npy|409|나는 살아오면서 감기를 앓은 적이 한 번도 없다
+comspec-00010.npy|com-00010.npy|339|사흘 동안 심하게 몸살을 앓았어요
+comspec-00011.npy|com-00011.npy|338|요즘 공부가 안돼요
+comspec-00012.npy|com-00012.npy|338|장사가 잘 안돼서 우울해
+comspec-00013.npy|com-00013.npy|249|아무 것도 먹지 않으면 죽게 되어 있다
+comspec-00014.npy|com-00014.npy|369|그녀는 이유를 묻지 않고 돈을 빌려 주었다
+comspec-00015.npy|com-00015.npy|210|내가 아기를 안고 있을게
+comspec-00016.npy|com-00016.npy|249|엄마는 말없이 나를 꼭 안아 주셨다
+comspec-00017.npy|com-00017.npy|145|자리에 앉으세요
+comspec-00018.npy|com-00018.npy|185|한 여자가 내 옆에 앉았다
+comspec-00019.npy|com-00019.npy|353|일일사에 전화를 해서 번호를 알아보시지 그러세요
+comspec-00020.npy|com-00020.npy|177|내가 누군지 알아보겠니
+comspec-00021.npy|com-00021.npy|329|그는 절대 다른 사람의 의견을 받아들이지 않는다
+comspec-00022.npy|com-00022.npy|321|아이들도 언젠가는 그녀를 엄마로 받아들일 거야
+comspec-00023.npy|com-00023.npy|233|어디에서 영어를 배우셨어요
+comspec-00024.npy|com-00024.npy|233|동료에게서 수화를 배우고 있습니다
+comspec-00025.npy|com-00025.npy|217|이거 다른 걸로 바꿀 수 있을까요
+comspec-00026.npy|com-00026.npy|210|색깔을 바꾸는 게 나을 거 같아
+comspec-00027.npy|com-00027.npy|209|소영이 좀 바꿔 주세요
+comspec-00028.npy|com-00028.npy|201|눈이 얼음으로 바뀌었어
+comspec-00029.npy|com-00029.npy|225|핸드폰이 네 거랑 바뀐 거 같아
+comspec-00030.npy|com-00030.npy|293|그 차는 들판에 버려진 채 발견됐다
+comspec-00031.npy|com-00031.npy|336|이번 달 초에 상어떼가 해안가에서 발견됐다
+comspec-00032.npy|com-00032.npy|265|오타를 발견하시는 분께 사례하겠습니다
+comspec-00033.npy|com-00033.npy|281|결국 그의 개가 그의 시신을 발견했다
+comspec-00034.npy|com-00034.npy|321|정신분석학은 이십세기에 급격히 발전했다
+comspec-00035.npy|com-00035.npy|441|한국어 실력이 날이 갈수록 발전하는 것을 보니 기쁩니다
+comspec-00036.npy|com-00036.npy|297|죄송하지만 제 이름을 밝힐 수는 없어요
+comspec-00037.npy|com-00037.npy|393|정전이 되어 촛불을 밝혔다
+comspec-00038.npy|com-00038.npy|353|모두가 시험에 통과했음을 발표하게 되어 기쁘게 생각합니다
+comspec-00039.npy|com-00039.npy|321|그 밴드는 첫 음반을 발표한 직후에 해체했다
+comspec-00040.npy|com-00040.npy|241|화재가 발생하지 않도록 조심해라
+comspec-00041.npy|com-00041.npy|241|어제 일본에서 태풍이 발생했다
+comspec-00042.npy|com-00042.npy|201|돌고래는 지능이 발달했다
+comspec-00043.npy|com-00043.npy|241|이 지역에는 농업이 발달했어요
+comspec-00044.npy|com-00044.npy|186|그녀는 내 제안에 반대했다
+comspec-00045.npy|com-00045.npy|217|저는 무력 사용을 반대합니다
+comspec-00046.npy|com-00046.npy|281|밤늦게 남의 집을 방문하는 것은 실례다
+comspec-00047.npy|com-00047.npy|266|저희 회사에 방문해 주셔서 감사드립니다
+comspec-00048.npy|com-00048.npy|217|너는 브레이크를 너무 세게 밟아
+comspec-00049.npy|com-00049.npy|347|어떤 남자가 지하철에서 내 발을 밟고 모른 척했다
+comspec-00050.npy|com-00050.npy|313|그녀는 호기심으로 가득찬 눈으로 나를 바라보았다
+comspec-00051.npy|com-00051.npy|329|이 문제는 제삼자의 시각에서 바라볼 필요가 있어
+comspec-00052.npy|com-00052.npy|225|저한테 너무 많은 걸 바라지 마세요
+comspec-00053.npy|com-00053.npy|161|빨리 나으시길 바랍니다
+comspec-00054.npy|com-00054.npy|193|입술에 침이나 바르고 말해
+comspec-00055.npy|com-00055.npy|201|선크림을 발랐어야지
+comspec-00056.npy|com-00056.npy|241|나는 생일 선물로 책을 받았다
+comspec-00057.npy|com-00057.npy|185|신용 카드를 받나요
+comspec-00058.npy|com-00058.npy|185|스트레스 받는 일 있어
+comspec-00059.npy|com-00059.npy|225|어떻게 그렇게 돈을 버셨어요
+comspec-00060.npy|com-00060.npy|217|한 달에 삼백만 원을 법니다
+comspec-00061.npy|com-00061.npy|169|입을 벌려 보세요
+comspec-00062.npy|com-00062.npy|273|지하철에서 다리를 벌리고 앉지 마라
+comspec-00063.npy|com-00063.npy|249|벽 사이에 벌어진 틈이 있어
+comspec-00064.npy|com-00064.npy|289|그 법안을 놓고 말다툼이 벌어졌어
+comspec-00065.npy|com-00065.npy|265|담배 꽁초를 여기에 버리지 마세요
+comspec-00066.npy|com-00066.npy|185|내년 아버지 환갑 때 잔치를 벌일 거야
+comspec-00067.npy|com-00067.npy|281|오늘 아침 아내랑 말다툼을 벌였어
+comspec-00068.npy|com-00068.npy|273|가난에서 벗어나려면 습관부터 바꿔라
+comspec-00069.npy|com-00069.npy|297|복잡한 도시 지역을 벗어나니 참 좋군요
+comspec-00070.npy|com-00070.npy|297|외투 벗으실래요
+comspec-00071.npy|com-00071.npy|145|신발이 너무 꽉 껴서 벗을 수가 없어요
+comspec-00072.npy|com-00072.npy|273|아침 햇빛이 비치는 걸 보니 상쾌하군
+comspec-00073.npy|com-00073.npy|257|커튼 너머에 누군가의 그림자가 비쳤다
+comspec-00074.npy|com-00074.npy|273|램프가 그의 작품을 비추게 배치되어 있었다
+comspec-00075.npy|com-00075.npy|289|아침마다 내 얼굴을 거울에 비춰 봐요
+comspec-00076.npy|com-00076.npy|257|금고는 이미 비어 있었다
+comspec-00077.npy|com-00077.npy|202|이 자리는 비었습니까
+comspec-00078.npy|com-00078.npy|193|우리는 서로 답을 비교해 보았다
+comspec-00079.npy|com-00079.npy|217|부모가 저지르는 큰 실수 중 하나는 자기 아이를 다른 집 아이와 비교하는 것이다
+comspec-00080.npy|com-00080.npy|497|이틀 동안 차를 빌리고 싶은데요
+comspec-00081.npy|com-00081.npy|233|아내에게서 돈을 빌린다는 것은 좀 이상해요
+comspec-00082.npy|com-00082.npy|321|다이아몬드가 눈부시게 빛나고 있었다
+comspec-00083.npy|com-00083.npy|266|영화 보러 갈까
+comspec-00084.npy|com-00084.npy|360|그런 대한민국을 만들기 위해 저는
+comspec-00085.npy|com-00085.npy|153|오늘 우연히 길에서 그 여자를 봤어요
+comspec-00086.npy|com-00086.npy|297|제가 해 볼게요
+comspec-00087.npy|com-00087.npy|154|어디선가 뵌 분 같아요
+comspec-00088.npy|com-00088.npy|201|지난번에 뵌 후 오랜만에 뵙습니다
+comspec-00089.npy|com-00089.npy|281|그거 맛있어 보이네
+comspec-00090.npy|com-00090.npy|193|그는 나이에 비해 정말 젊어 보인다
+comspec-00091.npy|com-00091.npy|289|그녀가 나에게 사진 몇 장을 보여 주었다
+comspec-00092.npy|com-00092.npy|273|주민등록증을 보여 주시겠어요
+comspec-00093.npy|com-00093.npy|234|김치가 맛이 없어서 볶았어
+comspec-00094.npy|com-00094.npy|265|고기를 기름에 볶지 마라
+comspec-00095.npy|com-00095.npy|217|이 소포를 뉴욕으로 보내고 싶은데요
+comspec-00096.npy|com-00096.npy|258|선생님께 한 부 보내 드리겠습니다
+comspec-00097.npy|com-00097.npy|265|휴가 잘 보내세요
+comspec-00098.npy|com-00098.npy|177|그녀는 짐 하나하나에 이름표를 붙였다
+comspec-00099.npy|com-00099.npy|265|침으로 편지 봉투에 우표를 붙이지 마세요
+comspec-00100.npy|com-00100.npy|290|우리는 파티 준비를 위해 풍선을 불었다
+comspec-00101.npy|com-00101.npy|313|깊은 숲속 오두막 집에 아기돼지 삼형제가 살고 있었어요
+comspec-00102.npy|com-00102.npy|553|어느 날 엄마 돼지가 말했어요
+comspec-00103.npy|com-00103.npy|215|애들아 이젠 너희들도 다 컸으니까 각자 자기 집을 짓고 살도록 해라
+comspec-00104.npy|com-00104.npy|490|엄마 돼지의 말대로 아기돼지 삼형제는 집을 떠나기로 했어요
+comspec-00105.npy|com-00105.npy|385|한참을 가다가 어느 갈림길에 이르렀지요
+comspec-00106.npy|com-00106.npy|297|나는 오른쪽으로 갈테야
+comspec-00107.npy|com-00107.npy|194|나는 왼쪽으로 가겠어
+comspec-00108.npy|com-00108.npy|177|그럼 난 여기에다 집을 지어야지
+comspec-00109.npy|com-00109.npy|255|이렇게 해서 아기돼지 삼형제는 각자 흩어져 집을 짓게 되었지요
+comspec-00110.npy|com-00110.npy|441|난 초가집을 지을 거야
+comspec-00111.npy|com-00111.npy|185|얼른 지어놓고 실컷 놀 수 있으니까
+comspec-00112.npy|com-00112.npy|281|놀기만 좋아하는 첫째 돼지는 근처에 있는 짚을 모아 대충 쌓아놓고 초가집을 완성했어요
+comspec-00113.npy|com-00113.npy|585|아이 귀찮아 간단하게 집 짓는 방법이 없을까
+comspec-00114.npy|com-00114.npy|525|옳지 나뭇가지로 지으면 되겠다
+comspec-00115.npy|com-00115.npy|303|형들이 비웃어도 셋째 돼지는 열심히 부지런히 벽돌집을 지었어요
+comspec-00116.npy|com-00116.npy|449|으흐흐 요놈들 통통하니 아주 맛있게 생겼구나
+comspec-00117.npy|com-00117.npy|401|엄마야
+comspec-00118.npy|com-00118.npy|105|흥 요까짓 나무집도 문제없지 후우욱
+comspec-00119.npy|com-00119.npy|324|엄마야 살려줘
+comspec-00120.npy|com-00120.npy|153|늑대가 크게 한번 숨을 불자 나무집도 날아가 버렸어요
+comspec-00121.npy|com-00121.npy|380|잔뜩 화가 난 늑대가 굴뚝으로 올라갔어요
+comspec-00122.npy|com-00122.npy|433|셋째 돼지는 펄펄 끓는 가마솥을 굴뚝 아래에 걸어놓았어요
+comspec-00123.npy|com-00123.npy|417|아이고 뜨거라 늑대 살려 늑대 살려
+comspec-00124.npy|com-00124.npy|313|그리고 아기돼지 삼형제는 함께 모여 행복하게 살았답니다
+comspec-00125.npy|com-00125.npy|393|옛날 옛날에 저 멀리 한 왕국에 여왕이 살았었습니다
+comspec-00126.npy|com-00126.npy|370|거울아 거울아 세상에서 누가 가장 예쁘지
+comspec-00127.npy|com-00127.npy|385|어느 날 사악한 여왕은 그녀의 거울에게 물었고 그 거울은 이렇게 대답했습니다
+comspec-00128.npy|com-00128.npy|521|한번 맛보지 그러니
+comspec-00129.npy|com-00129.npy|169|그는 백설공주에게 강력하게 키스를 하였습니다
+comspec-00130.npy|com-00130.npy|337|백설공주가 살아나자 난쟁이들은 기뻐서 춤을 추었습니다
+comspec-00131.npy|com-00131.npy|425|알고 보니 그들은 고아가 아니라 7명의 작은 난쟁이였습니다
+comspec-00132.npy|com-00132.npy|430|거북이가 숲 속을 엉금엉금 기어가고 있었어요
+comspec-00133.npy|com-00133.npy|433|느림보가 어디쯤 오나
+comspec-00134.npy|com-00134.npy|185|토끼는 깡충깡충 뛰어 순식간에 쌩 사라졌고
+comspec-00135.npy|com-00135.npy|353|아하하 해 보나마나 내가 이길 텐데
+comspec-00136.npy|com-00136.npy|321|한번은 할머니가 소녀에게 붉은 벨벳으로 만들어진 모자를 선물했습니다
+comspec-00137.npy|com-00137.npy|449|빨간 모자야 이렇게 일찍 어딜 가니
+comspec-00138.npy|com-00138.npy|463|밖에 누구세요
+comspec-00139.npy|com-00139.npy|161|그 양동이에 물을 부어라
+comspec-00140.npy|com-00140.npy|195|아 할머니 귀가 정말 크시네요
+comspec-00141.npy|com-00141.npy|297|할머니가 왜 이렇게 시끄럽게 코를 고시는 거지
+comspec-00142.npy|com-00142.npy|297|크리스마스 전날 밤이었어요
+comspec-00143.npy|com-00143.npy|329|얘들아 이집에 혹시 노래하는 파랑새 있니
+comspec-00144.npy|com-00144.npy|217|난 요술쟁이란다
+comspec-00145.npy|com-00145.npy|329|개와 고양이 너희들도 함께 가거라
+comspec-00146.npy|com-00146.npy|161|단단히 겁을 줘서 쫓아 버려야겠구나
+comspec-00147.npy|com-00147.npy|289|모두들 깜짝 놀라 소리쳤어요
+comspec-00148.npy|com-00148.npy|249|무서워 어떻게 해
+comspec-00149.npy|com-00149.npy|249|이번에는 대비를 할 수 없었습니다
+comspec-00150.npy|com-00150.npy|225|대신 빵조각을 따라가면 집이 나올거야
