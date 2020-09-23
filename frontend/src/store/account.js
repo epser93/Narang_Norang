@@ -13,6 +13,10 @@ export default {
   },
 
   getters: {
+    isLoggedIn(state) {
+      return !!state.authToken
+    },
+
     config(state) {
       return {
         headers: {
@@ -25,6 +29,10 @@ export default {
   // 2. 받아올 정보를 저장할 mutations 설정
   // state 받아올 거니까 써주기
   mutations: {
+    SET_TOKEN(state, token) {
+      state.authToken = token
+      cookies.set('auth-token', token)
+    },
     GET_USERINFO(state, payload) {
       state.userInfo = payload
     },
