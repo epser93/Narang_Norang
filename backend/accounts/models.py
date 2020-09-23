@@ -12,6 +12,10 @@ class User(AbstractUser):
     def __str__(self):
         return self.username
 
+    def update(self, data):
+        self.first_name = data['nick_name']
+        self.save()
+
 
 class Subscribe(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)

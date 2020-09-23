@@ -5,18 +5,21 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.shortcuts import redirect
-from AI_PJT3 import settings
-import requests
 from rest_framework.response import Response
+from AI_PJT3 import settings
+
+from .serializers import UserSerializer
+
+import requests
 
 from allauth.socialaccount.providers.kakao.views import KakaoOAuth2Adapter
 from rest_auth.registration.views import SocialLoginView
 
 client_id = settings.env('CLIENT_ID')
 if settings.DEBUG:
-    redirect_uri = "http://127.0.0.1:8000/api/accounts/login/callback"
+    redirect_uri = "http://127.0.0.1:8000/api/accounts/login/callback/"
 else:
-    redirect_uri = 'https://j3c206.p.ssafy.io/api/accounts/login/callback'
+    redirect_uri = 'https://j3c206.p.ssafy.io/api/accounts/login/callback/'
 # 인증 code 요청
 @api_view(['GET', 'POST', 'PUT', 'DELETE'])
 def kakao_login(request):
@@ -36,4 +39,12 @@ class KakaoLogin(SocialLoginView):
 
 
 class UserAPI(APIView):
-    pass
+    
+    def get(self, request, format=None):
+        serializer = UserSerializer(request.user)
+        return Response(serializer.data)
+
+    def put(self, request, format=None):
+        request.user.update(request.data)
+        serializer = UserSerializer(request.user)
+        return Response(serializer.data)
