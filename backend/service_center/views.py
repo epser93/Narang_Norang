@@ -51,7 +51,7 @@ class FaQList(APIView):
     def post(self, request):
         if request.user.is_staff:
             faq = FaQ()
-            faq.create(request.data)
+            faq.create_and_update(request.data)
             serializer = FaQSerializer(faq)
             return Response(serializer.data)
         return Response('권한 없음', status=status.HTTP_403_FORBIDDEN)
@@ -66,7 +66,7 @@ class FaQDetail(APIView):
     def put(self, request, pk):
         if request.user.is_staff:
             faq = FaQ.objects.get(pk=pk)
-            faq.update(request.data)
+            faq.create_and_update(request.data)
             serializer = FaQSerializer(faq)
             return Response(serializer.data)
         return Response('권한 없음', status=status.HTTP_403_FORBIDDEN)
