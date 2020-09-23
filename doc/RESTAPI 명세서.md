@@ -344,12 +344,12 @@ https://j3c206.p.ssafy.io/api/books/favorite/
 ### Favorite 추가(POST)
 
 ```
-http://127.0.0.1:8000/api/books/favorite/<int:id>/
+https://j3c206.p.ssafy.io/api/books/favorite/<int:id>/
 ```
 
 - 응답
 
-```
+```json
 "추가완료"
 or
 "이미 추가되어 있습니다."
@@ -360,12 +360,12 @@ or
 ### Favorite 삭제(DELETE)
 
 ```
-http://127.0.0.1:8000/api/books/favorite/<int:id>/
+https://j3c206.p.ssafy.io/api/books/favorite/<int:id>/
 ```
 
 - 응답
 
-```
+```json
 "삭제완료"
 or
 "이미 삭제되어 있습니다."
