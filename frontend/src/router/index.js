@@ -23,7 +23,20 @@ const routes = [
       {
         path: 'help',
         name: 'CS',
-        component: () => import('@/views/navigation/CustomerService')
+        component: () => import('@/views/navigation/CustomerService'),
+        redirect: 'help',
+        children: [
+          {
+            path: '/',
+            name: 'QA',
+            component: () => import('@/views/helpdesk/MyQuations')
+          },
+        ]
+      },
+      {
+        path: 'voice',
+        name: 'Voice',
+        component: () => import('@/views/navigation/VoiceCloud')
       },
       {
         path: 'userinfo',
@@ -31,6 +44,11 @@ const routes = [
         component: () => import('@/views/navigation/UserInfo.vue')
       },
     ]
+  },
+  {
+    path: '/onAir',
+    name: 'REC',
+    component: () => import('@/views/VoiceRecord')
   },
   {
     path: '/ebook',

@@ -18,7 +18,7 @@
 
 			</b-tab>
 			<b-tab title-link-class="text-dark" title="1 : 1 문의">
-				<b-card-text>Not yet</b-card-text>
+				<router-view/>
 			</b-tab>
 		</b-tabs>
 	</b-card>
@@ -29,6 +29,7 @@ export default {
 	name:"CustomerService",
 	data() {
 		return {
+			// FAQ
 			accordions: 5,
       text: `
         Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
@@ -39,7 +40,7 @@ export default {
         wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher
         vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic
         synth nesciunt you probably haven't heard of them accusamus labore VHS.
-      `,
+			`,
 		}
 	}
 }

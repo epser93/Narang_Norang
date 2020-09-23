@@ -16,6 +16,7 @@
     "v-mask": "^2.2.3",
     "vue": "^2.6.11",
     "vue-carousel-3d": "^0.2.0",
+    "vue-cookies": "^1.7.4",
     "vue-google-login": "^2.0.5",
     "vue-kinesis": "^1.1.5",
     "vue-router": "^3.4.3",

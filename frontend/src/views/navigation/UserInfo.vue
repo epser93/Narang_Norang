@@ -6,37 +6,26 @@
         <b-form v-if="show">
           <b-form-group
             id="input-group-1"
-            label="Email address:"
+            label="이름:"
             label-for="input-1"
-            description="We'll never share your email with anyone else.">
+            description="이름은 수정 불가합니다.">
             <b-form-input
               id="input-1"
-              v-model="form.email"
-              type="email"
+              v-model="form.name"
+              type="text"
               required
-              placeholder="Enter email"
             ></b-form-input>
           </b-form-group>
 
           <b-form-group id="input-group-2" label="Your Name:" label-for="input-2">
             <b-form-input
               id="input-2"
-              v-model="form.name"
+              v-model="form.nickname"
               required
-              placeholder="Enter name"
             ></b-form-input>
           </b-form-group>
 
-          <b-form-group id="input-group-3" label="Voice:" label-for="input-3">
-            <b-form-select
-              id="input-3"
-              v-model="form.voice"
-              :options="voices"
-              required
-            ></b-form-select>
-          </b-form-group>
-          <b-button type="submit" variant="info">Submit</b-button>
-          <b-button type="reset" variant="danger" class="ml-2">Reset</b-button>
+          <b-button variant="info" @click="onChange()">Submit</b-button>
         </b-form>
       </b-col>
     </b-row>
@@ -44,38 +33,34 @@
 </template>
 
 <script>
+import {mapState, mapActions } from 'vuex'
+
 export default {
   name: "UserInfo",
+  computed: {
+    ...mapState('user', ['userInfo'])
+  },
   data() {
     return {
       form: {
-        email: '',
         name: '',
-        voice: null,
-        checked: [],
+        nickname: '',
       },
-      voices: [{ text: 'Select One', value: null }, 'Mama', 'Papa', 'Grandma', 'Grandpa'],
-      show: true
+      show: true,
     }
   },
   methods: {
-    onSubmit(evt) {
-      evt.preventDefault()
-      alert(JSON.stringify(this.form))
+    ...mapActions('user', ['getUserInfo', 'putUserInfo']),
+    onChange() {
+      this.putUserInfo(this.form.nickname)
     },
-    onReset(evt) {
-      evt.preventDefault()
-      // Reset our form values
-      this.form.email = ''
-      this.form.name = ''
-      this.form.voice = null
-      this.form.checked = []
-      // Trick to reset/clear native browser form validation state
-      this.show = false
-      this.$nextTick(() => {
-        this.show = true
-      })
-    }
+  },
+  created() {
+    this.getUserInfo()
+    setTimeout(function() {
+      this.form.name = this.userInfo.username
+      this.form.nickname = this.userInfo.first_name
+    }.bind(this), 100)
   }
 }
 </script>

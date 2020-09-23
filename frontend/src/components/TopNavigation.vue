@@ -59,7 +59,8 @@
         <!-- Menu Area -->
         <b-list-group>
           <b-list-group-item v-b-modal.mb @click="onRoute('MyBook')">내 서재</b-list-group-item>
-          <b-list-group-item v-b-model.mb @click="onRoute('UserInfo')">설정</b-list-group-item>
+          <b-list-group-item href="#" @click="onRoute('Voice')">새로운 목소리</b-list-group-item>
+          <b-list-group-item href="#" v-b-model.mb @click="onRoute('UserInfo')">설정</b-list-group-item>
         </b-list-group>
       </b-card>
       <!-- Footer Area -->
