@@ -17,6 +17,8 @@ import Carousel3d from 'vue-carousel-3d'
 
 Vue.use(Carousel3d);
 
+//Kakao
+window.Kakao.init(process.env.VUE_APP_KAKAO_KEY);
 
 Vue.config.productionTip = false
 
