@@ -108,7 +108,7 @@ def main():
   parser.add_argument('--model', default='tacotron')
   parser.add_argument('--restore_step', type=int)
   parser.add_argument('--summary_interval', type=int, default=1000) # 100
-  parser.add_argument('--checkpoint_interval', type=int, default=10000) #1000
+  parser.add_argument('--checkpoint_interval', type=int, default=5000) #1000
   args = parser.parse_args()
   os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
   run_name = args.model + '/' + args.username
