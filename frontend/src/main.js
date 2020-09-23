@@ -20,10 +20,6 @@ Vue.use(Carousel3d);
 //Kakao
 window.Kakao.init(process.env.VUE_APP_KAKAO_KEY);
 
-// v-mask
-import VueMask from 'v-mask'
-Vue.use(VueMask)
-
 Vue.config.productionTip = false
 
 new Vue({

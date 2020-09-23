@@ -35,7 +35,7 @@
           </div>
           <div class="mt-4">
             <img src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg" width="222" @click="loginWithKakao()" />
-            <button class="api-btn" @click="kakaoLogout()">로그아웃</button>
+            <!-- <button class="api-btn" @click="kakaoLogout()">로그아웃</button> -->
           </div>
         </div>
       </div>
@@ -71,6 +71,10 @@
 <script>
 // import About from './About.vue'
 import { KinesisContainer, KinesisElement } from 'vue-kinesis'
+import { mapGetters } from 'vuex'
+import axios from 'axios'
+import cookies from 'vue-cookies'
+import SERVER from '@/api/drf'
 
 export default {
   name: 'Login',
@@ -79,26 +83,36 @@ export default {
     KinesisContainer,
     KinesisElement,
   },
+  computed: {
+    ...mapGetters('user', ['isLoggedIn'])
+  },
   methods: {
     loginWithKakao() {
+
       window.Kakao.Auth.login({
         success({ access_token }) {
-          console.log(access_token)
+          axios.post(SERVER.URL + SERVER.ROUTER.login,{ "access_token": access_token })
+            .then(({ data }) => {
+              cookies.set('auth-token', data.token)
+              window.location.reload(true)
+              alert(data.user.username + "님 환영합니다.")
+            })
         },
         fail(err) {
           console.log(err)
         },
       })
+
     },
-    kakaoLogout() {
-      if (!window.Kakao.Auth.getAccessToken()) {
-        console.log('Not logged in.')
-        return
-      }
-      window.Kakao.Auth.logout(function() {
-        console.log('logout ok\naccess token -> ' + window.Kakao.Auth.getAccessToken())
-      })
-    }
+    // kakaoLogout() {
+    //   if (!window.Kakao.Auth.getAccessToken()) {
+    //     console.log('Not logged in.')
+    //     return
+    //   }
+    //   window.Kakao.Auth.logout(function() {
+    //     console.log('logout ok\naccess token -> ' + window.Kakao.Auth.getAccessToken())
+    //   })
+    // }
   },
 }
 </script>
