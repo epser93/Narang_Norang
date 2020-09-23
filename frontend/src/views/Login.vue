@@ -34,7 +34,8 @@
             <img class="animated pulse infinite" src="@/assets/img/나랑노랑.png" alt="나랑노랑 로고" style="width: 95%;">
           </div>
           <div class="mt-4">
-            <img class="kakao-login" src="@/assets/img/kakao_login_large_narrow.png" @click="onClick" alt="카카오 로그인 버튼" style="width: 70%;">
+            <img src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg" width="222" @click="loginWithKakao()" />
+            <button class="api-btn" @click="kakaoLogout()">로그아웃</button>
           </div>
         </div>
       </div>
@@ -73,17 +74,32 @@ import { KinesisContainer, KinesisElement } from 'vue-kinesis'
 
 export default {
   name: 'Login',
-  methods: {
-    onClick() {
-      // 로그 잘 찍힘
-      console.log('want to login')
-    }
-  },
   components: {
     // About,
     KinesisContainer,
     KinesisElement,
-  }
+  },
+  methods: {
+    loginWithKakao() {
+      window.Kakao.Auth.login({
+        success({ access_token }) {
+          console.log(access_token)
+        },
+        fail(err) {
+          console.log(err)
+        },
+      })
+    },
+    kakaoLogout() {
+      if (!window.Kakao.Auth.getAccessToken()) {
+        console.log('Not logged in.')
+        return
+      }
+      window.Kakao.Auth.logout(function() {
+        console.log('logout ok\naccess token -> ' + window.Kakao.Auth.getAccessToken())
+      })
+    }
+  },
 }
 </script>
 
