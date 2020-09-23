@@ -8,7 +8,7 @@ export default {
     authToken: cookies.get('auth-token'),
   },
 
-  getter: {
+  getters: {
     config(state) {
       return {
         headers: {
