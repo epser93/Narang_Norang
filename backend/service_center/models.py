@@ -17,7 +17,13 @@ class FaQ(models.Model):
     def __str__(self):
         return self.title
 
-
+    def create_and_update(self, data):
+        self.title = data['title']
+        self.content = data['content']
+        faq_category = FaQCategory.objects.get(pk=data['faq_category'])
+        self.faq_category = faq_category
+        self.save()
+    
 class QnA(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
