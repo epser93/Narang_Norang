@@ -7,7 +7,7 @@ from django.conf import settings
 
 class User(AbstractUser):
     balance = models.IntegerField(default=0)
-    favorite = models.ManyToManyField(Fairytale)
+    favorite = models.ManyToManyField(Fairytale, related_name='like_user')
 
     def __str__(self):
         return self.username
