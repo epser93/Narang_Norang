@@ -38,6 +38,11 @@ const routes = [
         name: 'Voice',
         component: () => import('@/views/navigation/VoiceCloud')
       },
+      {
+        path: 'userinfo',
+        name: 'UserInfo',
+        component: () => import('@/views/navigation/UserInfo.vue')
+      },
     ]
   },
   {
@@ -59,7 +64,7 @@ const routes = [
     path: '/about',
     name: 'About',
     component: () => import('@/views/About.vue')
-  }
+  },
 ]
 
 const router = new VueRouter({
