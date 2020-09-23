@@ -309,7 +309,7 @@ https://j3c206.p.ssafy.io/api/service_center/QnA/<int:id>/
 
 
 
-### Q&A 삭제하기
+### Q&A 삭제하기(DELETE)
 
 ```
 https://j3c206.p.ssafy.io/api/service_center/QnA/<int:id>/
@@ -320,4 +320,54 @@ https://j3c206.p.ssafy.io/api/service_center/QnA/<int:id>/
 ```
 
 
+
+### Favorite 조회(GET)
+
+```
+https://j3c206.p.ssafy.io/api/books/favorite/
+```
+
+- 응답
+
+```json
+[
+    {
+        "id": 1,
+        "title": "동화1",
+        "image": "/media/KakaoTalk_20200921_091027148.png"
+    }
+]
+```
+
+
+
+### Favorite 추가(POST)
+
+```
+https://j3c206.p.ssafy.io/api/books/favorite/<int:id>/
+```
+
+- 응답
+
+```json
+"추가완료"
+or
+"이미 추가되어 있습니다."
+```
+
+
+
+### Favorite 삭제(DELETE)
+
+```
+https://j3c206.p.ssafy.io/api/books/favorite/<int:id>/
+```
+
+- 응답
+
+```json
+"삭제완료"
+or
+"이미 삭제되어 있습니다."
+```
 
