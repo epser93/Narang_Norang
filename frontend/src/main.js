@@ -20,9 +20,8 @@ Vue.use(Carousel3d);
 //Kakao
 window.Kakao.init(process.env.VUE_APP_KAKAO_KEY);
 
-// v-mask
-import VueMask from 'v-mask'
-Vue.use(VueMask)
+// Booklet
+import 'vue-booklet/dist/lib/vue-booklet.min.css'
 
 Vue.config.productionTip = false
 
