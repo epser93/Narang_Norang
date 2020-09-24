@@ -2,8 +2,8 @@ from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .models import QnA, FaQ
-from .serializers import QnASerializer, FaQSerializer
+from .models import QnA, FaQ, QnaReply
+from .serializers import QnASerializer, FaQSerializer, QnAReplySerializer
 
 
 # Create your views here.
@@ -54,7 +54,7 @@ class FaQList(APIView):
             faq.create_and_update(request.data)
             serializer = FaQSerializer(faq)
             return Response(serializer.data)
-        return Response('권한 없음', status=status.HTTP_403_FORBIDDEN)
+        return Response('권한없음', status=status.HTTP_403_FORBIDDEN)
     
 
 class FaQDetail(APIView):
@@ -69,7 +69,7 @@ class FaQDetail(APIView):
             faq.create_and_update(request.data)
             serializer = FaQSerializer(faq)
             return Response(serializer.data)
-        return Response('권한 없음', status=status.HTTP_403_FORBIDDEN)
+        return Response('권한없음', status=status.HTTP_403_FORBIDDEN)
 
     def delete(self, request, pk):
         if request.user.is_staff:
@@ -77,3 +77,30 @@ class FaQDetail(APIView):
             faq.delete()
             return Response("삭제완료", status=status.HTTP_200_OK)
         return Response("권한없음", status=status.HTTP_403_FORBIDDEN)
+
+class QnAReply(APIView):
+    def post(self, request, pk):
+        if request.user.is_staff:
+            qna = QnA.objects.get(pk=pk)
+            reply = QnaReply()
+            reply.create_and_update(request.data, qna)
+            serializer = QnAReplySerializer(reply)
+            return Response(serializer.data)
+        return Response('권한없음', status=status.HTTP_403_FORBIDDEN)
+
+    def delete(self, request, pk):
+        if request.user.is_staff:
+            qna = QnA.objects.get(pk=pk)
+            reply = QnaReply.objects.get(qna=qna)
+            reply.delete(qna)
+            return Response('삭제완료', status=status.HTTP_200_OK)
+        return Response('권한없음', status=status.HTTP_403_FORBIDDEN)
+
+    def put(self, request, pk):
+        if request.user.is_staff:
+            qna = QnA.objects.get(pk=pk)
+            reply = QnaReply.objects.get(qna=qna)
+            reply.create_and_update(request.data, qna)
+            serializer = QnAReplySerializer(reply)
+            return Response(serializer.data)
+        return Response('권한없음', status=status.HTTP_403_FORBIDDEN)

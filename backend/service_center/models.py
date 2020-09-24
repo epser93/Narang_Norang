@@ -50,3 +50,15 @@ class QnaReply(models.Model):
     qna = models.ForeignKey(QnA, on_delete=models.CASCADE, related_name='qna_reply')
     content = models.TextField()
     create_date = models.DateField(auto_now_add=True)
+
+    def create_and_update(self, data, qna):
+        self.content = data['content']
+        self.qna = qna
+        self.save()
+        qna.is_answer = True
+        qna.save()
+        
+    def delete(self, qna):
+        qna.is_answer = False
+        qna.save()
+        super().delete()
