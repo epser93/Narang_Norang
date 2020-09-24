@@ -231,7 +231,8 @@ https://j3c206.p.ssafy.io/api/service_center/QnA/
             "balance": 0,
             "first_name": "mungto123",
             "is_staff": false
-        }
+        },
+        "qna_reply" : []
     }
 ]
 ```
@@ -268,7 +269,8 @@ https://j3c206.p.ssafy.io/api/service_center/QnA/
         "balance": 0,
         "first_name": "mungto123",
         "is_staff": false
-    }
+    },
+    "qna_reply" : []
 }
 ```
 
@@ -295,7 +297,8 @@ https://j3c206.p.ssafy.io/api/service_center/QnA/<int:id>/
         "balance": 0,
         "first_name": "mungto123",
         "is_staff": false
-    }
+    },
+    "qna_reply" : []
 }
 ```
 
@@ -331,7 +334,8 @@ https://j3c206.p.ssafy.io/api/service_center/QnA/<int:id>/
         "balance": 0,
         "first_name": "mungto123",
         "is_staff": false
-    }
+    },
+    qna_reply : []
 }
 ```
 
@@ -530,4 +534,68 @@ https://j3c206.p.ssafy.io/api/service_center/FaQ/<int:faq_id>/
 ```
 
 
+
+### QnA 답글 생성 (POST)
+
+```
+https://j3c206.p.ssafy.io/api/service_center/QnA/<int:qna_id>/reply
+```
+
+- body
+
+```json
+{
+    "content": "답글",
+}
+```
+
+- 응답
+
+```json
+{
+    "id": 14,
+    "content": "답글",
+    "create_date": "2020-09-24"
+}
+```
+
+
+
+### QnA 답글 수정 (PUT)
+
+```
+https://j3c206.p.ssafy.io/api/service_center/QnA/<int:qna_id>/reply
+```
+
+- body
+
+```json
+{
+    "content": "수정"
+}
+```
+
+- 응답
+
+```json
+{
+    "id": 14,
+    "content": "수정",
+    "create_date": "2020-09-24"
+}
+```
+
+
+
+### QnA 답글 삭제 (DELETE)
+
+```
+https://j3c206.p.ssafy.io/api/service_center/QnA/<int:qna_id>/reply
+```
+
+- 응답
+
+```json
+"삭제완료"
+```
 
