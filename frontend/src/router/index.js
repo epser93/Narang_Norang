@@ -30,7 +30,17 @@ const routes = [
           {
             path: '/',
             name: 'QA',
-            component: () => import('@/views/helpdesk/MyQuations')
+            component: () => import('@/views/helpdesk/MyQuestions')
+          },
+          {
+            path: 'QA/:qid/',
+            name: 'QAdetail',
+            component: () => import('@/views/helpdesk/QuestionDetail')
+          },
+          {
+            path: 'QA/',
+            name: 'Question',
+            component: () => import('@/views/helpdesk/QuestionForm')
           },
         ]
       },
@@ -38,11 +48,6 @@ const routes = [
         path: 'voice',
         name: 'Voice',
         component: () => import('@/views/navigation/VoiceCloud')
-      },
-      {
-        path: 'userinfo',
-        name: 'UserInfo',
-        component: () => import('@/views/navigation/UserInfo.vue')
       },
     ]
   },
@@ -65,7 +70,7 @@ const routes = [
     path: '/about',
     name: 'About',
     component: () => import('@/views/About.vue')
-  },
+  }
 ]
 
 const router = new VueRouter({
