@@ -1,5 +1,6 @@
-from .models import Fairytale, Genre
-from .serializers import FairytaleListSerializer, FairytaleDetailSerializer, GenreListSerializer
+from .models import Fairytale, Genre, VoiceStorage
+from .serializers import FairytaleListSerializer, FairytaleDetailSerializer, GenreListSerializer, VoiceStorageSerailizer
+from voices.models import VoiceModel
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -43,3 +44,14 @@ class FavoriteAPI(APIView):
             return Response('삭제완료')
         else:
             return Response('이미 삭제되어 있습니다.')
+
+
+class VoiceStoageAPI(APIView):
+    def get(self, request, pk, model_pk, format=None):
+        # to-do 읽을 수 있는 동화책인지 검증
+        fairytale = Fairytale.objects.get(pk=pk)
+        # to-do 사용가능한 목소리인지 검증 필요
+        voice_model = VoiceModel.objects.get(pk=model_pk)
+        voice_storage = VoiceStorage.objects.filter(fairytale=fairytale).filter(voice_model=voice_model)
+        serializer = VoiceStorageSerailizer(voice_storage, many=True)
+        return Response(serializer.data)
