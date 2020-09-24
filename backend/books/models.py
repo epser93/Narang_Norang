@@ -1,6 +1,8 @@
 from django.db import models
 from django.conf import settings
 
+from voices.models import VoiceModel
+
 import os
 
 
@@ -22,7 +24,6 @@ class Writer(models.Model):
 class Fairytale(models.Model):
     title = models.CharField(max_length=200)
     summary = models.TextField()
-    content = models.TextField()
     image = models.ImageField()
     date = models.DateField()
     writer = models.ForeignKey(Writer, on_delete=models.SET_NULL, related_name='fairytales', null=True)
@@ -51,3 +52,18 @@ class BookMark(models.Model):
 
     def __str__(self):
         return self.fairytale
+
+
+class Scenario(models.Model):
+    fairytale = models.ForeignKey(Fairytale, on_delete=models.CASCADE)
+    content = models.TextField()
+
+    def __str__(self):
+        return self.content
+
+
+class VoiceStorage(models.Model):
+    fairytale = models.ForeignKey(Fairytale, on_delete=models.CASCADE)
+    scenario = models.ForeignKey(Scenario, on_delete=models.CASCADE)
+    voice_model = models.ForeignKey(VoiceModel, on_delete=models.CASCADE)
+    voice_file = models.FileField()
