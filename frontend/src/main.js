@@ -20,9 +20,12 @@ Vue.use(Carousel3d);
 //Kakao
 window.Kakao.init(process.env.VUE_APP_KAKAO_KEY);
 
+<<<<<<< HEAD
 // Booklet
 import 'vue-booklet/dist/lib/vue-booklet.min.css'
 
+=======
+>>>>>>> 7ca33f2390f35934b72122e10dcf27498deb7ef2
 Vue.config.productionTip = false
 
 new Vue({
