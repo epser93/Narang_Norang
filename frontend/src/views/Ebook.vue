@@ -1,19 +1,22 @@
 <template>
   <div>
-    <flipbook class="flipbook" :pages="pages" :zooms="null" v-slot="flipbook">
+    <!-- <flipbook class="flipbook" :pages="pages" :zooms="null" v-slot="flipbook">
       <button @click="flipbook.flipLeft">Previous Page</button>
       <button @click="flipbook.flipRight">Next Page</button>
-    </flipbook>
+    </flipbook> -->
+    <read-book />
   </div>
 </template>
 
 <script>
-import Flipbook from "flipbook-vue";
+// import Flipbook from "flipbook-vue";
+import ReadBook from "@/components/ReadBook"
 
 export default {
   name: "Ebook",
   components: {
-    Flipbook,
+    // Flipbook,
+    ReadBook,
   },
   data() {
     return {
