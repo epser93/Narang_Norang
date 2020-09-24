@@ -13,7 +13,7 @@
     </div>
     <hr>
     <!-- 운영자 답변 -->
-    <b-button @click="$router.go(-1)" variant="outline-secondary" class="my-2 mr-2">
+    <b-button @click="onRoute('QA')" variant="outline-secondary" class="my-2 mr-2">
       <b-icon icon="arrow-left" aria-hidden="true"></b-icon> 뒤로가기
     </b-button>
 	</div>
@@ -27,13 +27,11 @@ export default {
   computed: {
     ...mapState('help', ['question'])
   },
-  data() {
-    return {
-
-    }
-  },
   methods: {
-    ...mapActions('help', ['getQuestion'])
+    ...mapActions('help', ['getQuestion']),
+    onRoute(name) {
+      this.$router.push({name: name}, () => {})
+    }
   },
   created() {
     const qid = this.$route.params.qid

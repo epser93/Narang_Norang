@@ -60,7 +60,7 @@ export default {
     setTimeout(function() {
       this.form.name = this.userInfo.username
       this.form.nickname = this.userInfo.first_name
-    }.bind(this), 100)
+    }.bind(this), 200)
   }
 }
 </script>

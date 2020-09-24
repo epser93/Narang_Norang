@@ -46,7 +46,11 @@ export default {
   methods: {
     ...mapActions('help', ['postQuestion']),
     onSubmit() {
-      this.postQuestion(this.form)
+      if (this.form.title && this.form.content) {
+        this.postQuestion(this.form)
+      } else {
+        alert("다시 확인 해주세요.")
+      }
     }
   }
 }

@@ -7,5 +7,8 @@ export default{
 
       //help_desk
       qna: 'service_center/QnA/',
+
+      //fairytale
+      book: 'books/fairytale/'
     }
   }

@@ -1,5 +1,6 @@
 import axios from 'axios'
 import SERVER from '@/api/drf'
+import router from '@/router'
 
 export default {
   namespaced: true,
@@ -10,10 +11,10 @@ export default {
   },
 
   mutations: {
-    GET_QUESTIONS(state, payload) {
+    SET_QUESTIONS(state, payload) {
       state.questions = payload
     },
-    GET_QUESTION(state, payload) {
+    SET_QUESTION(state, payload) {
       state.question = payload
     }
   },
@@ -22,16 +23,16 @@ export default {
     getQuestions({ rootGetters , commit }) {
       axios.get(SERVER.URL + SERVER.ROUTER.qna, rootGetters['user/config'])
         .then(({ data }) => {
-          commit('GET_QUESTIONS', data)
+          commit('SET_QUESTIONS', data)
         })
         .catch((err) => {
           console.log(err)
         })
     },
-    postQuestion({ rootGetters , commit }, body) {
+    postQuestion({ rootGetters }, body) {
       axios.post(SERVER.URL + SERVER.ROUTER.qna, body, rootGetters['user/config'])
         .then(({ data }) => {
-          commit('GET_QUESTIONS', data)
+          router.push({name:'QAdetail', params:{qid: data.id}})
         })
         .catch((err) => {
           console.log(err)
@@ -40,7 +41,7 @@ export default {
     getQuestion({ rootGetters , commit }, index) {
       axios.get(SERVER.URL + SERVER.ROUTER.qna + index + '/', rootGetters['user/config'])
         .then(({ data }) => {
-          commit('GET_QUESTION', data)
+          commit('SET_QUESTION', data)
         })
         .catch((err) => {
           console.log(err)

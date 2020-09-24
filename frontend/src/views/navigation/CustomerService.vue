@@ -17,7 +17,7 @@
 				</div>
 
 			</b-tab>
-			<b-tab title-link-class="text-dark" title="1 : 1 문의">
+			<b-tab title-link-class="text-dark" title="1 : 1 문의" @click="onRoute('QA')">
 				<router-view/>
 			</b-tab>
 		</b-tabs>
@@ -42,7 +42,12 @@ export default {
         synth nesciunt you probably haven't heard of them accusamus labore VHS.
 			`,
 		}
-	}
+	},
+	methods: {
+    onRoute(name) {
+      this.$router.push({name: name}, () => {})
+    }
+  }
 }
 </script>
 

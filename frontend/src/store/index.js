@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 // import dummy from './dummy'
 import helpdesk from './helpdesk'
 import account from './account'
+import fairytale from './fairytale'
 
 Vue.use(Vuex)
 
@@ -11,5 +12,6 @@ export default new Vuex.Store({
     // dummy: dummy,
     help: helpdesk,
     user: account, 
+    book: fairytale,
   }
 })

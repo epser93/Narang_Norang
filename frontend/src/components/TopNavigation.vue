@@ -36,18 +36,18 @@
         <!-- Voice Notice Area -->
         <b-card-body class="p-2">
           <b-container>
-            <strong>현재 목소리 - 엄마</strong>
+            <strong>현재 목소리 - 기본 아나운서</strong>
             <b-row>
               <b-col cols="6" class="py-3">
                 <b-card bg-variant="info">
-                  <b-avatar size="lg" rounded="lg" text="엄마" variant="info"></b-avatar>
+                  <b-avatar size="lg" rounded="lg" text="기본" variant="info"></b-avatar>
                 </b-card>
               </b-col>
-              <b-col cols="6" class="py-3">
+              <!-- <b-col cols="6" class="py-3">
                 <b-card>
                   <b-avatar size="lg" rounded="lg" src="https://placekitten.com/300/300"></b-avatar>
                 </b-card>
-              </b-col>
+              </b-col> -->
               <b-col cols="6" class="py-3">
                 <b-card>
                   <b-avatar class="plus-icon" size="lg" rounded="lg" icon="plus"></b-avatar>
@@ -58,9 +58,9 @@
         </b-card-body>
         <!-- Menu Area -->
         <b-list-group>
-          <b-list-group-item v-b-modal.mb @click="onRoute('MyBook')">내 서재</b-list-group-item>
+          <b-list-group-item href="#" @click="onRoute('MyBook')">내 서재</b-list-group-item>
           <b-list-group-item href="#" @click="onRoute('Voice')">새로운 목소리</b-list-group-item>
-          <b-list-group-item href="#" v-b-model.mb @click="onRoute('UserInfo')">설정</b-list-group-item>
+          <b-list-group-item href="#" @click="onRoute('UserInfo')">설정</b-list-group-item>
         </b-list-group>
       </b-card>
       <!-- Footer Area -->
@@ -70,7 +70,7 @@
           <p class="footer-blue-narang mb-0">나랑</p>
           <p class="footer-yellow-norang mb-0">노랑</p>
         </div>
-        <b-button class="ml-auto" v-b-modal.cs @click="onRoute('CS')">
+        <b-button class="ml-auto" @click="onRoute('CS')">
           <b-icon icon="headset" aria-hidden="true"></b-icon> 고객센터
         </b-button>
        </div>
@@ -85,10 +85,6 @@
 
 export default {
   name: "TopNavigation",
-  data() {
-    return {   
-    }
-  },
   methods: {
     onRoute(name) {
       this.$router.push({name: name}, () => {})

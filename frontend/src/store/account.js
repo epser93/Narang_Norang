@@ -33,7 +33,7 @@ export default {
       state.authToken = token
       cookies.set('auth-token', token)
     },
-    GET_USERINFO(state, payload) {
+    SET_USERINFO(state, payload) {
       state.userInfo = payload
     },
   },
@@ -45,7 +45,7 @@ export default {
     getUserInfo({ getters, commit }) {
       axios.get(SERVER.URL + SERVER.ROUTER.user, getters.config)
       .then(({ data }) => {
-        commit('GET_USERINFO', data)
+        commit('SET_USERINFO', data)
       })
       .catch((err) => {
         console.log(err)
@@ -57,7 +57,7 @@ export default {
       }
       axios.put(SERVER.URL + SERVER.ROUTER.user, bodydata, getters.config)
       .then(({ data }) => {
-        commit('GET_USERINFO', data)
+        commit('SET_USERINFO', data)
       })
       .catch((err) => {
         console.log(err)

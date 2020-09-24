@@ -49,6 +49,11 @@ const routes = [
         name: 'Voice',
         component: () => import('@/views/navigation/VoiceCloud')
       },
+      {
+        path: 'userinfo',
+        name: 'UserInfo',
+        component: () => import('@/views/navigation/UserInfo')
+      },
     ]
   },
   {
@@ -57,7 +62,7 @@ const routes = [
     component: () => import('@/views/VoiceRecord')
   },
   {
-    path: '/ebook',
+    path: '/ebook/:bid/',
     name: 'Ebook',
     component: () => import('@/views/Ebook.vue')
   },
