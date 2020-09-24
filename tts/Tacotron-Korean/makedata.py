@@ -22,18 +22,20 @@ def preprocess_kss(args):
   # in_dir = os.path.join(args.base_dir, 'kss')
   out_dir = os.path.join(args.base_dir, args.output)
   out_dir = os.path.join(out_dir, args.username) # ?
+  # 대본
+  read_dir = args.base_dir
 
   os.makedirs(out_dir, exist_ok=True)
-  metadata = build_from_path(args.username,in_dir, out_dir, args.num_workers, tqdm=tqdm)
+  metadata = build_from_path(args.username,in_dir, read_dir, out_dir, args.num_workers, tqdm=tqdm)
   write_metadata(metadata, out_dir)
 
 
-def build_from_path(username, in_dir, out_dir, num_workers=1, tqdm=lambda x: x):
+def build_from_path(username, in_dir, read_dir, out_dir, num_workers=1, tqdm=lambda x: x):
   executor = ProcessPoolExecutor(max_workers=num_workers)
   futures = []
   index = 1
-  if os.path.isfile(os.path.join(in_dir,"alignment.json")) :
-    with open(os.path.join(in_dir, "alignment.json"), encoding='utf-8') as f:
+  if os.path.isfile(os.path.join(read_dir,"alignment.json")) :
+    with open(os.path.join(read_dir, "alignment.json"), encoding='utf-8') as f:
         content = f.read()
     info = json.loads(content)
     # print(info)
@@ -46,6 +48,7 @@ def build_from_path(username, in_dir, out_dir, num_workers=1, tqdm=lambda x: x):
                 continue
         else:
             wav_path = path
+
             text = re.sub(re.compile(filters), '', text)
             futures.append(executor.submit(_process_utterance,username, out_dir, index, wav_path, text))
             index += 1
