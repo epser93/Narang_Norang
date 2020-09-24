@@ -5,33 +5,46 @@ export default {
   namespaced: true,
 
   state: {
-    quations: '',
+    questions: '',
+    question: '',
   },
 
   mutations: {
-    GET_QUATIONS(state, payload) {
-      state.quations = payload
+    GET_QUESTIONS(state, payload) {
+      state.questions = payload
     },
+    GET_QUESTION(state, payload) {
+      state.question = payload
+    }
   },
 
   actions: {
-    getQuations({ rootGetters , commit }) {
+    getQuestions({ rootGetters , commit }) {
       axios.get(SERVER.URL + SERVER.ROUTER.qna, rootGetters['user/config'])
         .then(({ data }) => {
-          commit('GET_QUATIONS', data)
+          commit('GET_QUESTIONS', data)
         })
         .catch((err) => {
           console.log(err)
         })
     },
-    postQuation({ rootGetters , commit }) {
-      axios.get(SERVER.URL + SERVER.ROUTER.qna, rootGetters['user/config'])
+    postQuestion({ rootGetters , commit }, body) {
+      axios.post(SERVER.URL + SERVER.ROUTER.qna, body, rootGetters['user/config'])
         .then(({ data }) => {
-          commit('GET_QUATIONS', data)
+          commit('GET_QUESTIONS', data)
         })
         .catch((err) => {
           console.log(err)
         })
+    },
+    getQuestion({ rootGetters , commit }, index) {
+      axios.get(SERVER.URL + SERVER.ROUTER.qna + index + '/', rootGetters['user/config'])
+        .then(({ data }) => {
+          commit('GET_QUESTION', data)
+        })
+        .catch((err) => {
+          console.log(err)
+        })   
     }
   },
 

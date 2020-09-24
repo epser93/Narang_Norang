@@ -29,17 +29,17 @@ const routes = [
           {
             path: '/',
             name: 'QA',
-            component: () => import('@/views/helpdesk/MyQuations')
+            component: () => import('@/views/helpdesk/MyQuestions')
           },
           {
             path: 'QA/:qid/',
             name: 'QAdetail',
-            component: () => import('@/views/helpdesk/QuationDetail')
+            component: () => import('@/views/helpdesk/QuestionDetail')
           },
           {
             path: 'QA/',
-            name: 'Quation',
-            component: () => import('@/views/helpdesk/QuationForm')
+            name: 'Question',
+            component: () => import('@/views/helpdesk/QuestionForm')
           },
         ]
       },
