@@ -16,8 +16,8 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr v-for="question in questions" :key="question.id" @click="onDetail(question.id)">
-					<th scope="row">{{question.id}}</th>
+				<tr v-for="(question, i) in questions" :key="question.id" @click="onDetail(question.id)">
+					<th scope="row">{{i+1}}</th>
 					<td>{{question.title}}</td>
 					<td>{{question.create_date}}</td>
 					<td>{{(question.is_answer) ? "완료" : "대기"}}</td>
@@ -38,12 +38,6 @@ export default {
 	data() {
 		return {
 			// QA
-			fields: ['제목', '답변', '날짜'],
-			items: [
-				{ 날짜: 40, 제목: 'Dickerson', 답변: 'Macdonald' },
-				{ 날짜: 21, 제목: 'Larsen', 답변: 'Shaw' },
-				{ 날짜: 89, 제목: 'Geneva', 답변: 'Wilson' }
-			],
 		}
 	},
 	methods: {

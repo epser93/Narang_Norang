@@ -30,7 +30,7 @@
       <b-card no-body style="min-height: 100%;">
         <b-card-text class="mt-4 mb-0">
           <b-avatar class="mr-3"></b-avatar>
-          <span class="mr-auto"> ~ 님 환영합니다.</span>
+          <span class="mr-auto"> 환영합니다.</span>
           <hr>
         </b-card-text>
         <!-- Voice Notice Area -->
@@ -49,7 +49,7 @@
                 </b-card>
               </b-col> -->
               <b-col cols="6" class="py-3">
-                <b-card>
+                <b-card @click="onRoute('Voice')">
                   <b-avatar class="plus-icon" size="lg" rounded="lg" icon="plus"></b-avatar>
                 </b-card>
               </b-col>
@@ -59,8 +59,8 @@
         <!-- Menu Area -->
         <b-list-group>
           <b-list-group-item href="#" @click="onRoute('MyBook')">내 서재</b-list-group-item>
-          <b-list-group-item href="#" @click="onRoute('Voice')">새로운 목소리</b-list-group-item>
           <b-list-group-item href="#" @click="onRoute('UserInfo')">설정</b-list-group-item>
+          <b-list-group-item href="#" @click="kakaoLogout()">로그아웃</b-list-group-item>
         </b-list-group>
       </b-card>
       <!-- Footer Area -->
@@ -82,12 +82,27 @@
 </template>
 
 <script>
+import cookies from 'vue-cookies'
 
 export default {
   name: "TopNavigation",
   methods: {
     onRoute(name) {
       this.$router.push({name: name}, () => {})
+    },
+    kakaoLogout() {
+      if (!window.Kakao.Auth.getAccessToken()) {
+        cookies.remove('auth-token')
+        window.location.reload(true)
+        alert("로그아웃 되었습니다.")
+        return
+      }
+      window.Kakao.Auth.logout(function() {
+        // console.log('logout ok\naccess token -> ' + window.Kakao.Auth.getAccessToken())
+        cookies.remove('auth-token')
+        window.location.reload(true)
+        alert("로그아웃 되었습니다.")
+      })
     }
   }
 }
