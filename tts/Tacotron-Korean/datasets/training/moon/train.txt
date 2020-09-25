@@ -1,0 +1,110 @@
+moonspec-00001.npy|moon-00001.npy|173|존경하는 독일 국민 여러분
+moonspec-00002.npy|moon-00002.npy|159|고국에 계신 국민 여러분
+moonspec-00003.npy|moon-00003.npy|196|하울젠 쾨르버재단 이사님과
+moonspec-00004.npy|moon-00004.npy|57|모드로
+moonspec-00005.npy|moon-00005.npy|183|전 동독 총리님을 비롯한
+moonspec-00006.npy|moon-00006.npy|65|내외 귀빈 여러분
+moonspec-00007.npy|moon-00007.npy|218|먼저 냉전과 분단을 넘어
+moonspec-00008.npy|moon-00008.npy|71|통일을 이루고
+moonspec-00009.npy|moon-00009.npy|346|그 힘으로 유럽통합과 국제평화를 선도하고 있는
+moonspec-00010.npy|moon-00010.npy|53|독일과
+moonspec-00011.npy|moon-00011.npy|85|독일 국민에게
+moonspec-00012.npy|moon-00012.npy|146|무한한 경의를 표합니다
+moonspec-00013.npy|moon-00013.npy|147|오늘 이 자리를 마련해 주신
+moonspec-00014.npy|moon-00014.npy|168|독일 정부와 쾨르버 재단에도
+moonspec-00015.npy|moon-00015.npy|78|감사드립니다
+moonspec-00016.npy|moon-00016.npy|161|아울러 얼마 전 별세하신
+moonspec-00017.npy|moon-00017.npy|37|고
+moonspec-00018.npy|moon-00018.npy|175|헬무트 콜 총리의 가족과
+moonspec-00019.npy|moon-00019.npy|181|독일 국민들에게 깊은 애도와
+moonspec-00020.npy|moon-00020.npy|140|위로의 마음을 전합니다
+moonspec-00021.npy|moon-00021.npy|87|대한민국은
+moonspec-00022.npy|moon-00022.npy|82|냉전시기
+moonspec-00023.npy|moon-00023.npy|118|어려운 환경 속에서도
+moonspec-00024.npy|moon-00024.npy|77|적극적이고
+moonspec-00025.npy|moon-00025.npy|95|능동적인 외교로
+moonspec-00026.npy|moon-00026.npy|167|독일 통일과 유럽통합을 주도한
+moonspec-00027.npy|moon-00027.npy|55|헬무트
+moonspec-00028.npy|moon-00028.npy|253|콜 총리의 위대한 업적을 기억할 것입니다
+moonspec-00029.npy|moon-00029.npy|163|친애하는 내외 귀빈 여러분
+moonspec-00030.npy|moon-00030.npy|74|이곳 베를린은
+moonspec-00031.npy|moon-00031.npy|132|지금으로부터 십칠년 전
+moonspec-00032.npy|moon-00032.npy|178|한국의 김대중 대통령이
+moonspec-00033.npy|moon-00033.npy|237|남북 화해 협력의 기틀을 마련한
+moonspec-00034.npy|moon-00034.npy|163|베를린 선언을 발표한 곳입니다
+moonspec-00035.npy|moon-00035.npy|190|여기 알테스 슈타트하우스는
+moonspec-00036.npy|moon-00036.npy|214|독일 통일조약 협상이 이뤄졌던
+moonspec-00037.npy|moon-00037.npy|121|역사적 현장입니다
+moonspec-00038.npy|moon-00038.npy|68|나는 오늘
+moonspec-00039.npy|moon-00039.npy|192|베를린의 교훈이 살아있는 이 자리에서
+moonspec-00040.npy|moon-00040.npy|238|대한민국 새 정부의 한반도 평화 구상을
+moonspec-00041.npy|moon-00041.npy|91|말씀드리고자 합니다
+moonspec-00042.npy|moon-00042.npy|74|내외 귀빈 여러분
+moonspec-00043.npy|moon-00043.npy|108|독일 통일의 경험은
+moonspec-00044.npy|moon-00044.npy|73|지구상
+moonspec-00045.npy|moon-00045.npy|187|마지막 분단국가로 남은 우리에게
+moonspec-00046.npy|moon-00046.npy|132|통일에 대한 희망과 함께
+moonspec-00047.npy|moon-00047.npy|203|우리가 나아가야 할 방향을 말해주고 있습니다
+moonspec-00048.npy|moon-00048.npy|74|그것은 우선
+moonspec-00049.npy|moon-00049.npy|75|통일에 이르는
+moonspec-00050.npy|moon-00050.npy|129|과정의 중요성입니다
+moonspec-00051.npy|moon-00051.npy|180|존경하고 사랑하는 국민 여러분
+moonspec-00052.npy|moon-00052.npy|63|감사합니다
+moonspec-00053.npy|moon-00053.npy|88|국민 여러분의
+moonspec-00054.npy|moon-00054.npy|87|위대한 선택에
+moonspec-00055.npy|moon-00055.npy|65|머리 숙여
+moonspec-00056.npy|moon-00056.npy|53|깊이
+moonspec-00057.npy|moon-00057.npy|58|감사드립니다
+moonspec-00058.npy|moon-00058.npy|64|저는 오늘
+moonspec-00059.npy|moon-00059.npy|64|대한민국
+moonspec-00060.npy|moon-00060.npy|180|제 십구대 대통령으로서
+moonspec-00061.npy|moon-00061.npy|115|새로운 대한민국을 향해
+moonspec-00062.npy|moon-00062.npy|152|첫걸음을 내딛습니다
+moonspec-00063.npy|moon-00063.npy|145|지금 제 두 어깨는
+moonspec-00064.npy|moon-00064.npy|132|국민 여러분으로부터
+moonspec-00065.npy|moon-00065.npy|63|부여받은
+moonspec-00066.npy|moon-00066.npy|120|막중한 소명감으로
+moonspec-00067.npy|moon-00067.npy|58|무겁습니다
+moonspec-00068.npy|moon-00068.npy|96|지금 제 가슴은
+moonspec-00069.npy|moon-00069.npy|120|한 번도 경험하지 못한
+moonspec-00070.npy|moon-00070.npy|273|나라를 만들겠다는 열정으로 뜨겁습니다
+moonspec-00071.npy|moon-00071.npy|111|그리고 지금 제 머리는
+moonspec-00072.npy|moon-00072.npy|153|통합과 공존의
+moonspec-00073.npy|moon-00073.npy|106|새로운 세상을 열어갈
+moonspec-00074.npy|moon-00074.npy|84|청사진으로
+moonspec-00075.npy|moon-00075.npy|66|가득 차 있습니다
+moonspec-00076.npy|moon-00076.npy|204|우리가 만들어가려는 새로운 대한민국은
+moonspec-00077.npy|moon-00077.npy|203|숱한 좌절과 패배에도 불구하고
+moonspec-00078.npy|moon-00078.npy|99|우리의 선대들이
+moonspec-00079.npy|moon-00079.npy|214|일관되게 추구했던 나라입니다
+moonspec-00080.npy|moon-00080.npy|222|또 많은 희생과 헌신을 감내하며
+moonspec-00081.npy|moon-00081.npy|80|우리 젊은이들이
+moonspec-00082.npy|moon-00082.npy|172|그토록 이루고 싶어했던
+moonspec-00083.npy|moon-00083.npy|30|나라입니다
+moonspec-00084.npy|moon-00084.npy|197|그런 대한민국을 만들기 위해 저는
+moonspec-00085.npy|moon-00085.npy|137|역사와 국민 앞에
+moonspec-00086.npy|moon-00086.npy|80|두렵지만
+moonspec-00087.npy|moon-00087.npy|78|겸허한 마음으로
+moonspec-00088.npy|moon-00088.npy|63|대한민국
+moonspec-00089.npy|moon-00089.npy|79|제 십구대
+moonspec-00090.npy|moon-00090.npy|100|대통령으로서의
+moonspec-00091.npy|moon-00091.npy|272|책임과 소명을 다할 것임을 천명합니다
+moonspec-00092.npy|moon-00092.npy|172|함께 선거를 치른 후보들께
+moonspec-00093.npy|moon-00093.npy|116|감사의 말씀과 함께
+moonspec-00094.npy|moon-00094.npy|71|심심한
+moonspec-00095.npy|moon-00095.npy|64|위로를 전합니다
+moonspec-00096.npy|moon-00096.npy|97|이번 선거에서는
+moonspec-00097.npy|moon-00097.npy|75|승자도
+moonspec-00098.npy|moon-00098.npy|81|패자도 없습니다
+moonspec-00099.npy|moon-00099.npy|51|우리는
+moonspec-00100.npy|moon-00100.npy|183|정치적 격변기를 보냈습니다
+moonspec-00101.npy|moon-00101.npy|154|정치는 혼란스러웠지만
+moonspec-00102.npy|moon-00102.npy|260|현직 대통령의 탄핵과 구속 앞에서도
+moonspec-00103.npy|moon-00103.npy|212|대한민국의 앞길을 열어주셨습니다
+moonspec-00104.npy|moon-00104.npy|171|우리 국민들은 좌절하지 않고
+moonspec-00105.npy|moon-00105.npy|168|이천십칠년 오월 십일
+moonspec-00106.npy|moon-00106.npy|171|존경하고 사랑하는 국민 여러분
+moonspec-00107.npy|moon-00107.npy|212|바로 그 질문에서 새로 시작하겠습니다
+moonspec-00108.npy|moon-00108.npy|181|구시대의 잘못된 관행과
+moonspec-00109.npy|moon-00109.npy|207|광화문 대통령 시대를 열겠습니다
+moonspec-00110.npy|moon-00110.npy|217|참모들과 머리와 어깨를 맞대고

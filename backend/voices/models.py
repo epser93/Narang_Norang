@@ -7,14 +7,23 @@ class VoiceModel(models.Model):
     name = models.CharField(max_length=40)
     model = models.FileField()
 
+    def __str__(self):
+        return self.name
+
 
 class Caption(models.Model):
     content = models.TextField()
+
+    def __str__(self):
+        return self.content
 
 
 class VoiceCategory(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     name = models.CharField(max_length=40)
+
+    def __str__(self):
+        return '{}_{}'.format(self.user,self.name)
 
 
 class TrainVoice(models.Model):
@@ -23,14 +32,23 @@ class TrainVoice(models.Model):
     voice_category = models.ForeignKey(VoiceCategory, on_delete=models.SET_NULL, null=True)
     train_file = models.FileField()
 
+    def __str__(self):
+        return '{}_{}_{}'.format(self.user, self.voice_category, self.id)
+
 
 class VoiceRent(models.Model):
     voice_model = models.ForeignKey(VoiceModel, on_delete=models.PROTECT, related_name='voice_rent')
     price = models.IntegerField(default=0)
 
+    def __str__(self):
+        return self.voice_model
+
 
 class VoicePurchase(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='voice_purchase')
     voice_model = models.ForeignKey(VoiceModel, on_delete=models.PROTECT)
-    start_date = models.DateField(auto_now=True)
+    start_date = models.DateField(auto_now_add=True)
     end_date = models.DateField()
+
+    def __str__(self):
+        return self.voice_model

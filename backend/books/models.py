@@ -1,26 +1,37 @@
 from django.db import models
 from django.conf import settings
 
+from voices.models import VoiceModel
+
 import os
 
 
 class Genre(models.Model):
     name = models.CharField(max_length=20)
 
+    def __str__(self):
+        return self.name
+
 
 class Writer(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     name = models.CharField(max_length=20)
 
+    def __str__(self):
+        return self.name
+
 
 class Fairytale(models.Model):
     title = models.CharField(max_length=200)
     summary = models.TextField()
-    content = models.TextField()
     image = models.ImageField()
     date = models.DateField()
     writer = models.ForeignKey(Writer, on_delete=models.SET_NULL, related_name='fairytales', null=True)
     Genre = models.ForeignKey(Genre, on_delete=models.SET_NULL, related_name='fairytales', null=True)
+
+    def __str__(self):
+        return self.title
+
 
     # 이미지 삭제 함수
     def image_delete(self):
@@ -38,3 +49,21 @@ class BookMark(models.Model):
     fairytale = models.ForeignKey(Fairytale, on_delete=models.CASCADE)
     page = models.IntegerField()
     last_date = models.DateField(auto_now=True)
+
+    def __str__(self):
+        return self.fairytale
+
+
+class Scenario(models.Model):
+    fairytale = models.ForeignKey(Fairytale, on_delete=models.CASCADE)
+    content = models.TextField()
+
+    def __str__(self):
+        return self.content
+
+
+class VoiceStorage(models.Model):
+    fairytale = models.ForeignKey(Fairytale, on_delete=models.CASCADE)
+    scenario = models.ForeignKey(Scenario, on_delete=models.CASCADE)
+    voice_model = models.ForeignKey(VoiceModel, on_delete=models.CASCADE)
+    voice_file = models.FileField()
