@@ -9,6 +9,7 @@
 | accounts/subscribe/                             | 정액권정보                                      | 정액권결제                         |                      | 정액권 환불          |
 | books/fairytale/                                | 전체리스트                                      | 동화생성(작가만)                   |                      |                      |
 | books/fairytale/<book_id>                       | 동화상세정보                                    |                                    | 동화수정(작가만)     |                      |
+| books/fairytale/<book_id>/voice/<voice_model>/  | 동화책 대본과 소리데이터 가져오기               |                                    |                      |                      |
 | books/genre/                                    | 장르목록                                        | 장르생성(관리자)                   | 장르수정(관리자)     | 장르삭제(관리자)     |
 | books/favorite/                                 | 즐겨찾기목록                                    |                                    |                      | 전체삭제             |
 | books/favorite/<book_id>/                       |                                                 | 즐겨찾기 생성                      |                      | 즐겨찾기 삭제        |
@@ -172,12 +173,80 @@ https://j3c206.p.ssafy.io/api/books/fairytale/<int:id>/
     "id": 1,
     "title": "동화1",
     "summary": "동화 줄거리",
-    "content": "동화내용",
     "image": "/media/KakaoTalk_20200921_091027148.png",
     "date": "2020-09-21",
     "writer": 1,
     "Genre": 1
 }
+```
+
+
+
+### 동화책 대본과 음성데이터 가져오기(GET)
+
+```
+https://j3c206.p.ssafy.io/api/books/fairytale/<int:fairytale_id>/voice/<int:voice_model_id>/
+```
+
+- 응답
+
+```json
+[
+    {
+        "scenario": {
+            "content": "'옛날 어느 고을에 흥부와 놀부라는 형제가 살았어요',"
+        },
+        "voice_file": "/media/eval-135000-0.wav"
+    },
+    {
+        "scenario": {
+            "content": "'동생 흥부는 마음씨가 착하고 형 놀부는 맘대로 하는 심술쟁이 욕심꾸러기였어요',"
+        },
+        "voice_file": "/media/eval-135000-1.wav"
+    },
+    {
+        "scenario": {
+            "content": "'어느날 아버지가 병으로 앓아누어 돌아가시자 아버지에게서 물려받은 유산을 자기혼자 다 차지한 놀부는 동생 흥부를 쫒아냈어요',"
+        },
+        "voice_file": "/media/eval-135000-2.wav"
+    },
+    {
+        "scenario": {
+            "content": "'형님 겨울만 나게 해주십시오',"
+        },
+        "voice_file": "/media/eval-135000-3.wav"
+    },
+    {
+        "scenario": {
+            "content": "'이추운날 이어린것들을 두고 어디로 가라고 하십니까',"
+        },
+        "voice_file": "/media/eval-135000-4.wav"
+    },
+    {
+        "scenario": {
+            "content": "'더 이상 못봐준다니깐 난 너희 그많은 자식들만보면 소화가 안돼',"
+        },
+        "voice_file": "/media/eval-135000-5.wav"
+    },
+    {
+        "scenario": {
+            "content": "'몇일만이라도  아님 쌀이라도 주십시 형님',"
+        },
+        "voice_file": "/media/eval-135000-6.wav"
+    },
+    {
+        "scenario": {
+            "content": "'놀부는 간절히 부탁하는 흥부를 뿌리쳤어요',"
+        },
+        "voice_file": "/media/eval-135000-7.wav"
+    },
+    {
+        "scenario": {
+            "content": "'흥부는 아내와 여러 자식들을 거느니고 다 무너져가는 초가집에서 헐벗은 채',"
+        },
+        "voice_file": "/media/eval-135000-8.wav"
+    }
+]
 ```
 
 
