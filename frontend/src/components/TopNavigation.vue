@@ -13,7 +13,7 @@
       
       <!-- 나랑노랑 Logo-Image -->
       <b-navbar-brand class="mr-auto ml-auto">
-        <img src="../assets/img/나랑노랑.png" alt="" style="width: 80px;">
+        <img src="../assets/img/나랑노랑.png" alt="" style="width: 100px;">
       </b-navbar-brand>
 
       <!-- SideBar Nav -->
@@ -24,29 +24,30 @@
     <!-- End NavBar -->
     </b-navbar>
 
+  <!-- SideBar -->
     <b-sidebar id="sidebar-right" right shadow backdrop-variant="dark" backdrop> 
-
+      <!-- Greeting Area -->
       <b-card no-body style="min-height: 100%;">
         <b-card-text class="mt-4 mb-0">
           <b-avatar class="mr-3"></b-avatar>
           <span class="mr-auto"> ~ 님 환영합니다.</span>
           <hr>
         </b-card-text>
-
+        <!-- Voice Notice Area -->
         <b-card-body class="p-2">
           <b-container>
-            <strong>현재 목소리 - 엄마</strong>
+            <strong>현재 목소리 - 기본 아나운서</strong>
             <b-row>
               <b-col cols="6" class="py-3">
                 <b-card bg-variant="info">
-                  <b-avatar size="lg" rounded="lg" text="엄마" variant="info"></b-avatar>
+                  <b-avatar size="lg" rounded="lg" text="기본" variant="info"></b-avatar>
                 </b-card>
               </b-col>
-              <b-col cols="6" class="py-3">
+              <!-- <b-col cols="6" class="py-3">
                 <b-card>
                   <b-avatar size="lg" rounded="lg" src="https://placekitten.com/300/300"></b-avatar>
                 </b-card>
-              </b-col>
+              </b-col> -->
               <b-col cols="6" class="py-3">
                 <b-card>
                   <b-avatar class="plus-icon" size="lg" rounded="lg" icon="plus"></b-avatar>
@@ -55,21 +56,21 @@
             </b-row>
           </b-container>
         </b-card-body>
-
+        <!-- Menu Area -->
         <b-list-group>
-          <b-list-group-item v-b-modal.mb @click="onRoute('MyBook')">내 서재</b-list-group-item>
-          <!-- <b-list-group-item href="#">Not yet...</b-list-group-item> -->
-          <!-- <b-list-group-item href="#">Not yet...</b-list-group-item> -->
+          <b-list-group-item href="#" @click="onRoute('MyBook')">내 서재</b-list-group-item>
+          <b-list-group-item href="#" @click="onRoute('Voice')">새로운 목소리</b-list-group-item>
+          <b-list-group-item href="#" @click="onRoute('UserInfo')">설정</b-list-group-item>
         </b-list-group>
       </b-card>
-
+      <!-- Footer Area -->
       <template v-slot:footer="{}">
        <div class="d-flex align-items-center px-3 py-2">
         <div class="row ml-1">
           <p class="footer-blue-narang mb-0">나랑</p>
           <p class="footer-yellow-norang mb-0">노랑</p>
         </div>
-        <b-button class="ml-auto" v-b-modal.cs @click="onRoute('CS')">
+        <b-button class="ml-auto" @click="onRoute('CS')">
           <b-icon icon="headset" aria-hidden="true"></b-icon> 고객센터
         </b-button>
        </div>
@@ -84,10 +85,6 @@
 
 export default {
   name: "TopNavigation",
-  data() {
-    return {   
-    }
-  },
   methods: {
     onRoute(name) {
       this.$router.push({name: name}, () => {})

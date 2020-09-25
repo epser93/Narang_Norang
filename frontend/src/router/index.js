@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import cookies from 'vue-cookies'
 
 Vue.use(VueRouter)
 
@@ -23,12 +24,45 @@ const routes = [
       {
         path: 'help',
         name: 'CS',
-        component: () => import('@/views/navigation/CustomerService')
+        component: () => import('@/views/navigation/CustomerService'),
+        redirect: 'help',
+        children: [
+          {
+            path: '/',
+            name: 'QA',
+            component: () => import('@/views/helpdesk/MyQuestions')
+          },
+          {
+            path: 'QA/:qid/',
+            name: 'QAdetail',
+            component: () => import('@/views/helpdesk/QuestionDetail')
+          },
+          {
+            path: 'QA/',
+            name: 'Question',
+            component: () => import('@/views/helpdesk/QuestionForm')
+          },
+        ]
+      },
+      {
+        path: 'voice',
+        name: 'Voice',
+        component: () => import('@/views/navigation/VoiceCloud')
+      },
+      {
+        path: 'userinfo',
+        name: 'UserInfo',
+        component: () => import('@/views/navigation/UserInfo')
       },
     ]
   },
   {
-    path: '/ebook',
+    path: '/onAir',
+    name: 'REC',
+    component: () => import('@/views/VoiceRecord')
+  },
+  {
+    path: '/ebook/:bid/',
     name: 'Ebook',
     component: () => import('@/views/Ebook.vue')
   },
@@ -50,19 +84,19 @@ const router = new VueRouter({
   routes
 })
 
-// router.beforeEach((to, from, next) => {
-//   const publicPages = ['Login', 'SignUp']  // Login 안해도 됨
-//   const authPages = ['Login', 'Signup']  // Login 되어있으면 안됨
+router.beforeEach((to, from, next) => {
+  const publicPages = ['Login']  // Login 안해도 됨
+  const authPages = ['Login']  // Login 되어있으면 안됨
 
-//   const authRequired = !publicPages.includes(to.name)  // 로그인 해야 함.
-//   const unauthRequired = authPages.includes(to.name)  // 로그인 해서는 안됨
-//   const isLoggedIn = !!cookies.get('auth-token')
+  const authRequired = !publicPages.includes(to.name)  // 로그인 해야 함.
+  const unauthRequired = authPages.includes(to.name)  // 로그인 해서는 안됨
+  const isLoggedIn = !!cookies.get('auth-token')
 
-//   if (unauthRequired && isLoggedIn) {
-//     next('/')
-//   }
+  if (unauthRequired && isLoggedIn) {
+    next('/')
+  }
 
-//   authRequired && !isLoggedIn ? next({ name: 'Login' }) : next()
-// })
+  authRequired && !isLoggedIn ? next({ name: 'Login' }) : next()
+})
 
 export default router
