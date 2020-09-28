@@ -14,7 +14,7 @@
     <hr>
     <!-- 답변란 -->
 
-    <div v-if="!question.is_answer">
+    <div v-if="(!question.is_answer) && (userInfo.is_staff)">
       <b-form-textarea
         id="textarea-large"
         placeholder="답변을 남겨주세요."
@@ -22,12 +22,12 @@
         v-model="form.content"
       ></b-form-textarea>
     </div>
-    <div v-else>
+    <div v-if="question.is_answer">
       <p class="mt-1" style="font-weight: bold;">to. {{(question.user.first_name == '') ? question.user.username : question.user.first_name}} 님</p>
       <p>" {{ question.qna_reply[0].content }} "</p>
       <p class="mt-4">from. 나랑노랑</p>
+      <hr>
     </div>
-    <hr>
     <b-button @click="onRoute('QA')" variant="outline-secondary" class="my-2 mr-2">
       <b-icon icon="arrow-left" aria-hidden="true"></b-icon> 뒤로가기
     </b-button>

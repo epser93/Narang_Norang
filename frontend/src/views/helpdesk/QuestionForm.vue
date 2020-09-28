@@ -24,10 +24,10 @@
     <b-button @click="$router.go(-1)" variant="outline-secondary" class="my-2 mr-2">
       <b-icon icon="arrow-left" aria-hidden="true"></b-icon> 뒤로가기
     </b-button>
-    <b-button v-if="this.update" @click="onUpdate()" variant="outline-secondary" class="my-2">
+    <b-button v-if="this.update" @click="onUpdate()" variant="outline-info" class="my-2">
       <b-icon icon="pencil-square" aria-hidden="true"></b-icon> 수정하기
     </b-button>
-    <b-button v-else @click="onSubmit()" variant="outline-secondary" class="my-2">
+    <b-button v-else @click="onSubmit()" variant="outline-info" class="my-2">
       <b-icon icon="pencil-square" aria-hidden="true"></b-icon> 작성하기
     </b-button>
   </div>
