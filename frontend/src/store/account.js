@@ -58,6 +58,7 @@ export default {
       axios.put(SERVER.URL + SERVER.ROUTER.user, bodydata, getters.config)
       .then(({ data }) => {
         commit('SET_USERINFO', data)
+        alert('개인정보가 수정되었습니다.')
       })
       .catch((err) => {
         console.log(err)
