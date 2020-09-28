@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div v-if="userInfo" class="container">
     <b-row class="justify-content-lg-center">
       <b-col col lg="8">
         <!-- email 잠금 필요 -->
@@ -50,13 +50,12 @@ export default {
     }
   },
   methods: {
-    ...mapActions('user', ['getUserInfo', 'putUserInfo']),
+    ...mapActions('user', [ 'putUserInfo']),
     onChange() {
       this.putUserInfo(this.form.nickname)
     },
   },
   created() {
-    this.getUserInfo()
     setTimeout(function() {
       this.form.name = this.userInfo.username
       this.form.nickname = this.userInfo.first_name
