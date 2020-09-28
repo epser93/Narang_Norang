@@ -169,4 +169,8 @@ export default {
   color: grey;
   background-color: white;
 }
+
+.plus-icon:hover {
+  cursor: pointer;
+}
 </style>
