@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="userInfo">
     <!-- NavBar -->
     <b-navbar>
 
@@ -30,7 +30,7 @@
       <b-card no-body style="min-height: 100%;">
         <b-card-text class="mt-4 mb-0">
           <b-avatar class="mr-3"></b-avatar>
-          <span class="mr-auto"> 환영합니다.</span>
+          <span class="mr-auto">{{(userInfo.first_name == '') ? userInfo.username : userInfo.first_name}}님 환영합니다.</span>
           <hr>
         </b-card-text>
         <!-- Voice Notice Area -->
@@ -83,10 +83,15 @@
 
 <script>
 import cookies from 'vue-cookies'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   name: "TopNavigation",
+  computed: {
+    ...mapState('user', ['userInfo'])
+  },
   methods: {
+    ...mapActions('user', ['getUserInfo']),
     onRoute(name) {
       this.$router.push({name: name}, () => {})
     },
@@ -104,6 +109,9 @@ export default {
         alert("로그아웃 되었습니다.")
       })
     }
+  },
+  created() {
+    this.getUserInfo()
   }
 }
 </script>
@@ -160,5 +168,9 @@ export default {
 .plus-icon {
   color: grey;
   background-color: white;
+}
+
+.plus-icon:hover {
+  cursor: pointer;
 }
 </style>

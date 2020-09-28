@@ -5,7 +5,7 @@ from .models import Subscribe
 
 class UserAdmin(admin.ModelAdmin):
     list_display = ['id', 'username', 'balance','is_superuser', 'is_staff']
-    fields = ['username', 'is_superuser']
+    fields = ['username', 'is_staff']
 
 
 class SubscribeAdmin(admin.ModelAdmin):

@@ -42,6 +42,11 @@ const routes = [
             name: 'Question',
             component: () => import('@/views/helpdesk/QuestionForm')
           },
+          {
+            path: 'QA/:qid/:update',
+            name: 'QAupdate',
+            component: () => import('@/views/helpdesk/QuestionForm')
+          },
         ]
       },
       {

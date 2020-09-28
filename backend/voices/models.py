@@ -1,6 +1,16 @@
 from django.db import models
 from django.conf import settings
+from django.core.files.storage import FileSystemStorage
+import os
 
+
+class OverwriteStorage(FileSystemStorage):
+    def get_available_name(self, name, max_length):
+        if self.exists(name):
+            os.remove(os.path.join(settings.MEDIA_ROOT, name))
+        return name
+
+fs = OverwriteStorage()
 
 class VoiceModel(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='voice_model')
@@ -25,6 +35,16 @@ class VoiceCategory(models.Model):
     def __str__(self):
         return '{}_{}'.format(self.user,self.name)
 
+    def create(self, data, user):
+        self.name = data['name']
+        self.user = user
+        self.save()
+
+    def update(self, data, user):
+        self.user = user
+        self.name = data['name']
+        self.save()
+
 
 class TrainVoice(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='train_voice')
@@ -34,6 +54,22 @@ class TrainVoice(models.Model):
 
     def __str__(self):
         return '{}_{}_{}'.format(self.user, self.voice_category, self.id)
+
+
+    def create(self, filename, category, caption, user):
+        self.user = user
+        self.voice_category = category
+        self.caption = caption
+        self.train_file = filename
+        self.save()
+
+    def delete(self):
+        # 파일삭제코드 추가
+        try:
+            os.remove(os.path.join(settings.MEDIA_ROOT, self.train_file.name))
+        except :
+            pass
+        super().delete()
 
 
 class VoiceRent(models.Model):
