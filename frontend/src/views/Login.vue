@@ -95,7 +95,7 @@ export default {
             .then(({ data }) => {
               cookies.set('auth-token', data.token)
               window.location.reload(true)
-              alert(data.user.username + "님 환영합니다.")
+              alert((data.user.first_name == '') ? data.user.username : data.user.first_name + "님 환영합니다.")
             })
         },
         fail(err) {

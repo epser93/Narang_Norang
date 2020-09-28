@@ -24,19 +24,26 @@
     <b-button @click="$router.go(-1)" variant="outline-secondary" class="my-2 mr-2">
       <b-icon icon="arrow-left" aria-hidden="true"></b-icon> 뒤로가기
     </b-button>
-    <b-button @click="onSubmit()" variant="outline-secondary" class="my-2">
+    <b-button v-if="this.update" @click="onUpdate()" variant="outline-secondary" class="my-2">
+      <b-icon icon="pencil-square" aria-hidden="true"></b-icon> 수정하기
+    </b-button>
+    <b-button v-else @click="onSubmit()" variant="outline-secondary" class="my-2">
       <b-icon icon="pencil-square" aria-hidden="true"></b-icon> 작성하기
     </b-button>
   </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   name:"QuestionForm",
+  computed: {
+    ...mapState('help', ['question'])
+  },
   data() {
     return {
+      update: false,
       form: {
         title: "",
         content: "",
@@ -44,13 +51,27 @@ export default {
     }
   },
   methods: {
-    ...mapActions('help', ['postQuestion']),
+    ...mapActions('help', ['postQuestion', 'putQuestion']),
     onSubmit() {
       if (this.form.title && this.form.content) {
         this.postQuestion(this.form)
       } else {
         alert("다시 확인 해주세요.")
       }
+    },
+    onUpdate() {
+      if (this.form.title && this.form.content) {
+        this.putQuestion({ index: this.$route.params.qid, body: this.form})
+      } else {
+        alert("다시 확인 해주세요.")
+      }
+    }
+  },
+  created() {
+    if (this.$route.params.update == 'update') {
+      this.update = true
+      this.form.title = this.question.title
+      this.form.content = this.question.content
     }
   }
 }

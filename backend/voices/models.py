@@ -35,6 +35,16 @@ class VoiceCategory(models.Model):
     def __str__(self):
         return '{}_{}'.format(self.user,self.name)
 
+    def create(self, data, user):
+        self.name = data['name']
+        self.user = user
+        self.save()
+
+    def update(self, data, user):
+        self.user = user
+        self.name = data['name']
+        self.save()
+
 
 class TrainVoice(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='train_voice')
