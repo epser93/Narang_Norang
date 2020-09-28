@@ -25,7 +25,10 @@ class QnAList(APIView):
 
 class QnADetail(APIView):
     def get(self, request, pk):
-        qna = QnA.objects.get(pk=pk, user=request.user)
+        if request.user.is_staff:
+            qna = QnA.objects.get(pk=pk)
+        else:
+            qna = QnA.objects.get(pk=pk, user=request.user)
         serializer = QnASerializer(qna)
         return Response(serializer.data)
 
