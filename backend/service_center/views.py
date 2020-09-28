@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -40,6 +39,9 @@ class QnADetail(APIView):
 
     def delete(self, request, pk):
         qna = QnA.objects.get(pk=pk)
+        if qna.is_answer:
+            return Response("답변이 달린글은 삭제 불가능 합니다.", status=status.HTTP_400_BAD_REQUEST) 
+
         if request.user.is_staff or request.user == qna.user:
             qna.delete()
             return Response("삭제완료", status=status.HTTP_200_OK)
