@@ -1,9 +1,15 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .models import VoiceCategory
-from .serializers import TrainVoiceCategorySerializer 
+from .models import Caption, VoiceCategory
+from .serializers import TrainCaptionSerializer, TrainVoiceCategorySerializer 
 from rest_framework import status
 # Create your views here.
+
+class TrainCaption(APIView):
+    def get(self, request):
+        caption = Caption.objects.all()
+        serializer = TrainCaptionSerializer(caption, many=True)
+        return Response(serializer.data)
 
 class TrainVoiceCategory(APIView):
     def get(self, request):
@@ -36,4 +42,3 @@ class TrainVoiceCategoryDetail(APIView):
         category.update(request.data, request.user)
         serializer = TrainVoiceCategorySerializer(category)
         return Response(serializer.data, status=status.HTTP_200_OK)
-
