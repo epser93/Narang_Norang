@@ -3,8 +3,6 @@
     <!-- 사용자 질문 -->
     <b-badge v-if="question.is_answer" variant="primary">답변완료</b-badge>
     <b-badge v-else variant="light">미답변</b-badge>
-    {{question}}
-    {{userInfo}}
     <div class="col-8 justify-content-center mr-auto ml-auto">
       <h3 class="mb-0">{{ question.title }}</h3>
       <p class="ml-1">{{ question.create_date }}</p>
@@ -16,7 +14,7 @@
     <hr>
     <!-- 답변란 -->
 
-    <div v-if="!question.is_answer">
+    <div v-if="(!question.is_answer) && (userInfo.is_staff)">
       <b-form-textarea
         id="textarea-large"
         placeholder="답변을 남겨주세요."
@@ -24,16 +22,16 @@
         v-model="form.content"
       ></b-form-textarea>
     </div>
-    <div v-else>
+    <div v-if="question.is_answer">
       <p class="mt-1" style="font-weight: bold;">to. {{(question.user.first_name == '') ? question.user.username : question.user.first_name}} 님</p>
-      <p>" {{ question.qna_reply.content }} "</p>
+      <p>" {{ question.qna_reply[0].content }} "</p>
       <p class="mt-4">from. 나랑노랑</p>
+      <hr>
     </div>
-    <hr>
     <b-button @click="onRoute('QA')" variant="outline-secondary" class="my-2 mr-2">
       <b-icon icon="arrow-left" aria-hidden="true"></b-icon> 뒤로가기
     </b-button>
-    <b-button v-if="(question.user.id == userInfo.id)" @click="onDelete" variant="outline-danger" class="my-2 mr-2">
+    <b-button v-if="(!question.is_answer) && (question.user.id == userInfo.id)" @click="onDelete" variant="outline-danger" class="my-2 mr-2">
       <b-icon icon="x-square" class="pt-1" aria-hidden="true"></b-icon> 삭제하기
     </b-button>
     <b-button v-if="(!question.is_answer) && (question.user.id == userInfo.id)" @click="onUpdate" variant="outline-info" class="my-2 mr-2">
