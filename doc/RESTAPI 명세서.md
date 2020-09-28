@@ -22,7 +22,7 @@
 | service_center/QnA/<qna_id>/reply/              | 답글조회                                        | 답글생성                           | 답글수정             | 답글삭제             |
 | voices/                                         | 내 계정에서 만든 목소리들 + 임대한 목소리(임대) |                                    |                      |                      |
 | voices/voice/<voice_id>/                        | 목소리 모델                                     |                                    | 목소리 정보 수정     | 목소리 삭제          |
-| voices/caption/                                 | 캡션리스트                                      |                                    |                      |                      |
+| voices/caption/                                 | 학습용 대본 조회                                |                                    |                      |                      |
 | voices/rent/                                    | 목소리 임대 리스트                              | 목소리 임대 생성                   |                      | 목소리 임대 삭제     |
 | voices/rent/<voice_id>/                         | 목소리 테스트 내용                              | 목소리 구매                        |                      |                      |
 | voices/train/category/                          | 내가만든 카테고리 조회                          | 카테고리 생성                      |                      |                      |
@@ -666,5 +666,93 @@ https://j3c206.p.ssafy.io/api/service_center/QnA/<int:qna_id>/reply
 
 ```json
 "삭제완료"
+```
+
+
+
+### 훈련용 목소리 카테고리 전체 조회(GET)
+
+```
+https://j3c206.p.ssafy.io/api/voices/train/category
+```
+
+- 응답
+
+```json
+[
+    {
+        "id": 3,
+        "name": "아나운서"
+    },
+    {
+        "id": 4,
+        "name": "엄마"
+    }
+]
+```
+
+
+
+### 훈련용 목소리 카테고리 생성 (POST)
+
+```
+https://j3c206.p.ssafy.io/api/voices/train/category
+```
+
+- body
+
+```json
+{
+    "name": "엄마"
+}
+```
+
+- 응답
+
+```json
+[
+    {
+        "name": "엄마"
+    }
+]
+```
+
+
+
+### 훈련용 목소리 카테고리 삭제 (DELETE)
+
+```
+https://j3c206.p.ssafy.io/api/voices/train/category/<int:category_id>
+```
+
+- 응답
+
+```json
+"삭제완료"
+```
+
+
+
+### 훈련용 목소리 카테고리 수정 (PUT)
+
+```json
+https://j3c206.p.ssafy.io/api/voices/train/category/<int:category_id>
+```
+
+- body
+
+```json
+{
+    "name": "친구A"
+}
+```
+
+- 응답
+
+```json
+{
+    "id": 4,
+    "name": "친구A"
+}
 ```
 
