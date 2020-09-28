@@ -670,6 +670,29 @@ https://j3c206.p.ssafy.io/api/service_center/QnA/<int:qna_id>/reply
 
 
 
+### 학습용 대본 불러오기 (GET)
+
+```
+https://j3c206.p.ssafy.io/api/voices/caption
+```
+
+- 응답
+
+```json
+[
+    {
+        "id": 1,
+        "content": "'옛날 어느 고을에 흥부와 놀부라는 형제가 살았어요'"
+    },
+    {
+        "id": 2,
+        "content": "'동생 흥부는 마음씨가 착하고 형 놀부는 맘대로 하는 심술쟁이 욕심꾸러기였어요'"
+    }
+]
+```
+
+
+
 ### 훈련용 목소리 카테고리 전체 조회(GET)
 
 ```
