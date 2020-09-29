@@ -4,7 +4,7 @@
     <b-navbar>
 
       <!-- 나랑노랑 -->
-      <b-navbar-brand class="main-narang-norang" @click="onRoute('Main')">
+      <b-navbar-brand href="#" class="main-narang-norang" @click="onRoute('Main')">
         <div class="row ml-4">
           <p class="main-blue-narang mb-0">나랑</p>
           <p class="main-yellow-norang mb-0">노랑</p>
