@@ -1,8 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .serializers import TrainCaptionSerializer, TrainVoiceCategorySerializer 
-
+from .serializers import TrainCaptionSerializer, TrainVoiceCategorySerializer, VoiceModelSerializer
 from .models import VoiceModel, VoiceCategory, Caption, TrainVoice, OverwriteStorage
 
 fs = OverwriteStorage()
@@ -70,4 +69,20 @@ class TrainVoiceCategoryDetail(APIView):
             return Response('중복된 카테고리입니다.', status=status.HTTP_400_BAD_REQUEST)
         category.update(request.data, request.user)
         serializer = TrainVoiceCategorySerializer(category)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+class VoiceModelAPI(APIView):
+    def get(self, request):
+        voice = VoiceModel.objects.filter(user=request.user)
+        serializer = VoiceModelSerializer(voice, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+class VoiceModelDetailAPI(APIView):
+    def put(self, request, voice_id):
+        voice = VoiceModel.objects.get(pk=voice_id)
+        is_exist = VoiceModel.objects.filter(user=request.user).filter(name=request.data['name']).exists()
+        if is_exist:
+            return Response('중복된 이름입니다.', status=status.HTTP_400_BAD_REQUEST)
+        voice.update(request.data)
+        serializer = VoiceModelSerializer(voice)
         return Response(serializer.data, status=status.HTTP_200_OK)

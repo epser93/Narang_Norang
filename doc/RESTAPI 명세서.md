@@ -21,7 +21,7 @@
 | service_center/QnA/<qna_id>/                    | qna상세정보                                     |                                    | QnA 수정             | QnA 삭제             |
 | service_center/QnA/<qna_id>/reply/              | 답글조회                                        | 답글생성                           | 답글수정             | 답글삭제             |
 | voices/                                         | 내 계정에서 만든 목소리들 + 임대한 목소리(임대) |                                    |                      |                      |
-| voices/voice/<voice_id>/                        | 목소리 모델                                     |                                    | 목소리 정보 수정     | 목소리 삭제          |
+| voices/voice/<voice_id>/                        |                                                 |                                    | 목소리 정보 수정     | 목소리 삭제          |
 | voices/caption/                                 | 학습용 대본 조회                                |                                    |                      |                      |
 | voices/rent/                                    | 목소리 임대 리스트                              | 목소리 임대 생성                   |                      | 목소리 임대 삭제     |
 | voices/rent/<voice_id>/                         | 목소리 테스트 내용                              | 목소리 구매                        |                      |                      |
@@ -776,6 +776,54 @@ https://j3c206.p.ssafy.io/api/voices/train/category/<int:category_id>
 {
     "id": 4,
     "name": "친구A"
+}
+```
+
+
+
+### 사용 가능 목소리 모델 리스트 조회 (GET)
+
+```
+https://j3c206.p.ssafy.io/api/voices/
+```
+
+- 응답
+
+```json
+[
+    {
+        "id": 2,
+        "name": "아빠"
+    },
+    {
+        "id": 3,
+        "name": "엄마"
+    }
+]
+```
+
+
+
+### 목소리 모델 이름 수정 (PUT)
+
+```
+https://j3c206.p.ssafy.io/api/voices/voice/<int:voice_id>/
+```
+
+- body
+
+```json
+{
+    "name": "수정할 이름"
+}
+```
+
+- 응답
+
+```json
+{
+    "id": 2,
+    "name": "수정할 이름"
 }
 ```
 
