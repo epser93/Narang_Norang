@@ -122,6 +122,10 @@ export default {
   margin-right: 15vw;
 }
 
+.main-narang-norang:hover {
+  cursor: pointer;
+}
+
 .main-blue-narang {
   color: #89aef3;
   font-size: 40px;
