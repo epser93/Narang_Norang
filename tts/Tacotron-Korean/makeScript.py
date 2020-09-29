@@ -29,6 +29,7 @@ def preprocess_kss(args):
 def build_from_path(username, in_dir, read_dir):
   script = {}
   index = 0
+  # ft = open(os.path.join(in_dir,"새파일.txt"), 'w',  encoding='utf-8')
   with open(os.path.join(in_dir, text_name), encoding='utf-8') as f:
     for line in f:
       
@@ -37,9 +38,12 @@ def build_from_path(username, in_dir, read_dir):
       text = parts[2]
       script[wav_path] = text
       index += 1
+      
+      # ft.write(text+'\n')
+    # ft.close()
 
   save_route = in_dir
-  print(script)
+  # print(script)
   with open(os.path.join(save_route,'script.json'),'w',encoding='utf-8') as fp:
     json.dump(script,fp , ensure_ascii=False, indent=4)
 
