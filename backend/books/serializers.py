@@ -27,3 +27,9 @@ class VoiceStorageSerailizer(serializers.ModelSerializer):
     class Meta:
         model = VoiceStorage
         fields = ['id','scenario', 'voice_file']
+
+
+class ScenarioIdSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Scenario
+        fields = ['id', 'content']

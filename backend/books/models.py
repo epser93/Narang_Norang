@@ -65,5 +65,5 @@ class Scenario(models.Model):
 class VoiceStorage(models.Model):
     fairytale = models.ForeignKey(Fairytale, on_delete=models.CASCADE)
     scenario = models.ForeignKey(Scenario, on_delete=models.CASCADE)
-    voice_model = models.ForeignKey(VoiceModel, on_delete=models.CASCADE)
+    voice_model = models.ForeignKey(VoiceModel, on_delete=models.CASCADE, null=True)
     voice_file = models.FileField()
