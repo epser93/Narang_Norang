@@ -1,35 +1,32 @@
 <template>
 	<div class="container">
     <div class="mr-auto ml-auto" style="width: 80%; margin-top: 50px;">
-      <b-progress :value="5" variant="warning" striped :animated="animate" class="mt-2"></b-progress>
+      <b-progress :value="index+1" variant="warning" striped :animated="true" class="mt-2"></b-progress>
     </div>
-    <div style="margin-top: 60px;">
+    <div v-if="script" style="margin-top: 60px;">
       <p class="mt-4">마이크 버튼을 누른 후, 아래의 문장을 녹음해 주세요.</p>
-      <h1 style="margin-top: 20px;">"풀을 뜯는 얼룩말"</h1>
+      <h1 style="margin-top: 20px;">{{ test_script[index].content }}</h1>
       <hr style="width: 80%; ">
-      <b-button class="mt-3">
-        다음 문장<b-icon class="ml-3" icon="arrow-right-square-fill" scale="2"></b-icon>
+      <b-button @click="toPrev" class="mt-3">
+        <b-icon icon="arrow-left-square-fill" scale="2"></b-icon>
+      </b-button>
+      <b-button @click="toNext" class="mt-3">
+        <b-icon class="ml-3" icon="arrow-right-square-fill" scale="2"></b-icon>
       </b-button>
     </div>
-    <!-- <div style="positon: fixed; margin-top: 200px;">
-      <vue-record-audio @result="onResult" />
-      <div v-if="test_audio">
-        <button @click="onPlay">
-          <b-icon icon="caret-right"></b-icon>
-        </button>
-      </div>
-    </div> -->
+
     <div style="margin-top: 100px;">
       <div class="record-settings">
-        <vue-record-audio :mode="recordMode.audio" @stream="onStream" @result="onResult" />
+        <!-- <vue-record-audio :mode="'press'" @stream="onStream" @result="onResult" /> -->
+        <vue-record-audio :mode="'press'" @result="onResult" />
       </div>
     </div>
     <div class="column mt-4">
       <div class="recorded-audio">
-        <div v-for="(record, index) in recordings" :key="index" class="recorded-item">
-          <div class="audio-container"><audio :src="record.src" controls /></div>
+        <div class="recorded-item">
+          <div class="audio-container"><audio :src="now_record" controls /></div>
           <div>
-            <button @click="removeRecord(index)">delete</button>
+            <button @click="removeRecord">delete</button>
           </div>
         </div>
       </div>
@@ -41,57 +38,80 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
+
 export default {
   name:"VoiceRecord",
+  computed: {
+    ...mapState('voice', ['script']),
+    total() {
+      // return this.script.length
+      return this.test_script.length
+    },
+  },
   data() {
     return {
-      // test_audio: '',
-      // audio_url: '',
-      // audio: '',
-      // animate: true,
-      recordMode: {
-        audio: 'press'
-      },
-      recordings: []
+      test_script: [
+        {
+          id: 1,
+          content: '첫 번째 대본입니다.'
+        },
+        {
+          id: 2,
+          content: '두 번째 대본입니다.'
+        },
+        {
+          id: 3,
+          content: '세 번째 대본입니다.'
+        },
+        {
+          id: 4,
+          content: '네 번째 대본입니다.'
+        },
+        {
+          id: 5,
+          content: '마지막 대본입니다.'
+        },
+      ],
+      recordings: new Array(this.total),
+      now_record: this.recordings[0],
+      index: 0,
     }
   },
   methods: {
-    // onResult (data) {
-    //   this.audio = data
-    //   // console.log('The blob data:', data);
-    //   // console.log('Downloadable audio', window.URL.createObjectURL(data));
-    //   this.audio_url = window.URL.createObjectURL(this.audio)
-    //   // console.log(this.audio_url)
-    //   // console.log(this.audio)
-    //   this.test_audio = new Audio(this.audio_url)
-    // },
-    // onPlay() {
-    //   this.test_audio.play()
-    // }
-    removeRecord (index) {
-      this.recordings.splice(index, 1)
+    ...mapActions('voice', ['getScript']),
+    removeRecord() {
+      this.recordings[this.index] = undefined
     },
-    onStream (stream) {
-      console.log('Got a stream object:', stream);
+    onResult(data) {
+      this.recordings[this.index] = window.URL.createObjectURL(data)
+      this.now_record = window.URL.createObjectURL(data)
+      console.log(this.recordings)
     },
-    onResult (data) {
-      this.recordings.push({
-        src: window.URL.createObjectURL(data)
-      })
+    toNext() {
+      if (this.index < this.total-1) {
+        this.index++
+        this.now_record = this.recordings[this.index]
+      } else {
+        alert('마지막 대본입니다.')
+      }
+    },
+    toPrev() {
+      if (this.index > 0) {
+        this.index--
+        this.now_record = this.recordings[this.index]
+      } else {
+        alert('첫 번째 대본입니다.')
+      }
     }
+  },
+  created() {
+    this.getScript()
   }
 }
 </script>
 
 <style>
-/* .vue-audio-recorder {
-  background-color: #89aef3;
-}
-
-.vue-audio-recorder:hover {
-  background-color: #4582f5;
-} */
-
 .vue-audio-recorder {
   margin-right: 16px;
 }
