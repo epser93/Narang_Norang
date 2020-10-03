@@ -14,8 +14,8 @@ filters = "([.,!?])"
 ##
 
 def preprocess_kss(args):
-  in_dir = os.path.join(args.base_dir, args.username)
-  out_dir = os.path.join(in_dir, 'audio')
+  in_dir = os.path.join(args.base_dir, args.username+'/')
+  out_dir = os.path.join(in_dir, 'audio/')
   # out_dir = os.path.join(args.base_dir, args.output)
   # out_dir = os.path.join(out_dir, args.username) # ?
   # 대본
