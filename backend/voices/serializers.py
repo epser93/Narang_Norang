@@ -17,7 +17,7 @@ class TrainVoiceSerializer(serializers.ModelSerializer):
     caption = TrainCaptionSerializer()
     class Meta:
         model = TrainVoice
-        fields= ['id', 'voice_category', 'train_file', 'caption']
+        fields= ['id', 'train_file', 'caption']
 
 class VoiceModelSerializer(serializers.ModelSerializer):
     class Meta:

@@ -7,9 +7,16 @@ class FairytaleListSerializer(serializers.ModelSerializer):
         fields = ['id', 'title', 'image']
 
 class FairytaleDetailSerializer(serializers.ModelSerializer):
+    is_liked = serializers.SerializerMethodField()
+    def get_is_liked(self, obj):
+        user = self.context.get('user')
+        if obj.like_user.filter(pk=user.id).exists():
+            return True
+        return False
+
     class Meta:
         model = Fairytale
-        fields = '__all__'
+        fields = ['id', 'title', 'summary', 'image', 'date', 'writer', 'Genre', 'is_liked']
 
 class GenreListSerializer(serializers.ModelSerializer):
     class Meta:
