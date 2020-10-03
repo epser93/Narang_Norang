@@ -20,6 +20,10 @@ class VoiceModel(models.Model):
     def __str__(self):
         return self.name
 
+    def update(self, data):
+        self.name = data['name']
+        self.save()
+
 
 class Caption(models.Model):
     content = models.TextField()

@@ -21,13 +21,13 @@
 | service_center/QnA/<qna_id>/                    | qna상세정보                                     |                                    | QnA 수정             | QnA 삭제             |
 | service_center/QnA/<qna_id>/reply/              | 답글조회                                        | 답글생성                           | 답글수정             | 답글삭제             |
 | voices/                                         | 내 계정에서 만든 목소리들 + 임대한 목소리(임대) |                                    |                      |                      |
-| voices/voice/<voice_id>/                        | 목소리 모델                                     |                                    | 목소리 정보 수정     | 목소리 삭제          |
+| voices/voice/<voice_id>/                        |                                                 |                                    | 목소리 정보 수정     | 목소리 삭제          |
 | voices/caption/                                 | 학습용 대본 조회                                |                                    |                      |                      |
 | voices/rent/                                    | 목소리 임대 리스트                              | 목소리 임대 생성                   |                      | 목소리 임대 삭제     |
 | voices/rent/<voice_id>/                         | 목소리 테스트 내용                              | 목소리 구매                        |                      |                      |
 | voices/train/category/                          | 내가만든 카테고리 조회                          | 카테고리 생성                      |                      |                      |
 | voices/train/category/<category_id>/            | 해당 카테고리 내용 조회                         | 모델학습시작(모두 채워져 있을때만) | 카테고리 수정        | 카테고리 삭제        |
-| vocies/train/category/<category_id>/<train_id>/ |                                                 | 데이터 추가                        |                      | 데이터 삭제          |
+| voices/train/category/<category_id>/<train_id>/ |                                                 | 데이터 추가                        |                      | 데이터 삭제          |
 
 
 
@@ -742,6 +742,35 @@ https://j3c206.p.ssafy.io/api/voices/train/category
 
 
 
+### 훈련용 목소리 카테고리 상세 조회 (GET)
+
+```
+https://j3c206.p.ssafy.io/api/voices/train/category/<int:category_id>
+```
+
+- 응답
+
+```json
+[
+    {
+        "id": 1,
+        "voice_category": {
+            "id": 4,
+            "name": "친구A"
+        },
+        "train_file": "/media/%EC%A0%84%EC%82%B0%EC%A7%81_%EA%B3%B5%EB%B6%80_-_%EB%B3%B5%EC%82%AC%EB%B3%B8.wmv",
+        "caption": {
+            "id": 1,
+            "content": "'옛날 어느 고을에 흥부와 놀부라는 형제가 살았어요'"
+        }
+    }
+]
+```
+
+
+
+
+
 ### 훈련용 목소리 카테고리 삭제 (DELETE)
 
 ```
@@ -777,5 +806,67 @@ https://j3c206.p.ssafy.io/api/voices/train/category/<int:category_id>
     "id": 4,
     "name": "친구A"
 }
+```
+
+
+
+### 사용 가능 목소리 모델 리스트 조회 (GET)
+
+```
+https://j3c206.p.ssafy.io/api/voices/
+```
+
+- 응답
+
+```json
+[
+    {
+        "id": 2,
+        "name": "아빠"
+    },
+    {
+        "id": 3,
+        "name": "엄마"
+    }
+]
+```
+
+
+
+### 목소리 모델 이름 수정 (PUT)
+
+```
+https://j3c206.p.ssafy.io/api/voices/voice/<int:voice_id>/
+```
+
+- body
+
+```json
+{
+    "name": "수정할 이름"
+}
+```
+
+- 응답
+
+```json
+{
+    "id": 2,
+    "name": "수정할 이름"
+}
+```
+
+
+
+### 목소리 모델 삭제 (DELETE)
+
+```
+https://j3c206.p.ssafy.io/api/voices/voice/<int:voice_id>/
+```
+
+- 응답
+
+```json
+'삭제완료'
 ```
 
