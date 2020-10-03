@@ -13,7 +13,7 @@ class FairytaleList(APIView):
 class FairytaleDetail(APIView):
     def get(self, request, pk):
         fairytale = Fairytale.objects.get(pk=pk)
-        serializer = FairytaleDetailSerializer(fairytale)
+        serializer = FairytaleDetailSerializer(fairytale, context={'user' : request.user })
         return Response(serializer.data)
 
 class GenreList(APIView):
