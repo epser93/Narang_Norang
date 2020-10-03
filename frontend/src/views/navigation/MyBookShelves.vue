@@ -20,18 +20,12 @@
   </div>
 
 <!-- 보고 싶어요 -->
-  <div style="margin-top: 6vmin;">
+  <div v-if="favorites" style="margin-top: 6vmin;">
     <h2 class="mb-4">보고 싶어요 <b-icon icon="bookmark-heart"></b-icon></h2>
     <b-container fluid class="p-2">
       <b-row>
-        <b-col>
-          <b-img thumbnail class="thumbnail" fluid src="https://picsum.photos/250/250/?image=54" alt="Image 1"></b-img>
-        </b-col>
-        <b-col>
-          <b-img thumbnail class="thumbnail" fluid src="https://picsum.photos/250/250/?image=58" alt="Image 2"></b-img>
-        </b-col>
-        <b-col>
-          <b-img thumbnail class="thumbnail" fluid src="https://picsum.photos/250/250/?image=59" alt="Image 3"></b-img>
+        <b-col v-for="favorite in favorites" :key="favorite.id">
+          <b-img thumbnail class="thumbnail" fluid :src="`https://j3c206.p.ssafy.io/${favorite.image}`" alt="Image 1"></b-img>
         </b-col>
       </b-row>
     </b-container>
@@ -43,10 +37,23 @@
 
 <script>
 // import BookShelves from "@/components/BookShelves.vue"
+import { mapState, mapActions } from 'vuex'
 
 export default {
   name:"MyBookShelves",
-
+  computed: {
+    ...mapState('favorite', ['favorites'])
+  },
+  data() {
+    return {
+    }
+  },
+  methods: {
+    ...mapActions('favorite', ['getFavorites'])
+  },
+  created() {
+    this.getFavorites()
+  }
 }
 </script>
 

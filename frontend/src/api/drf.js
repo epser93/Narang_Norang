@@ -9,6 +9,9 @@ export default{
       qna: 'service_center/QnA/',
 
       //fairytale
-      book: 'books/fairytale/'
+      book: 'books/fairytale/',
+
+      //favorite
+      favorite: 'books/favorite/',
     }
   }
