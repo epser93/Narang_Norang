@@ -32,6 +32,15 @@ export default {
       .catch((err) => {
         console.log(err)
       })
+    },
+    deleteFavorites({ rootGetters }, bid) {
+      axios.delete(SERVER.URL + SERVER.ROUTER.favorite + bid + '/', rootGetters['user/config'])
+      .then(() => {
+        alert('삭제되었습니다.')
+      })
+      .catch((err) => {
+        console.log(err)
+      })
     }
   },
 }
