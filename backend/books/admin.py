@@ -26,9 +26,14 @@ class VoiceStorageAdmin(admin.ModelAdmin):
     list_display = ['id', 'fairytale', 'scenario', 'voice_model']
     fields = ['fairytale', 'scenario' ,'voice_model', 'voice_file']
 
+class BookMarkAdmin(admin.ModelAdmin):
+    list_display = ['id', 'user', 'fairytale', 'page', 'last_date']
+    fields = ['user', 'fairytale', 'page']
+
 
 admin.site.register(Genre, GenreAdmin)
 admin.site.register(Writer, WriterAdmin)
 admin.site.register(Fairytale, FairytaleAdmin)
 admin.site.register(Scenario, ScenarioAdmin)
 admin.site.register(VoiceStorage, VoiceStorageAdmin)
+admin.site.register(BookMark, BookMarkAdmin)

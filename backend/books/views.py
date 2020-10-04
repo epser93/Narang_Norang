@@ -1,5 +1,5 @@
-from .models import Fairytale, Genre, VoiceStorage
-from .serializers import FairytaleListSerializer, FairytaleDetailSerializer, GenreListSerializer, VoiceStorageSerailizer
+from .models import Fairytale, Genre, VoiceStorage, BookMark
+from .serializers import FairytaleListSerializer, FairytaleDetailSerializer, GenreListSerializer, VoiceStorageSerailizer, BookmarkSerializer
 from voices.models import VoiceModel
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -54,4 +54,21 @@ class VoiceStoageAPI(APIView):
         voice_model = VoiceModel.objects.get(pk=model_pk)
         voice_storage = VoiceStorage.objects.filter(fairytale=fairytale).filter(voice_model=voice_model)
         serializer = VoiceStorageSerailizer(voice_storage, many=True)
+        return Response(serializer.data)
+
+class Bookmark(APIView):
+    def post(self, request, pk, model_pk):
+        bookmark = BookMark.objects.filter(fairytale=pk)
+        fairytale = Fairytale.objects.get(pk=pk)
+        if not bookmark:
+            bookmark = BookMark()
+            bookmark.create(request.data, request.user, fairytale)
+        else:
+            bookmark = BookMark.objects.get(fairytale=pk)
+            bookmark.update(request.data, request.user, fairytale)
+        return Response('북마크 등록 완료')
+
+    def get(self, request, pk, model_pk):
+        bookmark = BookMark.objects.filter(fairytale=pk)
+        serializer = BookmarkSerializer(bookmark, many=True)
         return Response(serializer.data)

@@ -13,7 +13,6 @@ class TrainVoiceCategorySerializer(serializers.ModelSerializer):
         fields = ['id', 'name']
 
 class TrainVoiceSerializer(serializers.ModelSerializer):
-    voice_category = TrainVoiceCategorySerializer()
     caption = TrainCaptionSerializer()
     class Meta:
         model = TrainVoice

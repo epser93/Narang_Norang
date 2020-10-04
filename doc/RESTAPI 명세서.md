@@ -194,54 +194,63 @@ https://j3c206.p.ssafy.io/api/books/fairytale/<int:fairytale_id>/voice/<int:voic
 ```json
 [
     {
+        "id": 5,
         "scenario": {
             "content": "'옛날 어느 고을에 흥부와 놀부라는 형제가 살았어요',"
         },
         "voice_file": "/media/eval-135000-0.wav"
     },
     {
+        "id": 6,
         "scenario": {
             "content": "'동생 흥부는 마음씨가 착하고 형 놀부는 맘대로 하는 심술쟁이 욕심꾸러기였어요',"
         },
         "voice_file": "/media/eval-135000-1.wav"
     },
     {
+        "id": 7,
         "scenario": {
             "content": "'어느날 아버지가 병으로 앓아누어 돌아가시자 아버지에게서 물려받은 유산을 자기혼자 다 차지한 놀부는 동생 흥부를 쫒아냈어요',"
         },
         "voice_file": "/media/eval-135000-2.wav"
     },
     {
+        "id": 8,
         "scenario": {
             "content": "'형님 겨울만 나게 해주십시오',"
         },
         "voice_file": "/media/eval-135000-3.wav"
     },
     {
+        "id": 9,
         "scenario": {
             "content": "'이추운날 이어린것들을 두고 어디로 가라고 하십니까',"
         },
         "voice_file": "/media/eval-135000-4.wav"
     },
     {
+        "id": 10,
         "scenario": {
             "content": "'더 이상 못봐준다니깐 난 너희 그많은 자식들만보면 소화가 안돼',"
         },
         "voice_file": "/media/eval-135000-5.wav"
     },
     {
+        "id": 11,
         "scenario": {
             "content": "'몇일만이라도  아님 쌀이라도 주십시 형님',"
         },
         "voice_file": "/media/eval-135000-6.wav"
     },
     {
+        "id": 12,
         "scenario": {
             "content": "'놀부는 간절히 부탁하는 흥부를 뿌리쳤어요',"
         },
         "voice_file": "/media/eval-135000-7.wav"
     },
     {
+        "id": 13,
         "scenario": {
             "content": "'흥부는 아내와 여러 자식들을 거느니고 다 무너져가는 초가집에서 헐벗은 채',"
         },
@@ -863,6 +872,87 @@ https://j3c206.p.ssafy.io/api/voices/voice/<int:voice_id>/
 
 ```
 https://j3c206.p.ssafy.io/api/voices/voice/<int:voice_id>/
+```
+
+- 응답
+
+```json
+'삭제완료'
+```
+
+
+
+### 북마크 가져오기 (GET)
+
+```
+https://j3c206.p.ssafy.io/api/books/fairytale/<int:pk>/voice/<int:model_pk>/bookmark/
+```
+
+- 응답
+
+```json
+[
+    {
+        "id": 1,
+        "page": 2
+    }
+]
+```
+
+> page가 북마크 번호입니다!
+
+
+
+### 북마크 저장하기 (POST)
+
+```
+https://j3c206.p.ssafy.io/api/books/fairytale/<int:pk>/voice/<int:model_pk>/bookmark/
+```
+
+- body
+
+```json
+{
+    "id" : 2
+}
+```
+
+> 해당 대본 id 번호를 보내주시면 됩니다.
+
+- 응답
+
+```json
+'북마크 등록 완료'
+```
+
+
+
+### 목소리 음성 파일 추가하기 (POST)
+
+```
+https://j3c206.p.ssafy.io/api/voices/train/category/<category_id>/<caption_id>/
+```
+
+- body
+
+```
+form-data
+
+file : 음성파일
+```
+
+- 응답
+
+```json
+'저장완료'
+```
+
+
+
+### 목소리 음성 파일 삭제하기 (DELETE)
+
+```
+https://j3c206.p.ssafy.io/api/voices/train/category/<category_id>/<caption_id>/
 ```
 
 - 응답
