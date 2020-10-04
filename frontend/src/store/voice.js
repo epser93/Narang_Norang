@@ -52,8 +52,43 @@ export default {
 		getTrain({ rootGetters , commit }, vid) {
 			axios.get(SERVER.URL + SERVER.ROUTER.train + vid + '/', rootGetters['user/config'])
         .then(({ data }) => {
-					console.log(data)
-          commit('SET_TRAIN', data)
+					commit('SET_TRAIN', data)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+		},
+		// putTrain({ rootGetters , commit }, vid) {
+		// 	axios.get(SERVER.URL + SERVER.ROUTER.train + vid + '/', rootGetters['user/config'])
+    //     .then(({ data }) => {
+		// 			commit('SET_TRAIN', data)
+    //     })
+    //     .catch((err) => {
+    //       console.log(err)
+    //     })
+		// },
+		// delTrain({ rootGetters , commit }, vid) {
+		// 	axios.get(SERVER.URL + SERVER.ROUTER.train + vid + '/', rootGetters['user/config'])
+    //     .then(({ data }) => {
+		// 			commit('SET_TRAIN', data)
+    //     })
+    //     .catch((err) => {
+    //       console.log(err)
+    //     })
+		// },
+		postCaption({ rootGetters }, { vid, cid, file }) {
+			const formData = new FormData()
+			formData.append('file', file, 'voice.wav')
+			axios.post(SERVER.URL + SERVER.ROUTER.train + vid + '/' + cid + '/', formData, rootGetters['user/formconfig'])
+        .then(() => {	
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+		},
+		delCaption({ rootGetters }, { vid, cid }) {
+			axios.delete(SERVER.URL + SERVER.ROUTER.train + vid + '/' + cid + '/', rootGetters['user/config'])
+        .then(() => {
         })
         .catch((err) => {
           console.log(err)

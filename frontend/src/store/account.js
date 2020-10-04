@@ -25,6 +25,14 @@ export default {
       }
     },
 
+    formconfig(state) {
+      return {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'Authorization': `JWT ${state.authToken}`
+        }
+      }
+    },
   },
   // 2. 받아올 정보를 저장할 mutations 설정
   // state 받아올 거니까 써주기
