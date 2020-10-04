@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Fairytale, Genre, VoiceStorage, Scenario
+from .models import Fairytale, Genre, VoiceStorage, Scenario, BookMark
 
 class FairytaleListSerializer(serializers.ModelSerializer):
     class Meta:
@@ -34,3 +34,8 @@ class VoiceStorageSerailizer(serializers.ModelSerializer):
     class Meta:
         model = VoiceStorage
         fields = ['id','scenario', 'voice_file']
+
+class BookmarkSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = BookMark
+        fields = ['id', 'page']
