@@ -13,5 +13,8 @@ export default{
 
       //favorite
       favorite: 'books/favorite/',
+      
+      //voice
+      script: 'voices/caption/',
     }
   }

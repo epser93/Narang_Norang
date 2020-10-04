@@ -1,10 +1,10 @@
 <template>
   <div v-if="userInfo">
     <!-- NavBar -->
-    <b-navbar>
+    <b-navbar class="top-nav">
 
       <!-- 나랑노랑 -->
-      <b-navbar-brand class="main-narang-norang" @click="onRoute('Main')">
+      <b-navbar-brand href="#" class="main-narang-norang" @click="onRoute('Main')">
         <div class="row ml-4">
           <p class="main-blue-narang mb-0">나랑</p>
           <p class="main-yellow-norang mb-0">노랑</p>
@@ -171,6 +171,18 @@ export default {
 
 .plus-icon {
   color: grey;
+  background-color: white;
+}
+
+.plus-icon:hover {
+  cursor: pointer;
+}
+
+.top-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   background-color: white;
 }
 </style>

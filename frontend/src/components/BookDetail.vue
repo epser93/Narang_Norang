@@ -11,6 +11,7 @@
           <b-card style="height: 100%;">
             <div style="margin-top: 40%">
               <h3>{{ fairytale.title }}</h3>
+              <hr>
               <h5>{{ fairytale.summary }}</h5>
             </div>
             <template v-slot:footer>

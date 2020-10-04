@@ -7,7 +7,7 @@ from librosa import effects
 from models import create_model
 from util.text import text_to_sequence, sequence_to_text
 from util import audio, plot
-
+# 이부분 수정해야함.
 # python eval.py --checkpoint ./logs-tacotron/kss/model.ckpt-135000
 sentences = [
   '옛날 어느 고을에 흥부와 놀부라는 형제가 살았어요',
@@ -58,6 +58,7 @@ sentences = [
   '흥부야 내가 이때까지 미안했다 정말 미안해',
   '이렇게 마음씨 착한흥부와 놀부 형제는 행복하게 잘 지냈답니다'
 ]
+#여길 어떻게 바궈야할지 생각하기
 #   '깊은 숲속 오두막 집에 아기돼지 삼형제가 살고 있었어요',
 #   '어느 날 엄마 돼지가 말했어요',
 #   '애들아 이젠 너희들도 다 컸으니까 각자 자기 집을 짓고 살도록 해라',

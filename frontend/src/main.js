@@ -30,3 +30,8 @@ new Vue({
   store,
   render: h => h(App)
 }).$mount('#app')
+
+//vue-record
+import VueRecord from '@codekraft-studio/vue-record'
+
+Vue.use(VueRecord)
