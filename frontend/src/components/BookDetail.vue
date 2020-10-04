@@ -7,11 +7,11 @@
             <img :src="`https://j3c206.p.ssafy.io/${fairytale.image}`" alt="" style="width: 100%; margin-top: 40%">
           </b-card>
         </b-col>
-
         <b-col cols="6">
           <b-card style="height: 100%;">
             <div style="margin-top: 40%">
               <h3>{{ fairytale.title }}</h3>
+              <hr>
               <h5>{{ fairytale.summary }}</h5>
             </div>
             <template v-slot:footer>
@@ -19,7 +19,7 @@
                 <!-- 책 읽기 -->
                 <b-button @click="onDetail(fairytale.id)" variant="secondary">책 읽기<b-icon class="ml-2" icon="caret-right-fill" scale="1.2"></b-icon></b-button>
                 <!-- 즐겨찾기 -->
-                <b-button v-if="star" @click="changeStar"><b-icon icon="star-fill"></b-icon></b-button>
+                <b-button v-if="fairytale.is_liked" @click="changeStar"><b-icon icon="star-fill"></b-icon></b-button>
                 <b-button v-else @click="changeStar" variant="secondary"><b-icon icon="star" scale="1.2"></b-icon></b-button>
               </div>
             </template>
@@ -49,38 +49,22 @@ export default {
   },
   data() {
     return {
-      star: false,
     }
   },
   methods: {
-    ...mapActions('favorite', ['postFavorite']),
+    ...mapActions('favorite', ['postFavorites']),
+    ...mapActions('favorite', ['deleteFavorites']),
 		onDetail(bid) {
 			this.$router.push({name:'Ebook', params:{bid: bid}})
     },
     changeStar() {
-      // this.makeToast()
-      this.star = !this.star
-      if (this.star) {
-        this.postFavorite(this.fairytale.id)
+      this.fairytale.is_liked = !this.fairytale.is_liked
+      if (this.fairytale.is_liked) {
+        this.postFavorites(this.fairytale.id)
+      } else {
+        this.deleteFavorites(this.fairytale.id)
       }
     },
-    // makeToast() {
-    //   if (!this.star) {
-    //     this.$bvToast.toast("즐겨찾기에 추가되었습니다.", {
-    //       title: `즐겨찾기 ${"추가"}`,
-    //       variant: "success",
-    //       solid: true,
-    //       autoHideDelay: 700,
-    //     });
-    //   } else {
-    //     this.$bvToast.toast("즐겨찾기에서 삭제되었습니다.", {
-    //       title: `즐겨찾기 ${"취소"}`,
-    //       variant: "danger",
-    //       solid: true,
-    //       autoHideDelay: 700,
-    //     });     
-    //   }
-    // }
 	},
 }
 </script>

@@ -25,7 +25,13 @@
     <b-container fluid class="p-2">
       <b-row>
         <b-col v-for="favorite in favorites" :key="favorite.id">
-          <b-img thumbnail class="thumbnail" fluid :src="`https://j3c206.p.ssafy.io/${favorite.image}`" alt="Image 1"></b-img>
+          <b-img thumbnail class="thumbnail" 
+          fluid :src="`https://j3c206.p.ssafy.io/${favorite.image}`" 
+          alt="Image 1"
+          v-b-modal="`modal-${favorite.id}`"
+          @click="setModal(favorite)">
+          </b-img>
+          <book-detail :book="book"/>
         </b-col>
       </b-row>
     </b-container>
@@ -38,18 +44,28 @@
 <script>
 // import BookShelves from "@/components/BookShelves.vue"
 import { mapState, mapActions } from 'vuex'
+import	BookDetail from '@/components/BookDetail'
 
 export default {
   name:"MyBookShelves",
+  components: {
+		BookDetail
+  },
   computed: {
     ...mapState('favorite', ['favorites'])
   },
   data() {
     return {
+      book: {},
     }
   },
   methods: {
-    ...mapActions('favorite', ['getFavorites'])
+    ...mapActions('favorite', ['getFavorites']),
+    ...mapActions('book', ['getFairytale']),
+		setModal(favorite) {
+			this.book = favorite
+			this.getFairytale(favorite.id)
+		}
   },
   created() {
     this.getFavorites()
