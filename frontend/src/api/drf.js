@@ -11,7 +11,6 @@ export default{
       //fairytale
       book: 'books/fairytale/',
 
-<<<<<<< frontend/src/api/drf.js
       //favorite
       favorite: 'books/favorite/',
       

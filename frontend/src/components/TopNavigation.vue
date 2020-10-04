@@ -1,7 +1,7 @@
 <template>
   <div v-if="userInfo">
     <!-- NavBar -->
-    <b-navbar>
+    <b-navbar class="top-nav">
 
       <!-- 나랑노랑 -->
       <b-navbar-brand href="#" class="main-narang-norang" @click="onRoute('Main')">
@@ -176,5 +176,13 @@ export default {
 
 .plus-icon:hover {
   cursor: pointer;
+}
+
+.top-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
 }
 </style>
