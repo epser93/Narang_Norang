@@ -84,7 +84,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('voice', ['getScript']),
+    ...mapActions('voice', ['getScript', 'getTrain']),
     removeRecord() {
       if (confirm("파일을 삭제하시겠습니까??") == true) { 
         this.recordings[this.index] = ''
@@ -118,6 +118,10 @@ export default {
   },
   created() {
     this.getScript()
+
+    const vid = this.$route.params.vid
+    this.getTrain(vid)
+
     for (var i = 0; i <= this.total; i++) {
       this.recordings[i] = ''
     } 

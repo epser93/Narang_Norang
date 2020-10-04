@@ -11,20 +11,44 @@
         <p>6. 총 100개의 스크립트가 준비되어 있으며, 예상 소요 시간은 3시간입니다.</p>
       </div>
     </div>
-		<b-button class="mt-4" variant="outline-secondary" @click="onRoute('REC')">
+
+    <b-form-input
+      v-model="form.name"
+      required
+      placeholder="목소리 이름을 입력해주세요."
+      style="width 50%;"
+    ></b-form-input>
+
+		<b-button class="mt-4" variant="outline-secondary" @click="onREC()">
       <b-icon icon="mic" aria-hidden="true"></b-icon> 네, 녹음할게요.
     </b-button>
 	</div>
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   name:"VoiceCloud",
-  methods: {
-    onRoute(name) {
-      this.$router.push({name: name}, () => {})
+  data() {
+    return {
+      form: {
+        name: ''
+      }
     }
-  }
+  },
+  methods: {
+    ...mapActions('voice', ['postTrain']),
+    onREC() {
+      if (this.form.name) {
+        this.postTrain(this.form)
+      }
+      else {
+        alert('목소리 이름을 입력해주세요.')
+      }
+    },
+  },
+
 }
 </script>
 
