@@ -35,7 +35,15 @@ class VoiceStorageSerailizer(serializers.ModelSerializer):
         model = VoiceStorage
         fields = ['id','scenario', 'voice_file']
 
+
 class BookmarkSerializer(serializers.ModelSerializer):
+    fairytale = FairytaleListSerializer()
+    class Meta:
+        model = BookMark
+        fields = ['id', 'fairytale']
+
+
+class BookmarkDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = BookMark
         fields = ['id', 'page']

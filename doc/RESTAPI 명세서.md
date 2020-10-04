@@ -13,7 +13,8 @@
 | books/genre/                                      | 장르목록                                        | 장르생성(관리자)                   | 장르수정(관리자)     | 장르삭제(관리자)     |
 | books/favorite/                                   | 즐겨찾기목록                                    |                                    |                      | 전체삭제             |
 | books/favorite/<book_id>/                         |                                                 | 즐겨찾기 생성                      |                      | 즐겨찾기 삭제        |
-| books/bookmark/<book_id>/                         | 페이지정보 읽기                                 |                                    | 페이지정보 수정      |                      |
+| books/bookmark/                                   | 내가 읽은 책 목록                               |                                    |                      |                      |
+| books/bookmark/<book_id>/                         | 페이지정보 읽기                                 | 페이지 정보 등록                   |                      |                      |
 | service_center/FaQ/                               | 자주묻는 리스트                                 | 내용생성(관리자)                   |                      |                      |
 | service_center/FaQ/<faq_id>                       | 상세글 조회                                     |                                    | 내용수정(관리자)     | 내용삭제(관리자)     |
 | service_center/category/                          | 카테고리 목록                                   | 카테고리생성(관리자)               | 카테고리수정(관리자) | 카테고리삭제(관리자) |
@@ -882,10 +883,35 @@ https://j3c206.p.ssafy.io/api/voices/voice/<int:voice_id>/
 
 
 
+### 북마크한 동화 목록 가져오기 (GET)
+
+```
+https://j3c206.p.ssafy.io/api/books/bookmark/
+```
+
+- 응답
+
+```json
+[
+    {
+        "id": 1,
+        "fairytale": {
+            "id": 1,
+            "title": "햇님과 바람의 내기",
+            "image": "/media/KakaoTalk_20200921_091027148.png"
+        }
+    }
+]
+```
+
+
+
+
+
 ### 북마크 가져오기 (GET)
 
 ```
-https://j3c206.p.ssafy.io/api/books/fairytale/<int:pk>/voice/<int:model_pk>/bookmark/
+https://j3c206.p.ssafy.io/api/books/bookmark/<int:book_id>
 ```
 
 - 응답
@@ -906,7 +932,7 @@ https://j3c206.p.ssafy.io/api/books/fairytale/<int:pk>/voice/<int:model_pk>/book
 ### 북마크 저장하기 (POST)
 
 ```
-https://j3c206.p.ssafy.io/api/books/fairytale/<int:pk>/voice/<int:model_pk>/bookmark/
+https://j3c206.p.ssafy.io/api/books/bookmark/<int:book_id>
 ```
 
 - body

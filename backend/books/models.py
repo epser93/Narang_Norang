@@ -50,8 +50,8 @@ class BookMark(models.Model):
     page = models.IntegerField()
     last_date = models.DateField(auto_now=True)
 
-    # def __str__(self):
-    #     return self.fairytale
+    def __str__(self):
+        return self.fairytale.title
 
     def create(self, data, user, fairytale):
         self.user = user
@@ -60,9 +60,7 @@ class BookMark(models.Model):
         self.save()
     
     def update(self, data, user, fairytale):
-        self.user = user
         self.page = data['id']
-        self.fairytale = fairytale
         self.save()
 
 
