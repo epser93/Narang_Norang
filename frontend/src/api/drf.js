@@ -7,10 +7,14 @@ export default{
 
       //help_desk
       qna: 'service_center/QnA/',
+      faq: 'service_center/FaQ/',
 
       //fairytale
       book: 'books/fairytale/',
 
+      //favorite
+      favorite: 'books/favorite/',
+      
       //voice
       script: 'voices/caption/',
       train: 'voices/train/category/',
