@@ -1,5 +1,5 @@
 <template>
-	<b-card no-body style="min-height: 500px;">
+	<b-card no-body style="min-height: 500px;" >
 		<b-tabs card>
 			<b-tab title-link-class="text-dark" title="자주 묻는 질문">
 

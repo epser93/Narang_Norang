@@ -9,6 +9,7 @@
         </div>
         <div class="page" v-for="(page, i) in pages" :key="i">
           <article class="content" style="background-color: white;">
+            <b-icon icon="bookmarks" scale="1.5" class="float-right"></b-icon>
             <div v-for="(item, j) in itemsForList" :key="j">
               <h2 @click="readMe(3*i + j)" class="my-5" :id="`index${3*i + j}`">{{ item.scenario.content }}</h2>
             </div>
