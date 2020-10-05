@@ -1,9 +1,12 @@
+from .models import Fairytale, Genre, VoiceStorage, Scenario
+from .serializers import FairytaleListSerializer, FairytaleDetailSerializer, GenreListSerializer, VoiceStorageSerailizer, ScenarioIdSerializer
+from voices.models import VoiceModel, OverwriteStorage
 from .models import Fairytale, Genre, VoiceStorage, BookMark
 from .serializers import (FairytaleListSerializer, FairytaleDetailSerializer, 
 GenreListSerializer, VoiceStorageSerailizer, BookmarkSerializer, BookmarkDetailSerializer)
-from voices.models import VoiceModel
 from rest_framework.response import Response
 from rest_framework.views import APIView
+
 
 class FairytaleList(APIView):
     def get(self, request, format=None):
@@ -58,6 +61,51 @@ class VoiceStoageAPI(APIView):
         return Response(serializer.data)
 
 
+class AddScenario(APIView):
+
+    def get(self, request, f_id):
+        fairytale = Fairytale.objects.get(pk=f_id)
+        scenarios = Scenario.objects.filter(fairytale=fairytale)
+        serializer = ScenarioIdSerializer(scenarios, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, f_id):
+        fairytale = Fairytale.objects.get(pk=f_id)
+        content = request.data['content']
+        content = content.split('\n')
+        for i in content:
+            i = i.lstrip()
+            if len(i) == 0:
+                continue
+            scenario = Scenario()
+            scenario.fairytale = fairytale
+            scenario.content = i
+            scenario.save()
+        return Response('ok')
+
+
+fs = OverwriteStorage()
+
+class AddVoiceStorage(APIView):
+
+    def post(self, request, f_id, s_id, m_id):
+        fairytale = Fairytale.objects.get(pk=f_id)
+        scenario = Scenario.objects.get(pk=s_id)
+        model = VoiceModel.objects.get(pk=m_id)
+
+        voice_file = request.FILES['file']
+        extention = voice_file.name.split('.')[-1]
+        file_name = '{}_{}_{}.{}'.format(fairytale.title, m_id, s_id, extention)
+        filename = fs.save(file_name, voice_file)
+        
+        voice_storage = VoiceStorage()
+        voice_storage.fairytale = fairytale
+        voice_storage.scenario = scenario
+        voice_storage.voice_file = filename
+        voice_storage.voice_model = model
+        voice_storage.save()
+
+        return Response('ok')
 class BookMarkAPI(APIView):
     def get(self, request):
         bookmarks = BookMark.objects.filter(user=request.user)

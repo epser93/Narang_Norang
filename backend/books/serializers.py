@@ -36,6 +36,11 @@ class VoiceStorageSerailizer(serializers.ModelSerializer):
         fields = ['id','scenario', 'voice_file']
 
 
+class ScenarioIdSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Scenario
+        fields = ['id', 'content']
+        
 class BookmarkSerializer(serializers.ModelSerializer):
     fairytale = FairytaleListSerializer()
     class Meta:

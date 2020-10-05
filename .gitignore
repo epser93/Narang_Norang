@@ -6,6 +6,7 @@ annotations/
 train2014/
 augmentation/
 checkpoints/train/
+file/
 
 
 ## dataset ##
