@@ -10,8 +10,9 @@
 		</carousel-3d>
 
 		<h1 class="my-4">이달의 신작</h1>
-		<img :src="`https://j3c206.p.ssafy.io/${fairytales[0].image}`" alt="" class="mb-4" v-b-modal="`modal-${fairytales[0].id}`" @click="setModal(fairytales[0])">
-
+			<div v-for="fairytale in fairytales" :key="fairytale.id">
+				<img :src="`https://j3c206.p.ssafy.io/${fairytale.image}`" alt="" class="mb-4" v-b-modal="`modal-${fairytale.id}`" @click="setModal(fairytale)">
+			</div>
 		<book-detail :book="book"/>
 	</div>
 </template>

@@ -55,6 +55,7 @@ export default {
   },
   computed: {
     ...mapState('book', ['ebook']),
+    ...mapState('bookmark', ['bookmark']),
     rows() {
       return this.ebook.length
     },
@@ -70,6 +71,7 @@ export default {
   },
   data() {
     return {
+      bid : this.$route.params.bid,
       audio: new Audio(),
       index: 0,
       playing: false,
@@ -79,6 +81,7 @@ export default {
   },
   methods: {
     ...mapActions('book', ['getEbook']),
+    ...mapActions('bookmark', ['getBookmark', 'postBookmark']),
     start() {
       if(this.playing) {
         this.audio.pause();
@@ -123,11 +126,14 @@ export default {
     },
   },
   created() {
-    const bid = this.$route.params.bid
-    this.getEbook(bid)
+    this.getEbook(this.bid)
+    this.getBookmark(this.bid)
     setTimeout(function() {
       this.currentPage = 0
     }.bind(this), 150)
   },
+  destroyed() {
+    this.postBookmark({ bid: this.bid, body: { id: this.currentPage } })
+  }
 }
 </script>
