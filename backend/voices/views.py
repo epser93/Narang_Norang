@@ -1,8 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .serializers import TrainCaptionSerializer, TrainVoiceCategorySerializer 
-
+from .serializers import TrainCaptionSerializer, TrainVoiceCategorySerializer, VoiceModelSerializer, TrainVoiceSerializer
 from .models import VoiceModel, VoiceCategory, Caption, TrainVoice, OverwriteStorage
 
 fs = OverwriteStorage()
@@ -56,6 +55,11 @@ class TrainVoiceCategory(APIView):
         return Response('중복된 카테고리입니다.', status=status.HTTP_400_BAD_REQUEST)
 
 class TrainVoiceCategoryDetail(APIView):
+    def get(self, request, category_id):
+        category = TrainVoice.objects.filter(voice_category=category_id)
+        serializer = TrainVoiceSerializer(category, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
     def delete(self, request, category_id):
         category = VoiceCategory.objects.get(pk=category_id)
         if category.user == request.user:
@@ -71,3 +75,27 @@ class TrainVoiceCategoryDetail(APIView):
         category.update(request.data, request.user)
         serializer = TrainVoiceCategorySerializer(category)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+class VoiceModelAPI(APIView):
+    def get(self, request):
+        voice = VoiceModel.objects.filter(user=request.user)
+        serializer = VoiceModelSerializer(voice, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+class VoiceModelDetailAPI(APIView):
+    def put(self, request, voice_id):
+        voice = VoiceModel.objects.get(pk=voice_id)
+        # voice = VoiceModel.objects.filter(pk=voice_id)
+        is_exist = VoiceModel.objects.filter(user=request.user).filter(name=request.data['name']).exists()
+        if is_exist:
+            return Response('중복된 이름입니다.', status=status.HTTP_400_BAD_REQUEST)
+        voice.update(request.data)
+        serializer = VoiceModelSerializer(voice)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def delete(self, request, voice_id):
+        voice = VoiceModel.objects.get(pk=voice_id)
+        if voice.user == request.user:
+            voice.delete()
+            return Response('삭제완료', status=status.HTTP_200_OK)
+        return Response('권한없음', status=status.HTTP_403_FORBIDDEN)

@@ -51,7 +51,17 @@ class BookMark(models.Model):
     last_date = models.DateField(auto_now=True)
 
     def __str__(self):
-        return self.fairytale
+        return self.fairytale.title
+
+    def create(self, data, user, fairytale):
+        self.user = user
+        self.page = data['id']
+        self.fairytale = fairytale
+        self.save()
+    
+    def update(self, data, user, fairytale):
+        self.page = data['id']
+        self.save()
 
 
 class Scenario(models.Model):

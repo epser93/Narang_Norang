@@ -62,12 +62,12 @@ const routes = [
     ]
   },
   {
-    path: '/onAir',
+    path: '/onAir/:vid',
     name: 'REC',
     component: () => import('@/views/VoiceRecord')
   },
   {
-    path: '/ebook/:bid/',
+    path: '/ebook/:bid',
     name: 'Ebook',
     component: () => import('@/views/Ebook.vue')
   },
