@@ -34,7 +34,7 @@
             <img class="animated pulse infinite" src="@/assets/img/나랑노랑.png" alt="나랑노랑 로고" style="width: 95%;">
           </div>
           <div class="mt-4">
-            <img src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg" width="222" @click="loginWithKakao()" />
+            <img src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg" class="login-img" width="222" @click="loginWithKakao()" />
             <!-- <button class="api-btn" @click="kakaoLogout()">로그아웃</button> -->
           </div>
         </div>
@@ -122,7 +122,7 @@ export default {
   margin-top: 60px;
 }
 
-.kakao-login {
+.login-img {
   cursor: pointer;
 }
 </style>

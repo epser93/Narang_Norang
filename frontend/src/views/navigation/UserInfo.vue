@@ -13,7 +13,7 @@
               id="input-1"
               v-model="form.name"
               type="text"
-              required
+              disabled
             ></b-form-input>
           </b-form-group>
 
