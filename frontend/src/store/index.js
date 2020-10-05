@@ -6,6 +6,7 @@ import account from './account'
 import fairytale from './fairytale'
 import favorite from './favorite'
 import voice from './voice'
+import bookmark from './bookmark'
 
 Vue.use(Vuex)
 
@@ -17,5 +18,6 @@ export default new Vuex.Store({
     book: fairytale,
     favorite: favorite,
     voice: voice,
+    bookmark: bookmark,
   }
 })
