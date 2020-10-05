@@ -1,9 +1,5 @@
 <template>
-<<<<<<< HEAD
-	<b-card no-body style="min-height: 500px;" >
-=======
 	<b-card v-if="faq" no-body style="min-height: 500px;">
->>>>>>> 7bdb492d1d514b761f42bea27a8ef9b26c432708
 		<b-tabs card>
 			<b-tab title-link-class="text-dark" title="자주 묻는 질문">
 

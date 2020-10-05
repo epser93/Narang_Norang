@@ -17,5 +17,6 @@ export default{
       
       //voice
       script: 'voices/caption/',
+      train: 'voices/train/category/',
     }
   }
