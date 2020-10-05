@@ -78,5 +78,11 @@ export default {
 </script>
 
 <style>
+input::placeholder {
+  font-size: 16px;
+}
 
+textarea::placeholder {
+  font-size: 16px;
+}
 </style>

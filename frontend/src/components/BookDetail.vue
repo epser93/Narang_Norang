@@ -4,12 +4,12 @@
       <b-row>
         <b-col cols="6">
           <b-card style="min-height: 540px;">
-            <img :src="`https://j3c206.p.ssafy.io/${fairytale.image}`" alt="" style="width: 100%; margin-top: 40%">
+            <img :src="`https://j3c206.p.ssafy.io/${fairytale.image}`" alt="" style="width: 100%; margin-top: 5%;">
           </b-card>
         </b-col>
         <b-col cols="6">
           <b-card style="height: 100%;">
-            <div style="margin-top: 40%">
+            <div style="">
               <h3>{{ fairytale.title }}</h3>
               <hr>
               <h5>{{ fairytale.summary }}</h5>

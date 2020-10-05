@@ -17,7 +17,7 @@
             ></b-form-input>
           </b-form-group>
 
-          <b-form-group id="input-group-2" label="Your Name:" label-for="input-2">
+          <b-form-group id="input-group-2" label="별명:" label-for="input-2">
             <b-form-input
               id="input-2"
               v-model="form.nickname"
@@ -25,7 +25,7 @@
             ></b-form-input>
           </b-form-group>
 
-          <b-button variant="info" @click="onChange()">Submit</b-button>
+          <b-button variant="info" @click="onChange()">확인</b-button>
         </b-form>
       </b-col>
     </b-row>
