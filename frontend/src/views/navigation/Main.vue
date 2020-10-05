@@ -1,5 +1,5 @@
 <template>
-	<div v-if="fairytales" style="padding-top: 100px;">
+	<div v-if="fairytales">
     <h1 class="mt-4">베스트 셀러</h1>
 		<carousel-3d :space="360" :width="240" :height="360" :border="3" :perspective="0" :scaling="0">
 			<slide v-for="(slide, i) in slides" :key="i" :index="i">
