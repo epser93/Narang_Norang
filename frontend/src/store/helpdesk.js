@@ -8,6 +8,7 @@ export default {
   state: {
     questions: '',
     question: '',
+    faq: '',
   },
 
   mutations: {
@@ -16,7 +17,10 @@ export default {
     },
     SET_QUESTION(state, payload) {
       state.question = payload
-    }
+    },
+    SET_FAQ(state, payload) {
+      state.faq = payload
+    },
   },
 
   actions: {
@@ -76,6 +80,45 @@ export default {
         .catch((err) => {
           console.log(err)
         })
+    },
+    getFAQ({ rootGetters , commit }) {
+      axios.get(SERVER.URL + SERVER.ROUTER.faq, rootGetters['user/config'])
+        .then(({ data }) => {
+          commit('SET_FAQ', data)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    postFAQ({ rootGetters }, body) {
+      axios.post(SERVER.URL + SERVER.ROUTER.faq, body, rootGetters['user/config'])
+        .then(() => {
+          window.location.reload(true)
+          alert("추가가 완료되었습니다.")
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    putFAQ({ rootGetters }, { index, body }) {
+      axios.put(SERVER.URL + SERVER.ROUTER.faq + index + '/', body, rootGetters['user/config'])
+        .then(() => {
+          window.location.reload(true)
+          alert("수정이 완료되었습니다.")
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    delFAQ({ rootGetters }, index) {
+      axios.delete(SERVER.URL + SERVER.ROUTER.faq + index + '/', rootGetters['user/config'])
+        .then(() => {
+          window.location.reload(true)
+          alert("삭제가 완료되었습니다.")
+        })
+        .catch((err) => {
+          console.log(err)
+        })   
     },
   },
 
