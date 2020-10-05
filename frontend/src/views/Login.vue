@@ -35,7 +35,6 @@
           </div>
           <div class="mt-4">
             <img src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg" class="login-img" width="222" @click="loginWithKakao()" />
-            <!-- <button class="api-btn" @click="kakaoLogout()">로그아웃</button> -->
           </div>
         </div>
       </div>
@@ -69,7 +68,6 @@
 </template>
 
 <script>
-// import About from './About.vue'
 import { KinesisContainer, KinesisElement } from 'vue-kinesis'
 import { mapGetters } from 'vuex'
 import axios from 'axios'
@@ -79,7 +77,6 @@ import SERVER from '@/api/drf'
 export default {
   name: 'Login',
   components: {
-    // About,
     KinesisContainer,
     KinesisElement,
   },
@@ -104,15 +101,6 @@ export default {
       })
 
     },
-    // kakaoLogout() {
-    //   if (!window.Kakao.Auth.getAccessToken()) {
-    //     console.log('Not logged in.')
-    //     return
-    //   }
-    //   window.Kakao.Auth.logout(function() {
-    //     console.log('logout ok\naccess token -> ' + window.Kakao.Auth.getAccessToken())
-    //   })
-    // }
   },
 }
 </script>
@@ -124,5 +112,16 @@ export default {
 
 .login-img {
   cursor: pointer;
+}
+
+@keyframes pulse {
+  from {
+    background-color: transparent;
+    transform: scale(.8)
+  }
+  to {
+    background-color: transparent;
+    transform: scale(.9)
+  }
 }
 </style>
