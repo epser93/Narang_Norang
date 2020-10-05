@@ -10,7 +10,7 @@
 		</carousel-3d>
 
 		<h1 class="my-4">이달의 신작</h1>
-		<img :src="`https://j3c206.p.ssafy.io/${fairytales[0].image}`" alt="" class="mb-4" v-b-modal="`modal-${fairytales[0].id}`" @click="setModal(fairytales[0])">
+		<img :src="`https://j3c206.p.ssafy.io${fairytales[0].image}`" alt="" class="mb-4" v-b-modal="`modal-${fairytales[0].id}`" @click="setModal(fairytales[0])">
 
 		<book-detail :book="book"/>
 	</div>
@@ -33,7 +33,7 @@ export default {
   },
   data() {
     return {
-			slides: 8,
+			slides: 7,
 			book: {},
     }
 	},
