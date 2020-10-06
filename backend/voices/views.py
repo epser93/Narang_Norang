@@ -96,6 +96,12 @@ class VoiceModelAPI(APIView):
 
 
 class VoiceModelDetailAPI(APIView):
+    def post(self, request, voice_id):
+        voice = VoiceModel.objects.get(pk=voice_id)
+        if request.user.set_voice(voice):
+            return Response('변경완료')
+        return Response('변경 불가/실패', status=status.HTTP_400_BAD_REQUEST)
+        
     def put(self, request, voice_id):
         voice = VoiceModel.objects.get(pk=voice_id)
         if VoiceModel.objects.filter(user=request.user).filter(name=request.data['name']).exists():
@@ -107,6 +113,6 @@ class VoiceModelDetailAPI(APIView):
     def delete(self, request, voice_id):
         voice = VoiceModel.objects.get(pk=voice_id)
         if voice.user == request.user:
-            voice.delete()
+            voice.delete(request.user)
             return Response('삭제완료', status=status.HTTP_200_OK)
         return Response('권한없음', status=status.HTTP_403_FORBIDDEN)

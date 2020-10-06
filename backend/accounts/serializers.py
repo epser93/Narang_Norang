@@ -15,7 +15,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['id', 'username', 'balance','first_name', 'is_staff', 'is_subscribed']
+        fields = ['id', 'username', 'balance','first_name', 'is_staff', 'is_subscribed', 'current_voice']
 
 
 class SubscribeSerializer(serializers.ModelSerializer):

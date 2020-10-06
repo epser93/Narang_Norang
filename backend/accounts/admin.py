@@ -4,8 +4,8 @@ from .models import Subscribe
 # admin 페이지에 보여질 내용 추가하기
 
 class UserAdmin(admin.ModelAdmin):
-    list_display = ['id', 'username', 'balance','is_superuser', 'is_staff']
-    fields = ['username', 'is_staff']
+    list_display = ['id', 'username', 'balance','is_superuser', 'is_staff', 'current_voice']
+    fields = ['username', 'is_staff', 'current_voice']
 
 
 class SubscribeAdmin(admin.ModelAdmin):
