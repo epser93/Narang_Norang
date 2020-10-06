@@ -8,7 +8,7 @@
 | accounts/writer/<writer_id>/                      | 작가정보                                        |                                    |                      |                      |
 | accounts/subscribe/                               | 정액권정보                                      | 정액권결제                         |                      | 정액권 환불          |
 | books/fairytale/                                  | 전체리스트                                      | 동화생성(작가만)                   |                      |                      |
-| books/fairytale/<fairytale_name>/                 | 동화책 검색                                     |                                    |                      |                      |
+| books/fairytale/search/<fairytale_name>/          | 동화책 검색                                     |                                    |                      |                      |
 | books/fairytale/<book_id>                         | 동화상세정보                                    |                                    | 동화수정(작가만)     |                      |
 | books/fairytale/<book_id>/voice/<voice_model>/    | 동화책 대본과 소리데이터 가져오기               |                                    |                      |                      |
 | books/genre/                                      | 장르목록                                        | 장르생성(관리자)                   | 장르수정(관리자)     | 장르삭제(관리자)     |
@@ -166,7 +166,7 @@ https://j3c206.p.ssafy.io/api/books/fairytale/
 ## 동화책 검색 (GET)
 
 ```
-https://j3c206.p.ssafy.io/api/books/fairytale/<str:fairytale_name>/
+https://j3c206.p.ssafy.io/api/books/fairytale/search/<str:fairytale_name>/
 ```
 
 - 응답
