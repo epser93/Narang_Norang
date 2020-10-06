@@ -1,8 +1,8 @@
 <template>
   <div>
 
-    <div v-if="is_loading" class="loading-image">
-      <h1>잠시만 기다려 주세요.</h1>
+    <div v-if="is_loading" class="loading-image" style="margin-top: 280px;">
+      <h1>잠시만 기다려 주세요.</h1><b-icon icon="three-dots" animation="cylon" font-scale="4"></b-icon>
     </div>
 
     <div v-else class="container">
@@ -38,7 +38,7 @@
               </b-button>
           </div>
           <div v-else>
-            <h4 class="mt-3">녹음된 파일이 없습니다</h4>
+            <p class="mt-3">녹음된 파일이 없습니다.</p>
           </div>
         </div>
       </div>
