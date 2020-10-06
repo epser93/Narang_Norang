@@ -18,5 +18,6 @@ export default{
       //voice
       script: 'voices/caption/',
       train: 'voices/train/category/',
+      voice: 'voices/voice/',
     }
   }
