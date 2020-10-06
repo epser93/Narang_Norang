@@ -34,10 +34,6 @@ export default {
   },
   data() {
     return {
-<<<<<<< HEAD
-=======
-			slides: 7,
->>>>>>> 0e33700f46a1823b9db3418096578f2fcecf52b9
 			book: {},
     }
 	},
