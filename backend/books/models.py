@@ -28,6 +28,7 @@ class Fairytale(models.Model):
     date = models.DateField()
     writer = models.ForeignKey(Writer, on_delete=models.SET_NULL, related_name='fairytales', null=True)
     Genre = models.ForeignKey(Genre, on_delete=models.SET_NULL, related_name='fairytales', null=True)
+    is_pay = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title
