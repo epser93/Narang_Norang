@@ -6,15 +6,16 @@
           <b-card bg-variant="light" style="cursor: pointer;">
             <b-avatar size="lg" rounded="lg" :text="train.name" variant="light"></b-avatar>
           </b-card>
-          <div class="mt-2">
+          <div v-if="!train.is_train" class="mt-2">
             <b-button @click="onRoute(train.id)"><b-icon icon="mic-fill" scale="1.2" class="mr-2"></b-icon></b-button>
-            <b-button @click="getId(train.id)" v-b-modal.modal-prevent-closing><b-icon icon="pencil-square" scale="1.2" class="mr-2"></b-icon></b-button>
+            <b-button @click="getId(train.id)" v-b-modal.modal-train><b-icon icon="pencil-square" scale="1.2" class="mr-2"></b-icon></b-button>
             <b-button @click="onDelete(train.id)"><b-icon icon="trash-fill" scale="1.2"></b-icon></b-button>
           </div>
+          <h5 v-else class="mt-3"><strong>학습중</strong></h5>
         </b-col>
 
     <b-modal
-      id="modal-prevent-closing"
+      id="modal-train"
       ref="modal"
       title="목소리 이름 변경">
 

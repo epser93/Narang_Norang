@@ -2,7 +2,6 @@
   <div>
 
     <div v-if="is_loading" class="loading-image">
-      <img class="animated pulse infinite" src="@/assets/img/나랑노랑.png" alt="나랑노랑 로고" style="width: 40%;">
       <h1>잠시만 기다려 주세요.</h1>
     </div>
 
@@ -34,11 +33,9 @@
         <div class="recorded-audio">
           <div v-if="now_record" class="recorded-item">
             <div class="audio-container"><audio :src="now_record" controls /></div>
-            <div>
               <b-button @click="removeRecord" size="sm" variant="outline-secondary">
                 <b-icon icon="x" scale="2" class="pt-1" aria-hidden="true"></b-icon>
               </b-button>
-            </div>
           </div>
           <div v-else>
             <h4 class="mt-3">녹음된 파일이 없습니다</h4>
@@ -74,7 +71,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('voice', ['getScript', 'getTrain', 'postCaption', 'delCaption']),
+    ...mapActions('voice', ['getScript', 'getTrain', 'postCaption', 'delCaption', 'startTrain']),
     removeRecord() {
       if (confirm("파일을 삭제하시겠습니까??") == true) { 
         this.delCaption({ vid: this.vid, cid: this.index + 1 })
@@ -89,7 +86,11 @@ export default {
       this.now_record = window.URL.createObjectURL(file)
     },
     toNext() {
-      if (this.index == this.total-1) {
+      if ((this.index == this.total-1)&&(this.now_record != '')) {
+        if (confirm("학습을 시작하시겠습니다? \n(학습을 시작하면 더 이상 수정이 불가합니다.)") == true) {
+          this.startTrain(this.vid)
+        }
+      } else if (this.index == this.total-1) {
         alert('마지막 대본입니다.')
       } else if (this.now_record == '') {
         alert('녹음된 파일이 없습니다')
@@ -107,28 +108,30 @@ export default {
         this.index--
         this.now_record = this.recordings[this.index]
       }
-    }
+    },
   },
   created() {
     this.getScript()
     this.getTrain(this.vid)
     setTimeout(function() {
       this.index = this.train.length
-      for (var i = 0; i <= this.total; i++) {
-        if (i <= this.index) {
+      for (var i = 0; i < this.total; i++) {
+        if (i < this.index) {
           this.recordings[i] = 'https://j3c206.p.ssafy.io' + this.train[i].train_file
         } else {
           this.recordings[i] = ''
         }
       }
+      this.index = (this.index == 20) ? 19 : this.index 
       this.now_record = this.recordings[this.index]
       this.is_loading = false
+
     }.bind(this), 1000)
   }
 }
 </script>
 
-<style>
+<style scoped>
 .vue-audio-recorder {
   margin-right: 4px;
 }
