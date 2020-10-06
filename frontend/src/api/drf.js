@@ -12,11 +12,15 @@ export default{
       //fairytale
       book: 'books/fairytale/',
 
+      //bookmark
+      mark: 'books/bookmark/',
+
       //favorite
       favorite: 'books/favorite/',
       
       //voice
       script: 'voices/caption/',
       train: 'voices/train/category/',
+      voice: 'voices/',
     }
   }

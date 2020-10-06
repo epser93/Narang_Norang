@@ -88,5 +88,7 @@ export default {
 </script>
 
 <style>
-
+.container {
+  cursor: default;
+}
 </style>

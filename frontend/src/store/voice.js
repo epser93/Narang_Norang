@@ -9,6 +9,7 @@ export default {
 		script: '',
 		trains: '',
 		train: '',
+		voices: '',
 	},
 	mutations: {
 		SET_SCRIPT(state, payload) {
@@ -19,6 +20,9 @@ export default {
 		},
 		SET_TRAIN(state, payload) {
 			state.train = payload
+		},
+		SET_VOICES(state, payload) {
+			state.voices = payload
 		},
 	},
 	actions: {
@@ -58,24 +62,37 @@ export default {
           console.log(err)
         })
 		},
-		// putTrain({ rootGetters , commit }, vid) {
-		// 	axios.get(SERVER.URL + SERVER.ROUTER.train + vid + '/', rootGetters['user/config'])
-    //     .then(({ data }) => {
-		// 			commit('SET_TRAIN', data)
-    //     })
-    //     .catch((err) => {
-    //       console.log(err)
-    //     })
-		// },
-		// delTrain({ rootGetters , commit }, vid) {
-		// 	axios.get(SERVER.URL + SERVER.ROUTER.train + vid + '/', rootGetters['user/config'])
-    //     .then(({ data }) => {
-		// 			commit('SET_TRAIN', data)
-    //     })
-    //     .catch((err) => {
-    //       console.log(err)
-    //     })
-		// },
+		putTrain({ rootGetters, dispatch }, { index, body }) {
+			axios.put(SERVER.URL + SERVER.ROUTER.train + index + '/', body, rootGetters['user/config'])
+			.then(() => {
+        dispatch('getTrains')
+        alert('목소리 이름이 수정되었습니다.')
+			})
+			.catch((err) => {
+				console.log(err)
+			})
+		},
+		delTrain({ rootGetters, dispatch }, vid) {
+			axios.delete(SERVER.URL + SERVER.ROUTER.train + vid + '/', rootGetters['user/config'])
+        .then(() => {
+          dispatch('getTrains')
+          alert('목소리가 삭제되었습니다.')
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+		},
+		startTrain({ rootGetters }, vid) {
+			axios.post(SERVER.URL + SERVER.ROUTER.train + vid + '/', rootGetters['user/config'])
+        .then(({ data }) => {
+					console.log(data)
+          // router.push({name:'Voice'})
+					// alert('학습을 시작합니다.')
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+		},
 		postCaption({ rootGetters }, { vid, cid, file }) {
 			const formData = new FormData()
 			formData.append('file', file, 'voice.wav')
@@ -89,6 +106,35 @@ export default {
 		delCaption({ rootGetters }, { vid, cid }) {
 			axios.delete(SERVER.URL + SERVER.ROUTER.train + vid + '/' + cid + '/', rootGetters['user/config'])
         .then(() => {
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+		},
+		getVoices({ rootGetters , commit }) {
+			axios.get(SERVER.URL + SERVER.ROUTER.voice, rootGetters['user/config'])
+        .then(({ data }) => {
+					commit('SET_VOICES', data)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+		},
+		putVoice({ rootGetters, dispatch }, { index, body }) {
+			axios.put(SERVER.URL + SERVER.ROUTER.voice + 'voice/' + index + '/', body, rootGetters['user/config'])
+			.then(() => {
+        dispatch('getVoices')
+        alert('목소리 이름이 수정되었습니다.')
+			})
+			.catch((err) => {
+				console.log(err)
+			})
+		},
+		delVoice({ rootGetters, dispatch }, vid) {
+			axios.delete(SERVER.URL + SERVER.ROUTER.voice + 'voice/' + vid + '/', rootGetters['user/config'])
+        .then(() => {
+          dispatch('getVoices')
+          alert('목소리가 삭제되었습니다.')
         })
         .catch((err) => {
           console.log(err)

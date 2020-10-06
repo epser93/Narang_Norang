@@ -5,14 +5,13 @@
     <h2 class="mb-4">읽고 있어요 <b-icon icon="book"></b-icon></h2>
     <b-container fluid class="p-2">
       <b-row>
-        <b-col>
-          <b-img thumbnail class="thumbnail" fluid src="https://picsum.photos/250/250/?image=54" alt="Image 1"></b-img>
-        </b-col>
-        <b-col>
-          <b-img thumbnail class="thumbnail" fluid src="https://picsum.photos/250/250/?image=58" alt="Image 2"></b-img>
-        </b-col>
-        <b-col>
-          <b-img thumbnail class="thumbnail" fluid src="https://picsum.photos/250/250/?image=59" alt="Image 3"></b-img>
+        <b-col v-for="bookmark in bookmarks" :key="bookmark.fairytale.id">
+          <b-img thumbnail class="thumbnail" 
+          fluid :src="`https://j3c206.p.ssafy.io${bookmark.fairytale.image}`" 
+          alt="Image 1"
+          v-b-modal="`modal-${bookmark.fairytale.id}`"
+          @click="setModal(bookmark.fairytale)">
+          </b-img>
         </b-col>
       </b-row>
     </b-container>
@@ -26,17 +25,18 @@
       <b-row>
         <b-col v-for="favorite in favorites" :key="favorite.id">
           <b-img thumbnail class="thumbnail" 
-          fluid :src="`https://j3c206.p.ssafy.io/${favorite.image}`" 
+          fluid :src="`https://j3c206.p.ssafy.io${favorite.image}`" 
           alt="Image 1"
           v-b-modal="`modal-${favorite.id}`"
           @click="setModal(favorite)">
           </b-img>
-          <book-detail :book="book"/>
         </b-col>
       </b-row>
     </b-container>
     <hr>
   </div>
+
+  <book-detail :book="book"/>
 
 </div>
 </template>
@@ -52,7 +52,8 @@ export default {
 		BookDetail
   },
   computed: {
-    ...mapState('favorite', ['favorites'])
+    ...mapState('bookmark', ['bookmarks']),
+    ...mapState('favorite', ['favorites']),
   },
   data() {
     return {
@@ -60,6 +61,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions('bookmark', ['getBookmarks']),
     ...mapActions('favorite', ['getFavorites']),
     ...mapActions('book', ['getFairytale']),
 		setModal(favorite) {
@@ -68,6 +70,7 @@ export default {
 		}
   },
   created() {
+    this.getBookmarks()
     this.getFavorites()
   }
 }
