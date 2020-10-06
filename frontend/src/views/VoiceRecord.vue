@@ -113,7 +113,7 @@ export default {
     this.getScript()
     this.getTrain(this.vid)
     setTimeout(function() {
-      this.index = this.train.length - 1
+      this.index = this.train.length
       for (var i = 0; i <= this.total; i++) {
         if (i <= this.index) {
           this.recordings[i] = 'https://j3c206.p.ssafy.io' + this.train[i].train_file
@@ -123,7 +123,7 @@ export default {
       }
       this.now_record = this.recordings[this.index]
       this.is_loading = false
-    }.bind(this), 3000)
+    }.bind(this), 1000)
   }
 }
 </script>
