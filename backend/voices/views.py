@@ -76,6 +76,17 @@ class TrainVoiceCategoryDetail(APIView):
         serializer = TrainVoiceCategorySerializer(category)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+    def post(self, request, category_id):
+        category = VoiceCategory.objects.get(pk=category_id)
+        if category.is_train == True:
+            return Response('학습중입니다.')
+        caption = Caption.objects.all()
+        train_voices = TrainVoice.objects.filter(voice_category=category)
+        if len(train_voices) != len(caption):
+            return Response('녹음이 더 필요합니다', status=status.HTTP_400_BAD_REQUEST)
+        category.train()
+        return Response('학습시작')
+
 class VoiceModelAPI(APIView):
     def get(self, request):
         voice = VoiceModel.objects.filter(user=request.user)

@@ -10,7 +10,7 @@ class TrainCaptionSerializer(serializers.ModelSerializer):
 class TrainVoiceCategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = VoiceCategory
-        fields = ['id', 'name']
+        fields = ['id', 'name', 'is_train']
 
 class TrainVoiceSerializer(serializers.ModelSerializer):
     caption = TrainCaptionSerializer()

@@ -35,6 +35,7 @@ class Caption(models.Model):
 class VoiceCategory(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     name = models.CharField(max_length=40)
+    is_train = models.BooleanField(default=False)
 
     def __str__(self):
         return '{}_{}'.format(self.user,self.name)
@@ -47,6 +48,10 @@ class VoiceCategory(models.Model):
     def update(self, data, user):
         self.user = user
         self.name = data['name']
+        self.save()
+    
+    def train(self):
+        self.is_train = True
         self.save()
 
 
@@ -74,7 +79,6 @@ class TrainVoice(models.Model):
         except :
             pass
         super().delete()
-
 
 class VoiceRent(models.Model):
     voice_model = models.ForeignKey(VoiceModel, on_delete=models.PROTECT, related_name='voice_rent')
