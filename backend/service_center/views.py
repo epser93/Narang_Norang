@@ -5,7 +5,6 @@ from .models import QnA, FaQ, QnaReply
 from .serializers import QnASerializer, FaQSerializer, QnAReplySerializer
 
 
-# Create your views here.
 class QnAList(APIView):
     def get(self, request, format=None):
         if request.user.is_staff:
@@ -47,6 +46,7 @@ class QnADetail(APIView):
             return Response("삭제완료", status=status.HTTP_200_OK)
         return Response("권한없음", status=status.HTTP_403_FORBIDDEN)
 
+
 class FaQList(APIView):
     def get(self, request):
         faq = FaQ.objects.all()
@@ -82,6 +82,7 @@ class FaQDetail(APIView):
             faq.delete()
             return Response("삭제완료", status=status.HTTP_200_OK)
         return Response("권한없음", status=status.HTTP_403_FORBIDDEN)
+
 
 class QnAReply(APIView):
     def post(self, request, pk):

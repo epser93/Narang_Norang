@@ -1,10 +1,8 @@
-from .models import Fairytale, Genre, VoiceStorage, Scenario
-from .serializers import FairytaleListSerializer, FairytaleDetailSerializer, GenreListSerializer, VoiceStorageSerailizer, ScenarioIdSerializer
-from voices.models import VoiceModel, OverwriteStorage
 from .models import Fairytale, Genre, VoiceStorage, BookMark, Scenario
+from voices.models import VoiceModel, OverwriteStorage
 from accounts.models import Subscribe
 from .serializers import (FairytaleListSerializer, FairytaleDetailSerializer, 
-GenreListSerializer, VoiceStorageSerailizer, BookmarkSerializer, BookmarkDetailSerializer)
+GenreListSerializer, VoiceStorageSerailizer, ScenarioIdSerializer, BookmarkSerializer, BookmarkDetailSerializer)
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
@@ -57,11 +55,9 @@ class VoiceStoageAPI(APIView):
     def get(self, request, pk, model_pk, format=None):
         fairytale = Fairytale.objects.get(pk=pk)
         if fairytale.is_pay == True:
-        # to-do 읽을 수 있는 동화책인지 검증
             subscribe = Subscribe.objects.filter(user=request.user).filter(end_date__gte=datetime.datetime.today())
             if not subscribe:
                 return Response("이용권이 없습니다. 결제 후 사용해 주세요!", status=status.HTTP_403_FORBIDDEN)
-        # to-do 사용가능한 목소리인지 검증 필요
         voice_model = VoiceModel.objects.get(pk=model_pk)
         voice_storage = VoiceStorage.objects.filter(fairytale=fairytale).filter(voice_model=voice_model)
         caption = Scenario.objects.filter(fairytale=fairytale)
@@ -71,6 +67,7 @@ class VoiceStoageAPI(APIView):
         return Response(serializer.data)
 
 
+# 삭제예정
 class AddScenario(APIView):
 
     def get(self, request, f_id):
@@ -96,6 +93,7 @@ class AddScenario(APIView):
 
 fs = OverwriteStorage()
 
+# 삭제예정
 class AddVoiceStorage(APIView):
 
     def post(self, request, f_id, s_id, m_id):
@@ -139,6 +137,7 @@ class BookmarkDetailAPI(APIView):
         bookmark = BookMark.objects.filter(fairytale=pk)
         serializer = BookmarkDetailSerializer(bookmark, many=True)
         return Response(serializer.data)
+
 
 class FairytailSearch(APIView):
     def get(self, request, fairytale_name):

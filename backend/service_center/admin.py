@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import FaQCategory, FaQ, QnA, QnaReply
-# Register your models here.
+
 
 class FaQCategoryAdmin(admin.ModelAdmin):
     list_display = ['id', 'name']

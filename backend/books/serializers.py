@@ -8,6 +8,7 @@ class FairytaleListSerializer(serializers.ModelSerializer):
 
 class FairytaleDetailSerializer(serializers.ModelSerializer):
     is_liked = serializers.SerializerMethodField()
+
     def get_is_liked(self, obj):
         user = self.context.get('user')
         if obj.like_user.filter(pk=user.id).exists():
@@ -18,10 +19,12 @@ class FairytaleDetailSerializer(serializers.ModelSerializer):
         model = Fairytale
         fields = ['id', 'title', 'summary', 'image', 'date', 'writer', 'Genre', 'is_liked']
 
+
 class GenreListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Genre
         fields = '__all__'
+
 
 class ScenarioSerializer(serializers.ModelSerializer):
     class Meta:
@@ -40,6 +43,7 @@ class ScenarioIdSerializer(serializers.ModelSerializer):
     class Meta:
         model = Scenario
         fields = ['id', 'content']
+        
         
 class BookmarkSerializer(serializers.ModelSerializer):
     fairytale = FairytaleListSerializer()
