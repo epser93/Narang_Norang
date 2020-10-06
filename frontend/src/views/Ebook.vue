@@ -89,7 +89,7 @@ export default {
         
       } else {
         this.playing = true;
-        this.audio = new Audio("https://j3c206.p.ssafy.io/" + this.ebook[this.index].voice_file)
+        this.audio = new Audio("https://j3c206.p.ssafy.io" + this.ebook[this.index].voice_file)
         this.audio.play();
         this.audio.onended = () => {
           this.index++;

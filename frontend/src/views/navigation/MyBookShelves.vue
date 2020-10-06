@@ -7,12 +7,11 @@
       <b-row>
         <b-col v-for="bookmark in bookmarks" :key="bookmark.fairytale.id">
           <b-img thumbnail class="thumbnail" 
-          fluid :src="`https://j3c206.p.ssafy.io/${bookmark.fairytale.image}`" 
+          fluid :src="`https://j3c206.p.ssafy.io${bookmark.fairytale.image}`" 
           alt="Image 1"
           v-b-modal="`modal-${bookmark.fairytale.id}`"
           @click="setModal(bookmark.fairytale)">
           </b-img>
-          <book-detail :book="book"/>
         </b-col>
       </b-row>
     </b-container>
@@ -26,17 +25,18 @@
       <b-row>
         <b-col v-for="favorite in favorites" :key="favorite.id">
           <b-img thumbnail class="thumbnail" 
-          fluid :src="`https://j3c206.p.ssafy.io/${favorite.image}`" 
+          fluid :src="`https://j3c206.p.ssafy.io${favorite.image}`" 
           alt="Image 1"
           v-b-modal="`modal-${favorite.id}`"
           @click="setModal(favorite)">
           </b-img>
-          <book-detail :book="book"/>
         </b-col>
       </b-row>
     </b-container>
     <hr>
   </div>
+
+  <book-detail :book="book"/>
 
 </div>
 </template>

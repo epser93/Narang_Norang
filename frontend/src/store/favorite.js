@@ -24,18 +24,20 @@ export default {
         console.log(err)
       })
     },
-    postFavorites({ rootGetters }, bid) {
+    postFavorites({ rootGetters, dispatch }, bid) {
       axios.post(SERVER.URL + SERVER.ROUTER.favorite + bid + '/', {  }, rootGetters['user/config'])
       .then(() => {
+        dispatch('getFavorites')
         alert('추가되었습니다.')
       })
       .catch((err) => {
         console.log(err)
       })
     },
-    deleteFavorites({ rootGetters }, bid) {
+    deleteFavorites({ rootGetters, dispatch }, bid) {
       axios.delete(SERVER.URL + SERVER.ROUTER.favorite + bid + '/', rootGetters['user/config'])
       .then(() => {
+        dispatch('getFavorites')
         alert('삭제되었습니다.')
       })
       .catch((err) => {

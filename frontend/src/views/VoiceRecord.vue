@@ -116,7 +116,7 @@ export default {
       this.index = this.train.length - 1
       for (var i = 0; i <= this.total; i++) {
         if (i <= this.index) {
-          this.recordings[i] = 'https://j3c206.p.ssafy.io/' + this.train[i].train_file
+          this.recordings[i] = 'https://j3c206.p.ssafy.io' + this.train[i].train_file
         } else {
           this.recordings[i] = ''
         }
