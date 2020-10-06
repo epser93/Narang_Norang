@@ -1,6 +1,7 @@
 <template>
 	<div v-if="fairytales" style="padding-top: 1vw; margin: auto; width: 90%;">
     <h1 class="mt-4">베스트 셀러</h1>
+	<hr style="width: 246px; border-bottom: 6px solid #89aef3; margin-top: 0;">
 		<carousel-3d :space="360" :width="240" :height="360" :border="3" :perspective="0" :scaling="0" :controls-visible="true">
 			<slide v-for="(fairytale, i) in fairytales" :key="i" :index="i">
 				<figure>
@@ -34,10 +35,6 @@ export default {
   },
   data() {
     return {
-<<<<<<< HEAD
-=======
-			slides: 7,
->>>>>>> 0e33700f46a1823b9db3418096578f2fcecf52b9
 			book: {},
     }
 	},
