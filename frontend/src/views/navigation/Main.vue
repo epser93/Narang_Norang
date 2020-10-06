@@ -1,9 +1,6 @@
 <template>
 	<div v-if="fairytales" style="padding-top: 1vw; margin: auto; width: 90%;">
-		<b-button @click="onRoute('Books')" size="lg" variant="outline-secondary" class="mt-4" style="position: absolute; right: 8%;">
-      <b-icon icon="book" aria-hidden="true"></b-icon> 책 더보기
-    </b-button>
-    <h1 class="mt-4">베스트 셀러</h1>
+    <h1 class="mt-4">이달의 인기 동화</h1>
 	<hr style="width: 264px; border-bottom: 6px solid #89aef3; margin-top: 0;">
 		<carousel-3d :space="360" :width="240" :height="360" :border="3" :perspective="0" :scaling="0" :controls-visible="true">
 			<slide v-for="(fairytale, i) in fairytales" :key="i" :index="i">
@@ -58,5 +55,4 @@ export default {
 </script>
 
 <style>
-
 </style>
