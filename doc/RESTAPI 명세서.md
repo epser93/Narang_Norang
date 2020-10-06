@@ -104,7 +104,8 @@ https://j3c206.p.ssafy.io/api/accounts/user/
     "balance": 0,
     "first_name": "mungto",
     "is_staff": false,
-    "is_subscribe" : false
+    "is_subscribe" : false,
+    "current_voice": 1
 }
 ```
 
@@ -1075,6 +1076,24 @@ https://j3c206.p.ssafy.io/api/voices/
         "name": "엄마"
     }
 ]
+```
+
+
+
+## 사용할 모델 변경(POST)
+
+### 목소리 모델 이름 수정 (POST)
+
+```
+https://j3c206.p.ssafy.io/api/voices/voice/<int:voice_id>/
+```
+
+- 응답
+
+```json
+"변경완료" > 1번 혹은 자신 모델일경우
+
+"변경 불가/실패" > 자신이 사용못하는 모델일 경우
 ```
 
 

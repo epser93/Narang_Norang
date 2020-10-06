@@ -24,6 +24,12 @@ class VoiceModel(models.Model):
         self.name = data['name']
         self.save()
 
+    def delete(self, user):
+        if user.current_voice == self.id:
+            user.current_voice = 1
+            user.save()
+        super().delete()
+
 
 class Caption(models.Model):
     content = models.TextField()
