@@ -1,10 +1,9 @@
 <template>
   <div style="margin: auto; width: 90%;">
     <b-input-group size="lg" style="width: 25%; position: absolute; right:15%;">
-      <b-input-group-prepend is-text><b-icon icon="search"></b-icon></b-input-group-prepend>
-      <b-form-input type="search" placeholder="Search fairytale" v-model="search" @keypress.enter="getSearch(search)"></b-form-input>
+      <b-form-input type="search" placeholder="책 이름 검색" v-model="search" @keypress.enter="getSearch(search)"></b-form-input>
       <b-input-group-append>
-        <b-button text="Button" variant="outline-warning" @click="getSearch(search)"> 검색 </b-button>
+        <b-button text="Button" variant="outline-secondary" @click="getSearch(search)"><b-icon icon="search"></b-icon></b-button>
       </b-input-group-append>
     </b-input-group>
 

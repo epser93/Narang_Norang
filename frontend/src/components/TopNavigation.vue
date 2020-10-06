@@ -16,6 +16,10 @@
         <img src="../assets/img/나랑노랑.png" alt="" style="width: 100px;">
       </b-navbar-brand>
 
+      <div @click="onRoute('Books')" size="lg" variant="outline-secondary" class="book-plus mr-2" style="position: absolute; right: 8%;">
+        <b-icon icon="book" scale="1.5" aria-hidden="true" class="mr-2"></b-icon>책 더보기
+      </div>
+
       <!-- SideBar Nav -->
       <b-navbar-nav class="ml-auto">
 				<b-button v-b-toggle.sidebar-right class="my-2 my-sm-0 mr-3"><b-icon icon="list" scale="2.5"></b-icon></b-button>     
@@ -36,11 +40,11 @@
           <hr>
         </b-card-text>
         <b-card-text v-if="userInfo.is_subscribed" class="my-2">
-          <span class="mr-auto">나랑노랑 멤버쉽</span>
+          <span class="mr-auto">나랑노랑 멤버십</span>
           <hr>
         </b-card-text>
         <b-card-text v-else class="my-2">
-          <span class="mr-auto" v-b-modal.kakao-pay>나랑노랑 멤버쉽 이용하기</span>
+          <span class="mr-auto" v-b-modal.kakao-pay>나랑노랑 멤버십 이용하기</span>
           <hr>
         </b-card-text>
         <!-- Voice Notice Area -->
@@ -86,13 +90,10 @@
     <b-modal
       id="kakao-pay"
       ref="modal"
-      title="나랑노랑 멤버쉽">
-
-      <p>4,800원</p>
-
-      <template v-slot:modal-footer="{ cancel, ok }">
-        <b-button @click="cancel();" variant="outline-secondary">닫기</b-button>
-        <b-button @click="ok(); startKakaoPay();" variant="outline-primary">결제하기</b-button>
+      title="나랑노랑 멤버십 구독">
+      <img src="@/assets/img/membership.png" style="width: 350px; margin-left: 60px;" alt="">
+      <template v-slot:modal-footer="{ ok }">
+        <b-button class="mr-auto ml-auto" @click="ok(); startKakaoPay();" variant="outline-primary">매달 4,800원 결제하기</b-button>
       </template>
     </b-modal>
 
@@ -224,5 +225,9 @@ export default {
   right: 0;
   background-color: white;
   z-index: 7;
+}
+
+.book-plus:hover {
+  cursor: pointer;
 }
 </style>
