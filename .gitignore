@@ -11,6 +11,7 @@ file/
 
 ## dataset ##
 tts/Tacotron-Korean/datasets/kss/
+tts/Tacotron_Korean/dataset/
 tts/Tacotron-Korean/logs-tacotron/
 tts/Tacotron-Korean/training/
 

@@ -34,12 +34,10 @@ class Fairytale(models.Model):
         return self.title
 
 
-    # 이미지 삭제 함수
     def image_delete(self):
         if self.exists(self.image.name):
             os.remove(os.path.join(settings.MEDIA_ROOT, self.image.name))
 
-    # 해당 데이터가 삭제된다면 이미지 삭제함수 호출
     def delete(self):
         self.image_delete()
         super().delete()
