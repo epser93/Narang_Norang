@@ -163,6 +163,196 @@ https://j3c206.p.ssafy.io/api/books/fairytale/
 
 
 
+## 카카오페이
+
+> 결제 준비 -> 결제 승인 순서로 진행됩니다.
+
+### 페이 결제 준비 (POST)
+
+```
+https://j3c206.p.ssafy.io/api/accounts/kakaopay/
+```
+
+- 응답
+
+```json
+{
+    "tid": "T2814609304915267875",
+    "tms_result": false,
+    "next_redirect_app_url": "https://mockup-pg-web.kakao.com/v1/6238f4e724b1247f0407bfe47caee1177a113682a0bf094e3195138ce51e0716/aInfo",
+    "next_redirect_mobile_url": "https://mockup-pg-web.kakao.com/v1/6238f4e724b1247f0407bfe47caee1177a113682a0bf094e3195138ce51e0716/mInfo",
+    "next_redirect_pc_url": "https://mockup-pg-web.kakao.com/v1/6238f4e724b1247f0407bfe47caee1177a113682a0bf094e3195138ce51e0716/info",
+    "android_app_scheme": "kakaotalk://kakaopay/pg?url=https://mockup-pg-web.kakao.com/v1/6238f4e724b1247f0407bfe47caee1177a113682a0bf094e3195138ce51e0716/order",
+    "ios_app_scheme": "kakaotalk://kakaopay/pg?url=https://mockup-pg-web.kakao.com/v1/6238f4e724b1247f0407bfe47caee1177a113682a0bf094e3195138ce51e0716/order",
+    "created_at": "2020-10-06T19:21:36"
+}
+```
+
+> next_redirect_pc_url 로 리다이렉팅 시키시면 결제 페이지로 이동이 됩니다!
+>
+> tid를 저장해주세요
+
+
+
+### 페이 결제 승인 (POST)
+
+```
+https://j3c206.p.ssafy.io/api/accounts/kakaopay/approval/
+```
+
+- body
+
+```
+{
+   "tid" : 준비단계에서 나온 tid,
+   "pg_token" : 리다이렉트 된 결제 진행 페이지의 쿼리스트링
+}
+```
+
+- 응답
+
+```json
+aid: "A2814600169520689529"
+amount:{
+	discount: 0
+	point: 0
+	tax_free: 0
+	total: 4800
+	vat: 436
+}
+approved_at: "2020-10-06T18:46:17"
+cid: "TC0ONETIME"
+created_at: "2020-10-06T18:45:55"
+item_name: "나랑노랑 이용권"
+partner_order_id: "01"
+partner_user_id: "나랑노랑"
+payment_method_type: "MONEY"
+quantity: 1
+tid: "T2814600109390348074"
+```
+
+
+
+### 주문 정보 보기 (POST)
+
+```
+https://j3c206.p.ssafy.io/api/accounts/kakaopay/info/
+```
+
+- body
+
+```
+{
+	"tid" : tid
+}
+```
+
+- 응답
+
+```json
+amount:{
+	discount: 0
+	point: 0
+	tax_free: 0
+	total: 4800
+	vat: 436
+}
+approved_at: "2020-10-06T18:46:17"
+cancel_available_amount:{
+	discount: 0
+	point: 0
+	tax_free: 0
+	total: 4800
+	vat: 436
+}
+canceled_amount: {total: 0, tax_free: 0, vat: 0, point: 0, discount: 0}
+cid: "TC0ONETIME"
+created_at: "2020-10-06T18:45:55"
+item_name: "나랑노랑 이용권"
+partner_order_id: "01"
+partner_user_id: "나랑노랑"
+payment_action_details: [{…}]
+payment_method_type: "MONEY"
+quantity: 1
+status: "SUCCESS_PAYMENT"
+tid: "T2814600109390348074"
+```
+
+
+
+### 페이 환불하기 (POST)
+
+```
+https://j3c206.p.ssafy.io/api/accounts/kakaopay/refund/
+```
+
+- body
+
+```json
+{
+	"tid" : tid
+}
+```
+
+- 응답
+
+```json
+aid: "A2814612835378385197"
+amount: {total: 4800, tax_free: 0, vat: 436, point: 0, discount: 0}
+approved_at: "2020-10-06T18:46:17"
+approved_cancel_amount: {total: 4800, tax_free: 0, vat: 436, point: 0, discount: 0}
+cancel_available_amount: {total: 0, tax_free: 0, vat: 0, point: 0, discount: 0}
+canceled_amount: {total: 4800, tax_free: 0, vat: 436, point: 0, discount: 0}
+canceled_at: "2020-10-06T19:35:18"
+cid: "TC0ONETIME"
+created_at: "2020-10-06T18:45:55"
+item_name: "나랑노랑 이용권"
+partner_order_id: "01"
+partner_user_id: "나랑노랑"
+payment_method_type: "MONEY"
+quantity: 1
+status: "CANCEL_PAYMENT"
+tid: "T2814600109390348074"
+```
+
+
+
+### 이용권 결제 내역 보기 (GET)
+
+```
+https://j3c206.p.ssafy.io/api/accounts/subscribes/
+```
+
+- 응답
+
+```json
+[
+    {
+        "id": 8,
+        "start_date": "2020-10-06",
+        "end_date": "2020-10-05",
+        "tid": "T2814596780790693638",
+        "is_return": true
+    },
+    {
+        "id": 10,
+        "start_date": "2020-10-06",
+        "end_date": "2020-10-05",
+        "tid": "T2814599443670417184",
+        "is_return": true
+    },
+    {
+        "id": 11,
+        "start_date": "2020-10-06",
+        "end_date": "2020-10-05",
+        "tid": "T2814600109390348074",
+        "is_return": true
+    }
+]
+```
+
+
+
 ## 동화책 검색 (GET)
 
 ```

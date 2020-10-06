@@ -4,7 +4,7 @@ from .models import Fairytale, Genre, VoiceStorage, Scenario, BookMark
 class FairytaleListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Fairytale
-        fields = ['id', 'title', 'image']
+        fields = ['id', 'title', 'image', 'is_pay']
 
 class FairytaleDetailSerializer(serializers.ModelSerializer):
     is_liked = serializers.SerializerMethodField()

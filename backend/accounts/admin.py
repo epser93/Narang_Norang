@@ -9,8 +9,8 @@ class UserAdmin(admin.ModelAdmin):
 
 
 class SubscribeAdmin(admin.ModelAdmin):
-    list_display = ['id', 'user', 'start_date', 'end_date']
-    fields = ['user', 'end_date']
+    list_display = ['id', 'user', 'start_date', 'end_date', 'tid', 'is_return']
+    fields = ['user', 'end_date', 'tid', 'is_return']
 
 admin.site.register(get_user_model(), UserAdmin)
 admin.site.register(Subscribe, SubscribeAdmin)

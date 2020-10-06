@@ -13,8 +13,8 @@ class WriterAdmin(admin.ModelAdmin):
 
 
 class FairytaleAdmin(admin.ModelAdmin):
-    list_display = ['id', 'title']
-    fields = ['title', 'summary', 'image', 'date', 'writer', 'Genre']
+    list_display = ['id', 'title', 'is_pay']
+    fields = ['title', 'summary', 'image', 'date', 'writer', 'Genre', 'is_pay']
 
 
 class ScenarioAdmin(admin.ModelAdmin):
