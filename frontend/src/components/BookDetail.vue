@@ -4,7 +4,7 @@
       <b-row>
         <b-col cols="6">
           <b-card style="min-height: 540px;">
-            <img :src="`https://j3c206.p.ssafy.io/${fairytale.image}`" alt="" style="width: 100%; margin-top: 5%;">
+            <img :src="`https://j3c206.p.ssafy.io${fairytale.image}`" alt="" style="width: 100%; margin-top: 40%">
           </b-card>
         </b-col>
         <b-col cols="6">

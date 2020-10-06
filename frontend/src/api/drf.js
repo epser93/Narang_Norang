@@ -12,6 +12,9 @@ export default{
       //fairytale
       book: 'books/fairytale/',
 
+      //bookmark
+      mark: 'books/bookmark/',
+
       //favorite
       favorite: 'books/favorite/',
       

@@ -115,8 +115,8 @@ export default {
     setTimeout(function() {
       this.index = this.train.length
       for (var i = 0; i <= this.total; i++) {
-        if (i < this.index) {
-          this.recordings[i] = 'https://j3c206.p.ssafy.io/' + this.train[i].train_file
+        if (i <= this.index) {
+          this.recordings[i] = 'https://j3c206.p.ssafy.io' + this.train[i].train_file
         } else {
           this.recordings[i] = ''
         }
