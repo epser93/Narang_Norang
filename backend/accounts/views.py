@@ -7,6 +7,7 @@ from rest_framework.views import APIView
 from django.shortcuts import redirect
 from rest_framework.response import Response
 from AI_PJT3 import settings
+import json
 
 from .serializers import UserSerializer
 
@@ -48,3 +49,48 @@ class UserAPI(APIView):
         request.user.update(request.data)
         serializer = UserSerializer(request.user)
         return Response(serializer.data)
+
+@api_view(['POST'])
+def Kakaopay(request):
+    url = "https://kapi.kakao.com/v1/payment/ready"
+    redirect_url = settings.env('PAY_REDIRECT_URL')
+    approval_url = settings.env('PAY_APPROVAL_URL')
+    admin_key = settings.env('ADMIN_KEY')
+    headers = {
+        'Authorization': "KakaoAK " + admin_key,
+        'Content-type': 'application/x-www-form-urlencoded;charset=utf-8',
+    }
+    params = {
+        'cid': "TC0ONETIME", # 가맹점 코드, 테스트 코드
+        'partner_order_id': '01', # 가맹점 주문번호, 테스트므로 임의값 지정
+        'partner_user_id': '나랑노랑', # 가맹점 회원 id, 테스트므로 임의값 지정
+        'item_name': '나랑노랑 이용권',
+        'quantity': 1,
+        'total_amount': 19800,
+        'tax_free_amount': 0, # 상품 비과세 금액
+        'approval_url': approval_url,
+        'fail_url': redirect_url,
+        'cancel_url': redirect_url,
+    }
+    res = requests.post(url, params=params, headers=headers)
+    res = json.loads(res.text)
+    return Response(res)    
+
+@api_view(['POST'])
+def KakaopayApproval(request):
+    url = "https://kapi.kakao.com/v1/payment/approve"
+    admin_key = settings.env('ADMIN_KEY')
+    headers = {
+        'Authorization': "KakaoAK " + admin_key,
+        'Content-type': 'application/x-www-form-urlencoded;charset=utf-8',
+    }
+    params = {
+        "cid" : "TC0ONETIME",
+        "tid" : request.data['tid'],
+        "partner_order_id" : '01',
+        "partner_user_id" : '나랑노랑',
+        "pg_token" : request.data["pg_token"]
+    }
+    res = requests.post(url, headers=headers, params=params)
+    res = res.json()
+    return Response(res)
