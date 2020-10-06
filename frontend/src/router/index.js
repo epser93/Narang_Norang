@@ -85,6 +85,11 @@ const routes = [
     path: '/about',
     name: 'About',
     component: () => import('@/views/About.vue')
+  },
+  {
+    path: '/payment',
+    name: 'Payment',
+    component: () => import('@/views/KakaoPay.vue')
   }
 ]
 
@@ -97,16 +102,21 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   const publicPages = ['Login']  // Login 안해도 됨
   const authPages = ['Login']  // Login 되어있으면 안됨
+  const KakaoPayPage = ['Payment']
 
   const authRequired = !publicPages.includes(to.name)  // 로그인 해야 함.
   const unauthRequired = authPages.includes(to.name)  // 로그인 해서는 안됨
+  const TidRequired = KakaoPayPage.includes(to.name) 
   const isLoggedIn = !!cookies.get('auth-token')
+  const isPaiedIn = !!cookies.get('tid')
 
   if (unauthRequired && isLoggedIn) {
     next('/')
   }
 
   authRequired && !isLoggedIn ? next({ name: 'Login' }) : next()
+
+  TidRequired && !isPaiedIn ? next('/') : next()
 })
 
 export default router

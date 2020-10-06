@@ -18,7 +18,7 @@
 
       <!-- SideBar Nav -->
       <b-navbar-nav class="ml-auto">
-				<b-button v-b-toggle.sidebar-right class="my-2 my-sm-0 mr-3"><b-icon icon="list" scale="2.5"></b-icon></b-button>       
+				<b-button v-b-toggle.sidebar-right class="my-2 my-sm-0 mr-3"><b-icon icon="list" scale="2.5"></b-icon></b-button>     
       </b-navbar-nav>
 
     <!-- End NavBar -->
@@ -30,7 +30,17 @@
       <b-card no-body style="min-height: 100%;">
         <b-card-text class="mt-4 mb-0">
           <b-avatar class="mr-3"></b-avatar>
-          <span class="mr-auto">{{(userInfo.first_name == '') ? userInfo.username : userInfo.first_name}}님 환영합니다.</span>
+          <span class="mr-auto" @click="getsubscribes" v-b-modal.kakao-membership>
+            {{(userInfo.first_name == '') ? userInfo.username : userInfo.first_name}}님 환영합니다.
+          </span>
+          <hr>
+        </b-card-text>
+        <b-card-text v-if="userInfo.is_subscribed" class="my-2">
+          <span class="mr-auto">나랑노랑 멤버쉽</span>
+          <hr>
+        </b-card-text>
+        <b-card-text v-else class="my-2">
+          <span class="mr-auto" v-b-modal.kakao-pay>나랑노랑 멤버쉽 이용하기</span>
           <hr>
         </b-card-text>
         <!-- Voice Notice Area -->
@@ -43,11 +53,6 @@
                   <b-avatar size="lg" rounded="lg" text="기본" variant="info"></b-avatar>
                 </b-card>
               </b-col>
-              <!-- <b-col cols="6" class="py-3">
-                <b-card>
-                  <b-avatar size="lg" rounded="lg" src="https://placekitten.com/300/300"></b-avatar>
-                </b-card>
-              </b-col> -->
               <b-col cols="6" class="py-3">
                 <b-card @click="onRoute('Voice')">
                   <b-avatar class="plus-icon" size="lg" rounded="lg" icon="plus"></b-avatar>
@@ -78,6 +83,35 @@
 
     </b-sidebar>
 
+    <b-modal
+      id="kakao-pay"
+      ref="modal"
+      title="나랑노랑 멤버쉽">
+
+      <p>4,800원</p>
+
+      <template v-slot:modal-footer="{ cancel, ok }">
+        <b-button @click="cancel();" variant="outline-secondary">닫기</b-button>
+        <b-button @click="ok(); startKakaoPay();" variant="outline-primary">결제하기</b-button>
+      </template>
+    </b-modal>
+
+    <b-modal id="kakao-membership" scrollable title="나랑노랑 이용내역" v-if="subscribes">
+      <div v-for="subscribe in subscribes" :key="subscribe.id" >
+        <hr>
+        <p><strong>결제가 완료 되었습니다.</strong></p>
+        <p>결제일시: {{ subscribe.start_date }}</p>
+        <p>만료일시: {{ subscribe.end_date }}</p>
+        <b-button v-if="subscribe.is_return" disabled variant="secondary"> 결제 취소됨</b-button>
+        <b-button v-else @click="onRefund(subscribe.tid)" variant="outline-danger"> 환불하기 </b-button>
+        <hr>
+      </div>
+
+      <template v-slot:modal-footer="{ cancel }">
+        <b-button @click="cancel();" variant="outline-secondary">닫기</b-button>
+      </template>
+    </b-modal>
+
   </div>
 </template>
 
@@ -88,10 +122,10 @@ import { mapState, mapActions } from 'vuex'
 export default {
   name: "TopNavigation",
   computed: {
-    ...mapState('user', ['userInfo'])
+    ...mapState('user', ['userInfo', 'subscribes'])
   },
   methods: {
-    ...mapActions('user', ['getUserInfo']),
+    ...mapActions('user', ['getUserInfo', 'startKakaoPay', 'getsubscribes', 'delsubscribe']),
     onRoute(name) {
       this.$router.push({name: name}, () => {})
     },
@@ -108,6 +142,11 @@ export default {
         window.location.reload(true)
         alert("로그아웃 되었습니다.")
       })
+    },
+    onRefund(tid) {
+      if (confirm("정말 결제를 취소하시겠습니까??") == true) { 
+        this.delsubscribe({ tid: tid})
+      }
     }
   },
   created() {
