@@ -1,6 +1,7 @@
 import axios from 'axios'
 import cookies from 'vue-cookies'
 import SERVER from '@/api/drf'
+import router from '@/router'
 
 export default {
   namespaced: true,
@@ -9,7 +10,7 @@ export default {
     authToken: cookies.get('auth-token'),
     // 1. 받아올 거 선언
     userInfo: '',
-    changedUserInfo: '',
+    subscribes: ''
   },
 
   getters: {
@@ -44,6 +45,9 @@ export default {
     SET_USERINFO(state, payload) {
       state.userInfo = payload
     },
+    SET_SUBSCRIBES(state, payload) {
+      state.subscribes = payload
+    },
   },
 
   actions: {
@@ -71,6 +75,47 @@ export default {
       .catch((err) => {
         console.log(err)
       })
-    }
+    },
+    startKakaoPay({ getters }) {
+      axios.post(SERVER.URL + SERVER.ROUTER.kakaopay, null, getters.config)
+      .then(({ data }) => {
+        cookies.set('tid', data.tid)
+        location.href = data.next_redirect_pc_url
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    },
+    progressKakaoPay({ getters }, body) {
+      axios.post(SERVER.URL + SERVER.ROUTER.kakaopay + 'approval/', body, getters.config)
+      .then(() => {
+        cookies.remove('tid')
+        router.push({name:'Main'})
+        alert('결제가 완료 되었습니다.')
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    },
+    getsubscribes({ getters, commit }) {
+      axios.get(SERVER.URL + SERVER.ROUTER.subscribe, getters.config)
+      .then(({ data }) => {
+        commit('SET_SUBSCRIBES', data)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    },
+    delsubscribe({ getters, dispatch }, tid) {
+      axios.post(SERVER.URL + SERVER.ROUTER.kakaopay + 'refund/', tid, getters.config)
+      .then(() => {
+        dispatch('getsubscribes')
+        alert('결제가 취소 되었습니다.')
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    },
+    
   },
 }

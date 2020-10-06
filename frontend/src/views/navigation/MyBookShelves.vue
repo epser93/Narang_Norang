@@ -2,7 +2,8 @@
 <div>
   <!-- 읽고 있어요 -->
   <div class="mt-4">
-    <h2 class="mb-4">읽고 있어요 <b-icon icon="book"></b-icon></h2>
+    <h2 class="mb-2">읽고 있어요 <b-icon icon="book"></b-icon></h2>
+    <hr style="width: 246px; border-bottom: 6px solid #89aef3; margin-top: 0;">
     <b-container fluid class="p-2">
       <b-row>
         <b-col v-for="bookmark in bookmarks" :key="bookmark.fairytale.id">
@@ -15,12 +16,13 @@
         </b-col>
       </b-row>
     </b-container>
-    <hr>
+    <hr class="shelf">
   </div>
 
 <!-- 보고 싶어요 -->
   <div v-if="favorites" style="margin-top: 6vmin;">
-    <h2 class="mb-4">보고 싶어요 <b-icon icon="bookmark-heart"></b-icon></h2>
+    <h2 class="mb-2">보고 싶어요 <b-icon icon="bookmark-heart"></b-icon></h2>
+    <hr style="width: 246px; border-bottom: 6px solid #89aef3; margin-top: 0;">
     <b-container fluid class="p-2">
       <b-row>
         <b-col v-for="favorite in favorites" :key="favorite.id">
@@ -33,7 +35,7 @@
         </b-col>
       </b-row>
     </b-container>
-    <hr>
+    <hr class="shelf">
   </div>
 
   <book-detail :book="book"/>
@@ -81,7 +83,7 @@ export default {
   box-shadow: 4px 10px 5px #00000063;
 }
 
-hr {
+.shelf {
   margin-top: -2rem;
   margin-bottom: 1rem;
   border-top: 8vmin solid #b07112b0;

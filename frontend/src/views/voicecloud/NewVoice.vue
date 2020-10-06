@@ -130,5 +130,7 @@ export default {
 </script>
 
 <style>
-
+.b-avatar .b-avatar-img, .b-avatar .b-avatar-text {
+  width: 200%;
+}
 </style>

@@ -4,6 +4,8 @@ export default{
       //user
       login: 'accounts/kakao/',
       user: 'accounts/user/',
+      kakaopay: 'accounts/kakaopay/',
+      subscribe: 'accounts/subscribes/',
 
       //help_desk
       qna: 'service_center/QnA/',
@@ -11,6 +13,7 @@ export default{
 
       //fairytale
       book: 'books/fairytale/',
+      search: 'books/fairytale/search/',
 
       //bookmark
       mark: 'books/bookmark/',

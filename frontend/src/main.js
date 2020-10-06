@@ -17,11 +17,16 @@ import Carousel3d from 'vue-carousel-3d'
 
 Vue.use(Carousel3d);
 
-//Kakao
+// Kakao
 window.Kakao.init(process.env.VUE_APP_KAKAO_KEY);
 
 // Booklet
 import 'vue-booklet/dist/lib/vue-booklet.min.css'
+
+// VueCookies
+import VueCookies  from 'vue-cookies'
+Vue.use(VueCookies)
+
 
 Vue.config.productionTip = false
 

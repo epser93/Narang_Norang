@@ -50,6 +50,15 @@ export default {
           console.log(err)
         })
     },
+    getSearch({ rootGetters , commit }, search) {
+      axios.get(SERVER.URL + SERVER.ROUTER.search + search + '/', rootGetters['user/config'])
+        .then(({ data }) => {
+          commit('SET_FAIRYTALES', data)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    }
   },
 
 }
