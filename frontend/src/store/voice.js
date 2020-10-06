@@ -83,11 +83,10 @@ export default {
         })
 		},
 		startTrain({ rootGetters }, vid) {
-			axios.post(SERVER.URL + SERVER.ROUTER.train + vid + '/', rootGetters['user/config'])
-        .then(({ data }) => {
-					console.log(data)
-          // router.push({name:'Voice'})
-					// alert('학습을 시작합니다.')
+			axios.post(SERVER.URL + SERVER.ROUTER.train + vid + '/', {  }, rootGetters['user/config'])
+        .then(() => {
+          router.push({name:'Voice'})
+					alert('학습을 시작합니다.')
         })
         .catch((err) => {
           console.log(err)

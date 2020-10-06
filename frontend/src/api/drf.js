@@ -11,6 +11,7 @@ export default{
 
       //fairytale
       book: 'books/fairytale/',
+      search: 'books/fairytale/search/',
 
       //bookmark
       mark: 'books/bookmark/',
