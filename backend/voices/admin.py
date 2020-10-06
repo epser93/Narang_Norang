@@ -5,8 +5,8 @@ from .models import (
 
 
 class VoiceCategoryAdmin(admin.ModelAdmin):
-    list_display = ['id', 'user', 'name']
-    fields = ['user', 'name']
+    list_display = ['id', 'user', 'name', 'is_train']
+    fields = ['user', 'name', 'is_train']
 
 
 class VoiceModelAdmin(admin.ModelAdmin):

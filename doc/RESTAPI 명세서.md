@@ -102,7 +102,8 @@ https://j3c206.p.ssafy.io/api/accounts/user/
     "username": "김유기",
     "balance": 0,
     "first_name": "mungto",
-    "is_staff": false
+    "is_staff": false,
+    "is_subscribe" : false
 }
 ```
 
@@ -817,6 +818,27 @@ https://j3c206.p.ssafy.io/api/voices/train/category/<int:category_id>
     "id": 4,
     "name": "친구A"
 }
+```
+
+
+
+### 목소리 학습 시작하기 (POST)
+
+```
+https://j3c206.p.ssafy.io/api/voices/train/category/<int:category_id>
+```
+
+- 응답
+
+```json
+// 녹음을 덜 했을 때
+"녹음이 더 필요합니다" >> 400 BAD Request
+
+// 모든 대본을 녹음했을 때 학습시작
+"학습시작"
+
+// 학습중일 때 재요청이 들어온다면
+"학습중입니다."
 ```
 
 
