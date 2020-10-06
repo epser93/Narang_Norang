@@ -1,9 +1,9 @@
 <template>
   <div>
 
-    <div v-if="is_loading">
+    <div v-if="is_loading" class="loading-image">
       <img class="animated pulse infinite" src="@/assets/img/나랑노랑.png" alt="나랑노랑 로고" style="width: 40%;">
-      <h1>잠시만 기다려 주세요</h1>
+      <h1>잠시만 기다려 주세요.</h1>
     </div>
 
     <div v-else class="container">
@@ -155,5 +155,20 @@ export default {
   display: flex;
   height: 54px;
   margin-right: 16px;
+}
+
+@keyframes pulse {
+  from {
+    background-color: transparent;
+    transform: scale(.8)
+  }
+  to {
+    background-color: transparent;
+    transform: scale(.9)
+  }
+}
+
+.loading-image {
+  margin-top: 130px;
 }
 </style>

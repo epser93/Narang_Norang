@@ -45,5 +45,7 @@ export default {
 </script>
 
 <style>
-
+.nav-pills .nav-link.active {
+  background-color: #89aef3;
+}
 </style>

@@ -2,12 +2,45 @@
   <div v-if="trains">
     <b-container>
       <b-row>
-        <b-col cols="6" v-for="train in trains" :key="train.id" class="py-3">
-          <b-card @click="onRoute(train.id)" bg-variant="light" style="cursor: pointer;">
+        <b-col cols="4" v-for="train in trains" :key="train.id" class="py-3">
+          <b-card bg-variant="light" style="cursor: pointer;">
             <b-avatar size="lg" rounded="lg" :text="train.name" variant="light"></b-avatar>
           </b-card>
+          <div class="mt-2">
+            <b-button @click="onRoute(train.id)"><b-icon icon="mic-fill" scale="1.2" class="mr-2"></b-icon></b-button>
+            <b-button @click="getId(train.id)" v-b-modal.modal-prevent-closing><b-icon icon="pencil-square" scale="1.2" class="mr-2"></b-icon></b-button>
+            <b-button @click="onDelete(train.id)"><b-icon icon="trash-fill" scale="1.2"></b-icon></b-button>
+          </div>
         </b-col>
-        <b-col cols="6" class="py-3">
+
+    <b-modal
+      id="modal-prevent-closing"
+      ref="modal"
+      title="목소리 이름 변경">
+
+      <form ref="form">
+        <b-form-group
+          label="수정할 이름"
+          label-for="name-input"
+          invalid-feedback="이름은 필수 사항입니다."
+        >
+          <b-form-input
+            id="name-input"
+            v-model="form.name"
+            placeholder="이름을 입력해 주세요."
+            required
+          ></b-form-input>
+        </b-form-group>
+      </form>
+
+    <template v-slot:modal-footer="{ cancel, ok }">
+      <b-button @click="cancel();" variant="outline-secondary">닫기</b-button>
+      <b-button @click="ok(); handleSubmit();" variant="outline-primary">수정</b-button>
+    </template>
+    
+    </b-modal>
+
+        <b-col cols="4" class="py-3">
           <b-card v-b-modal="'new-question'">
             <b-avatar class="plus-icon" size="lg" rounded="lg" icon="plus"></b-avatar>
           </b-card>
@@ -57,11 +90,12 @@ export default {
     return {
       form: {
         name: ''
-      }
+      },
+      id: '',
     }
   },
   methods: {
-    ...mapActions('voice', ['getTrains', 'postTrain']),
+    ...mapActions('voice', ['getTrains', 'postTrain', 'putTrain', 'delTrain']),
     onREC() {
       if (this.form.name) {
         this.postTrain(this.form)
@@ -73,6 +107,18 @@ export default {
     onRoute(vid) {
       if (confirm("이어서 녹음 하시겠습니까?") == true) {
         this.$router.push({name:'REC', params:{vid: vid}})
+      }
+    },
+    getId(tid) {
+      this.id = tid
+    },
+    handleSubmit() {
+      this.putTrain({ index: this.id, body: this.form})
+      this.form.name = ''
+    },
+    onDelete(tid) {
+			if (confirm("정말 삭제하시겠습니까??") == true) { 
+        this.delTrain(tid)
       }
     }
   },
