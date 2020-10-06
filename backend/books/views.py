@@ -129,3 +129,9 @@ class BookmarkDetailAPI(APIView):
         bookmark = BookMark.objects.filter(fairytale=pk)
         serializer = BookmarkDetailSerializer(bookmark, many=True)
         return Response(serializer.data)
+
+class FairytailSearch(APIView):
+    def get(self, request, fairytale_name):
+        fairytales = Fairytale.objects.filter(title__icontains=fairytale_name)
+        serializer = FairytaleListSerializer(fairytales, many=True)
+        return Response(serializer.data)
