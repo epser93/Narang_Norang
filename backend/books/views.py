@@ -123,8 +123,8 @@ class BookMarkAPI(APIView):
 
 class BookmarkDetailAPI(APIView):
     def post(self, request, pk):
-        bookmark = BookMark.objects.filter(fairytale=pk)
         fairytale = Fairytale.objects.get(pk=pk)
+        bookmark = BookMark.objects.filter(fairytale=fairytale).filter(user=request.user)
         if not bookmark:
             bookmark = BookMark()
             bookmark.create(request.data, request.user, fairytale)
