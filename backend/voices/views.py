@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from .serializers import TrainCaptionSerializer, TrainVoiceCategorySerializer, VoiceModelSerializer, TrainVoiceSerializer
 from .models import VoiceModel, VoiceCategory, Caption, TrainVoice, OverwriteStorage
-
+from django.db.models import Q
 fs = OverwriteStorage()
 
 class TrainAPI(APIView):
@@ -90,7 +90,7 @@ class TrainVoiceCategoryDetail(APIView):
 
 class VoiceModelAPI(APIView):
     def get(self, request):
-        voice = VoiceModel.objects.filter(user=request.user)
+        voice = VoiceModel.objects.filter(Q(user=request.user) | Q(pk=1))
         serializer = VoiceModelSerializer(voice, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -103,7 +103,7 @@ class VoiceModelDetailAPI(APIView):
         return Response('변경 불가/실패', status=status.HTTP_400_BAD_REQUEST)
         
     def put(self, request, voice_id):
-        voice = VoiceModel.objects.get(pk=voice_id)
+        voice = VoiceModel.objects.get(pk=voice_id, user=request.user)
         if VoiceModel.objects.filter(user=request.user).filter(name=request.data['name']).exists():
             return Response('중복된 이름입니다.', status=status.HTTP_400_BAD_REQUEST)
         voice.update(request.data)

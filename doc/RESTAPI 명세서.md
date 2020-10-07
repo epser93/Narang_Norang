@@ -35,29 +35,6 @@
 
 ## 요청 응답방식
 
-임시
-
-### 소셜로그인 요청(브라우저에서 검색)
-
-```
-https://j3c206.p.ssafy.io/api/accounts/login/kakao/
-```
-
-- 응답
-
-```json
-{
-    "access_token": "_V0DqReM7CNA2L4z5rBWyQxeO1AuJ6_dOLxYpQo9c00AAAF0uGG_Vg",
-    "token_type": "bearer",
-    "refresh_token": "QzA74l847etqy8tXTWOslO0J0OXbF5evk84XPwo9c00AAAF0uGG_VA",
-    "expires_in": 21599,
-    "scope": "profile",
-    "refresh_token_expires_in": 5183999
-}
-```
-
-
-
 ### JWT 토큰 발급받기(POST)
 
 ```
@@ -133,7 +110,8 @@ https://j3c206.p.ssafy.io/api/accounts/user/
     "username": "김유기",
     "balance": 0,
     "first_name": "mungto123",
-    "is_staff": false
+    "is_staff": false,
+    "is_subscribed": false
 }
 ```
 
@@ -152,12 +130,14 @@ https://j3c206.p.ssafy.io/api/books/fairytale/
     {
         "id": 1,
         "title": "동화1",
-        "image": "/media/KakaoTalk_20200921_091027148.png"
+        "image": "/media/KakaoTalk_20200921_091027148.png",
+        "is_pay": true
     },
     {
         "id": 2,
         "title": "동화2",
-        "image": "/media/KakaoTalk_20200921_091027148_D0qNP8G.png"
+        "image": "/media/KakaoTalk_20200921_091027148_D0qNP8G.png",
+        "is_pay": false
     }
 ]
 ```
@@ -354,7 +334,7 @@ https://j3c206.p.ssafy.io/api/accounts/subscribes/
 
 
 
-## 동화책 검색 (GET)
+### 동화책 검색 (GET)
 
 ```
 https://j3c206.p.ssafy.io/api/books/fairytale/search/<str:fairytale_name>/
@@ -362,12 +342,13 @@ https://j3c206.p.ssafy.io/api/books/fairytale/search/<str:fairytale_name>/
 
 - 응답
 
-```
+```json
 [
     {
         "id": 3,
         "title": "헨젤과 그레텔",
-        "image": "/media/Naive_jDJezuX.PNG"
+        "image": "/media/Naive_jDJezuX.PNG",
+        "is_pay": false
     }
 ]
 ```
@@ -1080,9 +1061,7 @@ https://j3c206.p.ssafy.io/api/voices/
 
 
 
-## 사용할 모델 변경(POST)
-
-### 목소리 모델 이름 수정 (POST)
+### 사용할 모델 변경(POST)
 
 ```
 https://j3c206.p.ssafy.io/api/voices/voice/<int:voice_id>/
