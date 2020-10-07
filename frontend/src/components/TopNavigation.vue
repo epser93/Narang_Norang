@@ -49,7 +49,7 @@
           <hr>
         </b-card-text>
         <!-- Voice Notice Area -->
-        <b-card-body class="pt-0">
+        <b-card-body class="p-0">
           <b-container>
             <strong><b-icon icon="mic-fill" scale="1"></b-icon>
              현재 목소리: {{ current_voice.name }}</strong>
