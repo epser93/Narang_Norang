@@ -134,7 +134,7 @@ class BookmarkDetailAPI(APIView):
         return Response('북마크 등록 완료')
 
     def get(self, request, pk):
-        bookmark = BookMark.objects.filter(fairytale=pk)
+        bookmark = BookMark.objects.filter(fairytale=pk).filter(user=request.user)
         serializer = BookmarkDetailSerializer(bookmark, many=True)
         return Response(serializer.data)
 
