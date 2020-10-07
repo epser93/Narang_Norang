@@ -109,6 +109,7 @@ export default {
     delsubscribe({ getters, dispatch }, tid) {
       axios.post(SERVER.URL + SERVER.ROUTER.kakaopay + 'refund/', tid, getters.config)
       .then(() => {
+        dispatch('getUserInfo')
         dispatch('getsubscribes')
         alert('결제가 취소 되었습니다.')
       })

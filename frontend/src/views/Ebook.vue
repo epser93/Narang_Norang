@@ -11,7 +11,9 @@
           <article class="content" style="background-color: white;">
             <b-icon icon="bookmarks" scale="1.5" class="float-right"></b-icon>
             <div v-for="(item, j) in itemsForList" :key="j">
-              <h2 @click="readMe(3*i + j)" class="my-5" :id="`index${3*i + j}`">{{ item.scenario.content }}</h2>
+              <h3 @click="readMe(3*i + j)"><text-highlight :queries="queries" class="my-5" :id="`index${3*i + j}`">
+                {{ item.scenario.content }}
+              </text-highlight></h3>
             </div>
           </article>
           <article class="content" style="background-color: white;">
@@ -71,6 +73,9 @@ export default {
         (this.currentPage - 1) * this.perPage,
         this.currentPage * this.perPage,
       );
+    },
+    queries() {
+      return this.ebook[this.index].scenario.content
     }
   },
   data() {
@@ -131,8 +136,12 @@ export default {
       this.audio.pause()
       this.playing = false
       if (this.currentPage != (this.pages+2)) {
-        this.currentPage = this.currentPage + 1
         this.$refs.Book.nextPage()
+        this.currentPage = this.currentPage + 1
+        // this.$refs.Book.onFlipEnd = (currentPage = this.currentPage, direction = this.currentPage+1) => {
+        //   console.log('go')
+        //   this.currentPage = this.currentPage + 1
+        // }
       }
       this.index = 3*(this.currentPage-1)
     },
@@ -141,13 +150,17 @@ export default {
     this.getEbook({bid: this.bid, vid: this.vid})
     this.getBookmark(this.bid)
     setTimeout(function() {
-      this.currentPage = this.bookmark[0].page-1
+      this.currentPage = this.bookmark.length == 0 ? 0 : this.bookmark[0].page-1 
       this.index = 3*(this.currentPage-1)
-      this.$refs.Book.movePage(this.bookmark[0].page)
+      this.$refs.Book.movePage(this.bookmark.length == 0 ? 1 : this.bookmark[0].page)
     }.bind(this), 200)
   },
   destroyed() {
-    this.postBookmark({ bid: this.bid, body: { id: this.currentPage + 1 } })
+    if (this.currentPage > this.pages) {
+      this.postBookmark({ bid: this.bid, body: { id: 1 } })
+    } else {
+      this.postBookmark({ bid: this.bid, body: { id: this.currentPage + 1 } })
+    }
     this.audio.pause();
   }
 }
