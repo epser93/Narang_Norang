@@ -37,10 +37,11 @@
           <span class="mr-auto" @click="getsubscribes" v-b-modal.kakao-membership>
             {{(userInfo.first_name == '') ? userInfo.username : userInfo.first_name}}님 환영합니다.
           </span>
+          <!-- <p style="font-size: 10px; margin-top: 15px;">이름을 클릭하면 결제 내역을 볼 수 있습니다.</p> -->
           <hr>
         </b-card-text>
         <b-card-text v-if="userInfo.is_subscribed" class="my-2">
-          <span class="mr-auto">나랑노랑 멤버십</span>
+          <span class="mr-auto" v-b-modal.kakao-membership>나랑노랑 멤버십</span>
           <hr>
         </b-card-text>
         <b-card-text v-else class="my-2">
@@ -48,12 +49,14 @@
           <hr>
         </b-card-text>
         <!-- Voice Notice Area -->
-        <b-card-body class="p-2">
+        <b-card-body class="pt-0">
           <b-container>
-            <strong>현재 목소리 - {{ current_voice.name }}</strong>
+            <strong><b-icon icon="mic-fill" scale="1"></b-icon>
+             현재 목소리: {{ current_voice.name }}</strong>
+            <hr style="margin-bottom: 0; border-bottom: 1px solid grey;">
             <b-row>
               <b-col cols="6" v-for="voice in voices" :key="voice.id" class="py-3">
-                <b-card :bg-variant="voice.id == current_voice.id ? 'info' : 'secondary'" @click="onChangeVoice(voice.id)" style="cursor: pointer;">
+                <b-card :bg-variant="voice.id == current_voice.id ? 'primary' : 'secondary'" @click="onChangeVoice(voice.id)" style="cursor: pointer;">
                   <p class="mt-3" style="color: white;"><strong>{{ voice.name }}</strong></p>
                 </b-card>
               </b-col>
@@ -84,7 +87,6 @@
         </b-button>
        </div>
       </template>
-
     </b-sidebar>
 
     <b-modal
@@ -115,7 +117,6 @@
         <b-button @click="cancel();" variant="outline-secondary">닫기</b-button>
       </template>
     </b-modal>
-
   </div>
 </template>
 

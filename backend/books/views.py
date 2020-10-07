@@ -1,8 +1,13 @@
-from .models import Fairytale, Genre, VoiceStorage
-from .serializers import FairytaleListSerializer, FairytaleDetailSerializer, GenreListSerializer, VoiceStorageSerailizer
-from voices.models import VoiceModel
+from .models import Fairytale, Genre, VoiceStorage, BookMark, Scenario
+from voices.models import VoiceModel, OverwriteStorage
+from accounts.models import Subscribe
+from .serializers import (FairytaleListSerializer, FairytaleDetailSerializer, 
+GenreListSerializer, VoiceStorageSerailizer, ScenarioIdSerializer, BookmarkSerializer, BookmarkDetailSerializer)
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework import status
+import datetime
+
 
 class FairytaleList(APIView):
     def get(self, request, format=None):
@@ -13,7 +18,7 @@ class FairytaleList(APIView):
 class FairytaleDetail(APIView):
     def get(self, request, pk):
         fairytale = Fairytale.objects.get(pk=pk)
-        serializer = FairytaleDetailSerializer(fairytale)
+        serializer = FairytaleDetailSerializer(fairytale, context={'user' : request.user })
         return Response(serializer.data)
 
 class GenreList(APIView):
@@ -48,10 +53,94 @@ class FavoriteAPI(APIView):
 
 class VoiceStoageAPI(APIView):
     def get(self, request, pk, model_pk, format=None):
-        # to-do 읽을 수 있는 동화책인지 검증
         fairytale = Fairytale.objects.get(pk=pk)
-        # to-do 사용가능한 목소리인지 검증 필요
+        if fairytale.is_pay == True:
+            subscribe = Subscribe.objects.filter(user=request.user).filter(end_date__gte=datetime.datetime.today())
+            if not subscribe:
+                return Response("이용권이 없습니다. 결제 후 사용해 주세요!", status=status.HTTP_403_FORBIDDEN)
         voice_model = VoiceModel.objects.get(pk=model_pk)
         voice_storage = VoiceStorage.objects.filter(fairytale=fairytale).filter(voice_model=voice_model)
+        caption = Scenario.objects.filter(fairytale=fairytale)
+        if len(voice_storage) != len(caption):
+            return Response("음성 데이터가 생성되지 않았습니다. 관리자에게 문의해주세요", status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         serializer = VoiceStorageSerailizer(voice_storage, many=True)
+        return Response(serializer.data)
+
+
+# 삭제예정
+class AddScenario(APIView):
+
+    def get(self, request, f_id):
+        fairytale = Fairytale.objects.get(pk=f_id)
+        scenarios = Scenario.objects.filter(fairytale=fairytale)
+        serializer = ScenarioIdSerializer(scenarios, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, f_id):
+        fairytale = Fairytale.objects.get(pk=f_id)
+        content = request.data['content']
+        content = content.split('\n')
+        for i in content:
+            i = i.lstrip()
+            if len(i) == 0:
+                continue
+            scenario = Scenario()
+            scenario.fairytale = fairytale
+            scenario.content = i
+            scenario.save()
+        return Response('ok')
+
+
+fs = OverwriteStorage()
+
+# 삭제예정
+class AddVoiceStorage(APIView):
+
+    def post(self, request, f_id, s_id, m_id):
+        fairytale = Fairytale.objects.get(pk=f_id)
+        scenario = Scenario.objects.get(pk=s_id)
+        model = VoiceModel.objects.get(pk=m_id)
+
+        voice_file = request.FILES['file']
+        extention = voice_file.name.split('.')[-1]
+        file_name = '{}_{}_{}.{}'.format(fairytale.title, m_id, s_id, extention)
+        filename = fs.save(file_name, voice_file)
+        
+        voice_storage = VoiceStorage()
+        voice_storage.fairytale = fairytale
+        voice_storage.scenario = scenario
+        voice_storage.voice_file = filename
+        voice_storage.voice_model = model
+        voice_storage.save()
+
+        return Response('ok')
+class BookMarkAPI(APIView):
+    def get(self, request):
+        bookmarks = BookMark.objects.filter(user=request.user)
+        serializer = BookmarkSerializer(bookmarks, many=True)
+        return Response(serializer.data)
+
+
+class BookmarkDetailAPI(APIView):
+    def post(self, request, pk):
+        bookmark = BookMark.objects.filter(fairytale=pk)
+        fairytale = Fairytale.objects.get(pk=pk)
+        if not bookmark:
+            bookmark = BookMark()
+            bookmark.create(request.data, request.user, fairytale)
+        else:
+            bookmark = bookmark[0]
+            bookmark.update(request.data, request.user, fairytale)
+        return Response('북마크 등록 완료')
+
+    def get(self, request, pk):
+        bookmark = BookMark.objects.filter(fairytale=pk)
+        serializer = BookmarkDetailSerializer(bookmark, many=True)
+        return Response(serializer.data)
+
+
+class FairytailSearch(APIView):
+    def get(self, request, fairytale_name):
+        fairytales = Fairytale.objects.filter(title__icontains=fairytale_name)
+        serializer = FairytaleListSerializer(fairytales, many=True)
         return Response(serializer.data)
