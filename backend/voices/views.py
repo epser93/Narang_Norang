@@ -90,7 +90,7 @@ class TrainVoiceCategoryDetail(APIView):
 
 class VoiceModelAPI(APIView):
     def get(self, request):
-        voice = VoiceModel.objects.filter(Q(user=request.user) | Q(pk=1))
+        voice = VoiceModel.objects.filter(Q(user=request.user) | Q(pk=1) | Q(pk=2))
         serializer = VoiceModelSerializer(voice, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
