@@ -250,6 +250,6 @@ sudo docker rm <컨테이너 이름 혹은 아이디>
 접속
 
 ```bash
-
+sudo docker exec -it <컨테이너 이름 혹은 아이디> bash
 ```
 

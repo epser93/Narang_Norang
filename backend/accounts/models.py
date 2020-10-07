@@ -19,7 +19,7 @@ class User(AbstractUser):
         self.save()
 
     def set_voice(self, voice):
-        if voice.id == 1 or voice.user == self:
+        if voice.id <= 2 or voice.user == self:
             self.current_voice = voice.id
             self.save()
             return True
