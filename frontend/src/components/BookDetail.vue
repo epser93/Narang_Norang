@@ -71,7 +71,7 @@ export default {
     ...mapActions('favorite', ['postFavorites', 'deleteFavorites']),
     ...mapActions('user', ['startKakaoPay']),
 		onDetail(bid) {
-			this.$router.push({name:'Ebook', params:{bid: bid}})
+			this.$router.push({name:'Ebook', params:{bid: bid, bname: this.fairytale.title, vid: this.userInfo.current_voice}})
     },
     changeStar() {
       this.fairytale.is_liked = !this.fairytale.is_liked
