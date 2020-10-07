@@ -1,7 +1,7 @@
 <template>
   <div v-if="ebook">
     <div style="width: 80%; margin: 0 auto;">
-      <booklet :displayPageNumber="false" :enableSelectPage="false" :displayButton="false" ref="Book">
+      <booklet :displayPageNumber="false" :enableSelectPage="false" :displayButton="false" :onFlipEnd="this.onFlipEnd" ref="Book">
         <div class="page cover">
           <article class="content" style="background-color: #bca98a;">
             <h1>{{ book_name }}</h1>
@@ -30,15 +30,15 @@
       <b-icon icon="arrow-left" aria-hidden="true"></b-icon> 뒤로가기
     </b-button>
 
-    <b-button size="lg" variant="secondary" class="mb-2 mx-3"  @click="toPrev()">
+    <b-button size="lg" variant="secondary" class="mb-2 mx-3" @click="toPrev()">
       <b-icon icon="arrow-left" aria-label="Help"></b-icon>
     </b-button>
   
-    <b-button v-if="currentPage != 0" size="lg" variant="secondary" class="mb-2 mx-3"  @click="start">
+    <b-button v-if="(this.nowPage == 0) || (this.nowPage > this.pages)" size="lg" variant="secondary" class="mb-2 mx-3" @click="restart">
       <b-icon icon="app" aria-label="Help" v-if="playing"></b-icon>
       <b-icon icon="play" aria-label="Help" v-else></b-icon>
     </b-button>
-    <b-button v-else size="lg" variant="secondary" class="mb-2 mx-3">
+    <b-button v-else size="lg" variant="secondary" class="mb-2 mx-3" @click="start">
       <b-icon icon="app" aria-label="Help" v-if="playing"></b-icon>
       <b-icon icon="play" aria-label="Help" v-else></b-icon>
     </b-button>
@@ -70,8 +70,8 @@ export default {
     },
     itemsForList() {
       return this.ebook.slice(
-        (this.currentPage - 1) * this.perPage,
-        this.currentPage * this.perPage,
+        (this.nowPage - 1) * this.perPage,
+        this.nowPage * this.perPage,
       );
     },
     queries() {
@@ -86,8 +86,10 @@ export default {
       audio: new Audio(),
       index: 0,
       playing: false,
+      is_paged: true,
+      direction: '',
       perPage: 3,
-      currentPage: 0,
+      nowPage: 0,
     }
   },
   methods: {
@@ -107,8 +109,8 @@ export default {
           this.playing = false;
           this.start()
           if (this.index % 3 == 0) {
-            if (this.currentPage != (this.pages+2)) {
-              this.currentPage = this.currentPage + 1
+            if (this.nowPage != (this.pages+2)) {
+              this.nowPage = this.nowPage + 1
               this.$refs.Book.nextPage()
             }
           }
@@ -126,40 +128,70 @@ export default {
     toPrev() {
       this.audio.pause()
       this.playing = false
-      if (this.currentPage != 0) {
-        this.currentPage = this.currentPage - 1
+      if ((this.nowPage != 0) && this.is_paged) {
         this.$refs.Book.prevPage()
+        this.is_paged = false
+        setTimeout(function() {
+          this.nowPage = this.nowPage - 1
+          this.index = 3*(this.nowPage-1)
+        }.bind(this), 350)
       }
-      this.index = 3*(this.currentPage-1)
+
     },
     toNext() {
       this.audio.pause()
       this.playing = false
-      if (this.currentPage != (this.pages+2)) {
+      if ((this.nowPage != (this.pages+2)) && this.is_paged) {
         this.$refs.Book.nextPage()
-        this.currentPage = this.currentPage + 1
-        // this.$refs.Book.onFlipEnd = (currentPage = this.currentPage, direction = this.currentPage+1) => {
-        //   console.log('go')
-        //   this.currentPage = this.currentPage + 1
-        // }
+        this.is_paged = false
+        setTimeout(function() {
+          this.nowPage = this.nowPage + 1
+          this.index = 3*(this.nowPage-1)
+        }.bind(this), 150)
       }
-      this.index = 3*(this.currentPage-1)
     },
+    onFlipEnd() {
+      this.is_paged = true
+    },
+    restart() {
+      if (this.nowPage > this.pages) {
+        this.nowPage = 0
+        this.index = 0
+        this.$refs.Book.movePage(1)
+      } else {
+        this.toNext()
+        setTimeout(function() {
+          this.start()
+        }.bind(this), 1000)
+      }
+    }
   },
   created() {
     this.getEbook({bid: this.bid, vid: this.vid})
     this.getBookmark(this.bid)
     setTimeout(function() {
-      this.currentPage = this.bookmark.length == 0 ? 0 : this.bookmark[0].page-1 
-      this.index = 3*(this.currentPage-1)
-      this.$refs.Book.movePage(this.bookmark.length == 0 ? 1 : this.bookmark[0].page)
+      if ((this.bookmark.length == 0) || (this.bookmark[0].page == 1)) {
+        this.nowPage = 0
+        this.index = 3*(this.nowPage-1)
+        this.$refs.Book.movePage(1)
+      } else {
+        if (confirm("이어서 읽으시겠습니까?") == true) {
+          this.nowPage = this.bookmark[0].page-1 
+          this.index = 3*(this.nowPage-1)
+          this.$refs.Book.movePage(this.bookmark[0].page)
+        } else {
+          this.nowPage = 0
+          this.index = 3*(this.nowPage-1)
+          this.$refs.Book.movePage(1)
+        }
+      }
     }.bind(this), 200)
   },
   destroyed() {
-    if (this.currentPage > this.pages) {
+    if (this.nowPage > this.pages) {
       this.postBookmark({ bid: this.bid, body: { id: 1 } })
     } else {
-      this.postBookmark({ bid: this.bid, body: { id: this.currentPage + 1 } })
+      this.postBookmark({ bid: this.bid, body: { id: this.nowPage + 1 } })
     }
     this.audio.pause();
   }
