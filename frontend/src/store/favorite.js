@@ -25,7 +25,7 @@ export default {
       })
     },
     postFavorites({ rootGetters, dispatch }, bid) {
-      axios.post(SERVER.URL + SERVER.ROUTER.favorite + bid + '/', {  }, rootGetters['user/config'])
+      axios.post(SERVER.URL + SERVER.ROUTER.favorite + bid + '/', null, rootGetters['user/config'])
       .then(() => {
         dispatch('getFavorites')
         alert('추가되었습니다.')

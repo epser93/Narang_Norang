@@ -3,10 +3,10 @@
     <b-container>
       <b-row>
         <b-col cols="4" v-for="voice in voices" :key="voice.id" class="py-3">
-          <b-card bg-variant="light" style="cursor: pointer;">
-            <b-avatar size="lg" rounded="lg" :text="voice.name" variant="light"></b-avatar>
+          <b-card bg-variant="light">
+            <h5 class="mt-3"><strong>{{ voice.name }}</strong></h5>
           </b-card>
-          <div class="mt-2">
+          <div v-if="voice.id != 1" class="mt-2">
             <b-button @click="getId(voice.id)" v-b-modal.modal-voice><b-icon icon="pencil-square" scale="1.2" class="mr-2"></b-icon></b-button>
             <b-button @click="onDelete(voice.id)"><b-icon icon="trash-fill" scale="1.2"></b-icon></b-button>
           </div>
