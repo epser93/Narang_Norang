@@ -44,6 +44,7 @@
 </template>
 
 <script>
+import swal from 'sweetalert'
 import { mapState, mapActions } from 'vuex'
 
 export default {
@@ -65,9 +66,16 @@ export default {
       this.$router.push({name: name}, () => {})
     },
     onDelete() {
-      if (confirm("정말 삭제하시겠습니까??") == true) { 
-        this.delQuestion(this.question.id)
-      }
+      swal({
+        title: "정말 삭제하시겠습니까??",
+        icon: "warning",
+        buttons: ['닫기', '확인'],
+      })
+      .then((willDelete) => {
+        if (willDelete) {
+          this.delQuestion(this.question.id)
+        }
+      })
     },
     onUpdate() {
 			this.$router.push({name:'QAupdate', params:{ qid: this.question.id, update: 'update' }})
@@ -76,7 +84,7 @@ export default {
       if (this.form.content) {
         this.postReply({ index: this.question.id, body: this.form })
       } else {
-        alert("다시 확인 해주세요.")
+        swal("다시 확인 해주세요.", { buttons: '확인' })
       }
     }
   },

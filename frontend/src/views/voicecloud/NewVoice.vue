@@ -80,6 +80,7 @@
 </template>
 
 <script>
+import swal from 'sweetalert'
 import { mapState, mapActions } from 'vuex'
 
 export default {
@@ -102,13 +103,19 @@ export default {
         this.postTrain(this.form)
       }
       else {
-        alert('목소리 이름을 입력해주세요.')
+        swal('목소리 이름을 입력해주세요.', { buttons: '확인' })
       }
     },
     onRoute(vid) {
-      if (confirm("이어서 녹음 하시겠습니까?") == true) {
-        this.$router.push({name:'REC', params:{vid: vid}})
-      }
+      swal({
+        title: "이어서 녹음 하시겠습니까?",
+        buttons: ['닫기', '확인'],
+      })
+      .then((willDelete) => {
+        if (willDelete) {
+          this.$router.push({name:'REC', params:{vid: vid}})
+        }
+      })
     },
     getId(tid) {
       this.id = tid
@@ -118,9 +125,15 @@ export default {
       this.form.name = ''
     },
     onDelete(tid) {
-			if (confirm("정말 삭제하시겠습니까??") == true) { 
-        this.delTrain(tid)
-      }
+      swal({
+        title: "정말 삭제하시겠습니까??",
+        buttons: ['닫기', '확인'],
+      })
+      .then((willDelete) => {
+        if (willDelete) {
+          this.delTrain(tid)
+        }
+      })
     }
   },
   created() {

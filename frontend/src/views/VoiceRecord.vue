@@ -51,6 +51,7 @@
 </template>
 
 <script>
+import swal from 'sweetalert'
 import { mapState, mapActions } from 'vuex'
 
 export default {
@@ -73,11 +74,18 @@ export default {
   methods: {
     ...mapActions('voice', ['getScript', 'getTrain', 'postCaption', 'delCaption', 'startTrain']),
     removeRecord() {
-      if (confirm("파일을 삭제하시겠습니까??") == true) { 
-        this.delCaption({ vid: this.vid, cid: this.index + 1 })
-        this.recordings[this.index] = ''
-        this.now_record =  ''
-      }
+      swal({
+        title: "파일을 삭제하시겠습니까??",
+        icon: "warning",
+        buttons: ['닫기', '확인'],
+      })
+      .then((willDelete) => {
+        if (willDelete) {
+          this.delCaption({ vid: this.vid, cid: this.index + 1 })
+          this.recordings[this.index] = ''
+          this.now_record =  ''
+        }
+      })
     },
     onResult(data) {
       const file = new Blob([data], { type: 'audio/wav' })
@@ -87,13 +95,20 @@ export default {
     },
     toNext() {
       if ((this.index == this.total-1)&&(this.now_record != '')) {
-        if (confirm("학습을 시작하시겠습니다? \n(학습을 시작하면 더 이상 수정이 불가합니다.)") == true) {
-          this.startTrain(this.vid)
-        }
+        swal({
+          title: "학습을 시작하시겠습니다?",
+          text: "(학습을 시작하면 더 이상 수정이 불가합니다.)",
+          buttons: ['닫기', '확인'],
+        })
+        .then((willDelete) => {
+          if (willDelete) {
+            this.startTrain(this.vid)
+          }
+        })
       } else if (this.index == this.total-1) {
-        alert('마지막 대본입니다.')
+        swal('마지막 대본입니다.', { buttons: '확인' })
       } else if (this.now_record == '') {
-        alert('녹음된 파일이 없습니다')
+        swal('녹음된 파일이 없습니다', { buttons: '확인' })
       } else {
         this.index++
         this.now_record = this.recordings[this.index]
@@ -101,9 +116,9 @@ export default {
     },
     toPrev() {
       if (this.index == 0) {
-        alert('첫 번째 대본입니다.')
+        swal('첫 번째 대본입니다.', { buttons: '확인' })
       } else if (this.now_record == '') {
-        alert('녹음된 파일이 없습니다') 
+        swal('녹음된 파일이 없습니다', { buttons: '확인' }) 
       } else {
         this.index--
         this.now_record = this.recordings[this.index]

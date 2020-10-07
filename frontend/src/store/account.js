@@ -2,6 +2,7 @@ import axios from 'axios'
 import cookies from 'vue-cookies'
 import SERVER from '@/api/drf'
 import router from '@/router'
+import swal from 'sweetalert'
 
 export default {
   namespaced: true,
@@ -70,7 +71,7 @@ export default {
       axios.put(SERVER.URL + SERVER.ROUTER.user, bodydata, getters.config)
       .then(({ data }) => {
         commit('SET_USERINFO', data)
-        alert('개인정보가 수정되었습니다.')
+        swal('개인정보가 수정되었습니다.', { buttons: '확인' })
       })
       .catch((err) => {
         console.log(err)
@@ -91,7 +92,7 @@ export default {
       .then(() => {
         cookies.remove('tid')
         router.push({name:'Main'})
-        alert('결제가 완료 되었습니다.')
+        swal('결제가 완료 되었습니다.', { buttons: '확인' })
       })
       .catch((err) => {
         console.log(err)
@@ -111,7 +112,7 @@ export default {
       .then(() => {
         dispatch('getUserInfo')
         dispatch('getsubscribes')
-        alert('결제가 취소 되었습니다.')
+        swal('결제가 취소 되었습니다.', { buttons: '확인' })
       })
       .catch((err) => {
         console.log(err)

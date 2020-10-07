@@ -75,6 +75,7 @@
 </template>
 
 <script>
+import swal from 'sweetalert'
 import { mapState, mapActions } from 'vuex'
 
 export default {
@@ -113,9 +114,16 @@ export default {
 			}
 		},
 		onDelete(qid) {
-			if (confirm("정말 삭제하시겠습니까??") == true) { 
-        this.delFAQ(qid)
-      }
+			swal({
+        title: "정말 삭제하시겠습니까??",
+        icon: "warning",
+        buttons: ['닫기', '확인'],
+      })
+      .then((willDelete) => {
+        if (willDelete) {
+          this.delFAQ(qid)
+        }
+      })
 		},
 		onCancel() {
 			this.index = ''

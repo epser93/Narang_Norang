@@ -6,7 +6,7 @@
           <b-card bg-variant="light">
             <h5 class="mt-3"><strong>{{ voice.name }}</strong></h5>
           </b-card>
-          <div v-if="voice.id != 1" class="mt-2">
+          <div v-if="(voice.id != 1) && (voice.id != 2)" class="mt-2">
             <b-button @click="getId(voice.id)" v-b-modal.modal-voice><b-icon icon="pencil-square" scale="1.2" class="mr-2"></b-icon></b-button>
             <b-button @click="onDelete(voice.id)"><b-icon icon="trash-fill" scale="1.2"></b-icon></b-button>
           </div>
@@ -45,6 +45,7 @@
 </template>
 
 <script>
+import swal from 'sweetalert'
 import { mapState, mapActions } from 'vuex'
 
 export default {
@@ -70,9 +71,16 @@ export default {
       this.form.name = ''
     },
     onDelete(vid) {
-			if (confirm("정말 삭제하시겠습니까??") == true) { 
-        this.delVoice(vid)
-      }
+      swal({
+        title: "정말 삭제하시겠습니까??",
+        icon: "warning",
+        buttons: ['닫기', '확인'],
+      })
+      .then((willDelete) => {
+        if (willDelete) {
+          this.delVoice(vid)
+        }
+      })
     }
   },
   created() {
