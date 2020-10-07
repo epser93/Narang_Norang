@@ -83,7 +83,7 @@ export default {
         })
 		},
 		startTrain({ rootGetters }, vid) {
-			axios.post(SERVER.URL + SERVER.ROUTER.train + vid + '/', {  }, rootGetters['user/config'])
+			axios.post(SERVER.URL + SERVER.ROUTER.train + vid + '/', null, rootGetters['user/config'])
         .then(() => {
           router.push({name:'Voice'})
 					alert('학습을 시작합니다.')
@@ -139,5 +139,15 @@ export default {
           console.log(err)
         })
 		},
+		postVoice({ rootGetters, dispatch }, vid) {
+			axios.post(SERVER.URL + SERVER.ROUTER.voice + 'voice/' + vid + '/', null, rootGetters['user/config'])
+			.then(() => {
+        dispatch('user/getUserInfo', null, { root: true })
+        alert('현재 목소리가 변경되었습니다.')
+			})
+			.catch((err) => {
+				console.log(err)
+			})
+		}
 	}
 }

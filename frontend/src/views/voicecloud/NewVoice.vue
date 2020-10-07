@@ -3,8 +3,8 @@
     <b-container>
       <b-row>
         <b-col cols="4" v-for="train in trains" :key="train.id" class="py-3">
-          <b-card bg-variant="light" style="cursor: pointer;">
-            <b-avatar size="lg" rounded="lg" :text="train.name" variant="light"></b-avatar>
+          <b-card bg-variant="light">
+            <h5 class="mt-3"><strong>{{ train.name }}</strong></h5>
           </b-card>
           <div v-if="!train.is_train" class="mt-2">
             <b-button @click="onRoute(train.id)"><b-icon icon="mic-fill" scale="1.2" class="mr-2"></b-icon></b-button>

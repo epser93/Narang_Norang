@@ -50,11 +50,11 @@
         <!-- Voice Notice Area -->
         <b-card-body class="p-2">
           <b-container>
-            <strong>현재 목소리 - 기본 아나운서</strong>
+            <strong>현재 목소리 - {{ current_voice.name }}</strong>
             <b-row>
-              <b-col cols="6" class="py-3">
-                <b-card bg-variant="info">
-                  <b-avatar size="lg" rounded="lg" text="기본" variant="info"></b-avatar>
+              <b-col cols="6" v-for="voice in voices" :key="voice.id" class="py-3">
+                <b-card :bg-variant="voice.id == current_voice.id ? 'info' : 'secondary'" @click="onChangeVoice(voice.id)" style="cursor: pointer;">
+                  <p class="mt-3" style="color: white;"><strong>{{ voice.name }}</strong></p>
                 </b-card>
               </b-col>
               <b-col cols="6" class="py-3">
@@ -98,6 +98,9 @@
     </b-modal>
 
     <b-modal id="kakao-membership" scrollable title="나랑노랑 이용내역" v-if="subscribes">
+      <div v-if="(usage_history == 0)">
+        <h4>이용 내역이 없습니다.</h4>
+      </div>
       <div v-for="subscribe in subscribes" :key="subscribe.id" >
         <hr>
         <p><strong>결제가 완료 되었습니다.</strong></p>
@@ -123,10 +126,22 @@ import { mapState, mapActions } from 'vuex'
 export default {
   name: "TopNavigation",
   computed: {
-    ...mapState('user', ['userInfo', 'subscribes'])
+    ...mapState('user', ['userInfo', 'subscribes']),
+    ...mapState('voice', ['voices']),
+    usage_history() {
+      return this.subscribes.length
+    },
+    current_voice()  {
+      for(var i=0; i<this.voices.length; i++) {
+        if(this.voices[i].id == this.userInfo.current_voice) {
+          return this.voices[i]
+        } 
+      } return { name: '' }
+    }
   },
   methods: {
     ...mapActions('user', ['getUserInfo', 'startKakaoPay', 'getsubscribes', 'delsubscribe']),
+    ...mapActions('voice', ['getVoices', 'postVoice']),
     onRoute(name) {
       this.$router.push({name: name}, () => {})
     },
@@ -148,10 +163,20 @@ export default {
       if (confirm("정말 결제를 취소하시겠습니까??") == true) { 
         this.delsubscribe({ tid: tid})
       }
-    }
+    },
+    onChangeVoice(vid) {
+      if (confirm("목소리를 변경하시겠습니까??") == true) { 
+        if (this.current_voice.id == vid) {
+          alert("현재 목소리로는 변경할 수 없습니다.")
+        } else {
+          this.postVoice(vid)
+        }
+      }
+    },
   },
   created() {
     this.getUserInfo()
+    this.getVoices()
   }
 }
 </script>
