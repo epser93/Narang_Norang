@@ -95,7 +95,7 @@ def kakaopay_info(request):
 
 class SubscribeInfo(APIView):
     def get(self, request):
-        subscribes = Subscribe.objects.all()
+        subscribes = Subscribe.objects.filter(user=request.user)
         serializer = SubscribeSerializer(subscribes, many=True)
         return Response(serializer.data)
 
