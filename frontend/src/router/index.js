@@ -72,7 +72,7 @@ const routes = [
     component: () => import('@/views/VoiceRecord')
   },
   {
-    path: '/ebook/:bid',
+    path: '/ebook/:bid/:bname/:vid',
     name: 'Ebook',
     component: () => import('@/views/Ebook.vue')
   },

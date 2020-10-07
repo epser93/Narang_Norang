@@ -4,7 +4,7 @@
       <booklet :displayPageNumber="false" :enableSelectPage="false" :displayButton="false" ref="Book">
         <div class="page cover">
           <article class="content" style="background-color: #bca98a;">
-            <h1>흥부와 놀부</h1>
+            <h1>{{ book_name }}</h1>
           </article>
         </div>
         <div class="page" v-for="(page, i) in pages" :key="i">
@@ -32,7 +32,11 @@
       <b-icon icon="arrow-left" aria-label="Help"></b-icon>
     </b-button>
   
-    <b-button size="lg" variant="secondary" class="mb-2 mx-3"  @click="start">
+    <b-button v-if="currentPage != 0" size="lg" variant="secondary" class="mb-2 mx-3"  @click="start">
+      <b-icon icon="app" aria-label="Help" v-if="playing"></b-icon>
+      <b-icon icon="play" aria-label="Help" v-else></b-icon>
+    </b-button>
+    <b-button v-else size="lg" variant="secondary" class="mb-2 mx-3">
       <b-icon icon="app" aria-label="Help" v-if="playing"></b-icon>
       <b-icon icon="play" aria-label="Help" v-else></b-icon>
     </b-button>
@@ -71,7 +75,9 @@ export default {
   },
   data() {
     return {
-      bid : this.$route.params.bid,
+      bid: this.$route.params.bid,
+      vid: this.$route.params.vid,
+      book_name: this.$route.params.bname,
       audio: new Audio(),
       index: 0,
       playing: false,
@@ -80,7 +86,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('book', ['getEbook']),
+    ...mapActions('book', ['getEbook', ]),
     ...mapActions('bookmark', ['getBookmark', 'postBookmark']),
     start() {
       if(this.playing) {
@@ -95,6 +101,12 @@ export default {
           this.index++;
           this.playing = false;
           this.start()
+          if (this.index % 3 == 0) {
+            if (this.currentPage != (this.pages+2)) {
+              this.currentPage = this.currentPage + 1
+              this.$refs.Book.nextPage()
+            }
+          }
         }
       }
     },
@@ -107,33 +119,36 @@ export default {
       this.start()
     },
     toPrev() {
+      this.audio.pause()
+      this.playing = false
       if (this.currentPage != 0) {
         this.currentPage = this.currentPage - 1
         this.$refs.Book.prevPage()
       }
       this.index = 3*(this.currentPage-1)
-      this.audio.pause();
-      this.playing = false;
     },
     toNext() {
+      this.audio.pause()
+      this.playing = false
       if (this.currentPage != (this.pages+2)) {
         this.currentPage = this.currentPage + 1
         this.$refs.Book.nextPage()
       }
       this.index = 3*(this.currentPage-1)
-      this.audio.pause();
-      this.playing = false;
     },
   },
   created() {
-    this.getEbook(this.bid)
+    this.getEbook({bid: this.bid, vid: this.vid})
     this.getBookmark(this.bid)
     setTimeout(function() {
-      this.currentPage = 0
-    }.bind(this), 150)
+      this.currentPage = this.bookmark[0].page-1
+      this.index = 3*(this.currentPage-1)
+      this.$refs.Book.movePage(this.bookmark[0].page)
+    }.bind(this), 200)
   },
   destroyed() {
-    this.postBookmark({ bid: this.bid, body: { id: this.currentPage } })
+    this.postBookmark({ bid: this.bid, body: { id: this.currentPage + 1 } })
+    this.audio.pause();
   }
 }
 </script>

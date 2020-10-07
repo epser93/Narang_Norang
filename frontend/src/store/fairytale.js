@@ -41,8 +41,8 @@ export default {
           console.log(err)
         })
     },
-    getEbook({ rootGetters , commit }, bid) {
-      axios.get(SERVER.URL + SERVER.ROUTER.book + bid + '/voice/1/', rootGetters['user/config'])
+    getEbook({ rootGetters , commit }, { bid, vid }) {
+      axios.get(SERVER.URL + SERVER.ROUTER.book + bid + '/voice/' + vid + '/', rootGetters['user/config'])
         .then(({ data }) => {
           commit('SET_EBOOK', data)
         })
