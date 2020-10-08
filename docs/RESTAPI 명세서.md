@@ -4,18 +4,16 @@
 | ------------------------------------------------- | ----------------------------------------------- | ---------------------------------- | -------------------- | -------------------- |
 | accounts/login/                                   |                                                 | 로그인                             |                      |                      |
 | accounts/user/                                    | 유저정보                                        |                                    | 유저정보수정         |                      |
-| accounts/writer/                                  | 작가정보(개인)                                  | 작가생성                           | 작가수정             | 작가삭제             |
-| accounts/writer/<writer_id>/                      | 작가정보                                        |                                    |                      |                      |
 | accounts/subscribe/                               | 정액권정보                                      | 정액권결제                         |                      | 정액권 환불          |
-| books/fairytale/                                  | 전체리스트                                      | 동화생성(작가만)                   |                      |                      |
+| books/fairytale/                                  | 전체리스트                                      |                                    |                      |                      |
 | books/fairytale/search/<fairytale_name>/          | 동화책 검색                                     |                                    |                      |                      |
-| books/fairytale/<book_id>                         | 동화상세정보                                    |                                    | 동화수정(작가만)     |                      |
+| books/fairytale/<book_id>                         | 동화상세정보                                    |                                    |                      |                      |
 | books/fairytale/<book_id>/voice/<voice_model>/    | 동화책 대본과 소리데이터 가져오기               |                                    |                      |                      |
 | books/genre/                                      | 장르목록                                        | 장르생성(관리자)                   | 장르수정(관리자)     | 장르삭제(관리자)     |
 | books/favorite/                                   | 즐겨찾기목록                                    |                                    |                      | 전체삭제             |
 | books/favorite/<book_id>/                         |                                                 | 즐겨찾기 생성                      |                      | 즐겨찾기 삭제        |
 | books/bookmark/                                   | 내가 읽은 책 목록                               |                                    |                      |                      |
-| books/bookmark/<book_id>/                         | 페이지정보 읽기                                 | 페이지 정보 등록                   |                      |                      |
+| books/bookmark/<book_id>/                         | 북마크 조회                                     | 북마크 등록                        |                      | 북마크 삭제          |
 | service_center/FaQ/                               | 자주묻는 리스트                                 | 내용생성(관리자)                   |                      |                      |
 | service_center/FaQ/<faq_id>                       | 상세글 조회                                     |                                    | 내용수정(관리자)     | 내용삭제(관리자)     |
 | service_center/category/                          | 카테고리 목록                                   | 카테고리생성(관리자)               | 카테고리수정(관리자) | 카테고리삭제(관리자) |
@@ -25,20 +23,18 @@
 | voices/                                           | 내 계정에서 만든 목소리들 + 임대한 목소리(임대) |                                    |                      |                      |
 | voices/voice/<voice_id>/                          |                                                 |                                    | 목소리 정보 수정     | 목소리 삭제          |
 | voices/caption/                                   | 학습용 대본 조회                                |                                    |                      |                      |
-| voices/rent/                                      | 목소리 임대 리스트                              | 목소리 임대 생성                   |                      | 목소리 임대 삭제     |
-| voices/rent/<voice_id>/                           | 목소리 테스트 내용                              | 목소리 구매                        |                      |                      |
 | voices/train/category/                            | 내가만든 카테고리 조회                          | 카테고리 생성                      |                      |                      |
 | voices/train/category/<category_id>/              | 해당 카테고리 내용 조회                         | 모델학습시작(모두 채워져 있을때만) | 카테고리 수정        | 카테고리 삭제        |
 | voices/train/category/<category_id>/<caption_id>/ |                                                 | 녹음 목소리 추가                   |                      | 녹음 목소리 삭제     |
 
 
 
-## 요청 응답방식
+## Accounts
 
-### JWT 토큰 발급받기(POST)
+### 카카오로그인하기 - JWT 토큰 발급받기(POST)
 
 ```
-https://j3c206.p.ssafy.io/api/accounts/kakao/
+https://j3c206.p.ssafy.io/api/accounts/login/
 ```
 
 - BODY
@@ -113,33 +109,6 @@ https://j3c206.p.ssafy.io/api/accounts/user/
     "is_staff": false,
     "is_subscribed": false
 }
-```
-
-
-
-### 동화책 리스트 받아오기(GET)
-
-```
-https://j3c206.p.ssafy.io/api/books/fairytale/
-```
-
-- 응답
-
-```json
-[
-    {
-        "id": 1,
-        "title": "동화1",
-        "image": "/media/KakaoTalk_20200921_091027148.png",
-        "is_pay": true
-    },
-    {
-        "id": 2,
-        "title": "동화2",
-        "image": "/media/KakaoTalk_20200921_091027148_D0qNP8G.png",
-        "is_pay": false
-    }
-]
 ```
 
 
@@ -334,6 +303,35 @@ https://j3c206.p.ssafy.io/api/accounts/subscribes/
 
 
 
+## 동화책 관련
+
+### 동화책 리스트 받아오기(GET)
+
+```
+https://j3c206.p.ssafy.io/api/books/fairytale/
+```
+
+- 응답
+
+```json
+[
+    {
+        "id": 1,
+        "title": "동화1",
+        "image": "/media/KakaoTalk_20200921_091027148.png",
+        "is_pay": true
+    },
+    {
+        "id": 2,
+        "title": "동화2",
+        "image": "/media/KakaoTalk_20200921_091027148_D0qNP8G.png",
+        "is_pay": false
+    }
+]
+```
+
+
+
 ### 동화책 검색 (GET)
 
 ```
@@ -352,8 +350,6 @@ https://j3c206.p.ssafy.io/api/books/fairytale/search/<str:fairytale_name>/
     }
 ]
 ```
-
-
 
 
 
@@ -484,6 +480,140 @@ https://j3c206.p.ssafy.io/api/books/genre/
 ```
 
 
+
+### Favorite 조회(GET)
+
+```
+https://j3c206.p.ssafy.io/api/books/favorite/
+```
+
+- 응답
+
+```json
+[
+    {
+        "id": 1,
+        "title": "동화1",
+        "image": "/media/KakaoTalk_20200921_091027148.png"
+    }
+]
+```
+
+
+
+### Favorite 추가(POST)
+
+```
+https://j3c206.p.ssafy.io/api/books/favorite/<int:id>/
+```
+
+- 응답
+
+```json
+"추가완료"
+or
+"이미 추가되어 있습니다."
+```
+
+
+
+### Favorite 삭제(DELETE)
+
+```
+https://j3c206.p.ssafy.io/api/books/favorite/<int:id>/
+```
+
+- 응답
+
+```json
+"삭제완료"
+or
+"이미 삭제되어 있습니다."
+```
+
+### 북마크한 동화 목록 가져오기 (GET)
+
+```
+https://j3c206.p.ssafy.io/api/books/bookmark/
+```
+
+- 응답
+
+```json
+[
+    {
+        "id": 1,
+        "fairytale": {
+            "id": 1,
+            "title": "햇님과 바람의 내기",
+            "image": "/media/KakaoTalk_20200921_091027148.png"
+        }
+    }
+]
+```
+
+
+
+### 북마크 가져오기 (GET)
+
+```
+https://j3c206.p.ssafy.io/api/books/bookmark/<int:book_id>
+```
+
+- 응답
+
+```json
+[
+    {
+        "id": 1,
+        "page": 2
+    }
+]
+```
+
+> page가 북마크 번호입니다!
+
+
+
+### 북마크 저장하기 (POST)
+
+```
+https://j3c206.p.ssafy.io/api/books/bookmark/<int:book_id>
+```
+
+- body
+
+```json
+{
+    "id" : 2
+}
+```
+
+> 해당 대본 id 번호를 보내주시면 됩니다.
+
+- 응답
+
+```json
+'북마크 등록 완료'
+```
+
+
+
+### 북마크 삭제하기 (DELETE)
+
+```
+https://j3c206.p.ssafy.io/api/books/bookmark/<int:book_id>
+```
+
+- 응답
+
+```json
+'삭제완료'
+```
+
+
+
+## 고객센터 - Q&A
 
 ### Q&A 리스트 가져오기(GET)
 
@@ -629,57 +759,73 @@ https://j3c206.p.ssafy.io/api/service_center/QnA/<int:id>/
 
 
 
-### Favorite 조회(GET)
+### QnA 답글 생성 (POST)
 
 ```
-https://j3c206.p.ssafy.io/api/books/favorite/
+https://j3c206.p.ssafy.io/api/service_center/QnA/<int:qna_id>/reply
+```
+
+- body
+
+```json
+{
+    "content": "답글",
+}
 ```
 
 - 응답
 
 ```json
-[
-    {
-        "id": 1,
-        "title": "동화1",
-        "image": "/media/KakaoTalk_20200921_091027148.png"
-    }
-]
+{
+    "id": 14,
+    "content": "답글",
+    "create_date": "2020-09-24"
+}
 ```
 
 
 
-### Favorite 추가(POST)
+### QnA 답글 수정 (PUT)
 
 ```
-https://j3c206.p.ssafy.io/api/books/favorite/<int:id>/
+https://j3c206.p.ssafy.io/api/service_center/QnA/<int:qna_id>/reply
+```
+
+- body
+
+```json
+{
+    "content": "수정"
+}
 ```
 
 - 응답
 
 ```json
-"추가완료"
-or
-"이미 추가되어 있습니다."
+{
+    "id": 14,
+    "content": "수정",
+    "create_date": "2020-09-24"
+}
 ```
 
 
 
-### Favorite 삭제(DELETE)
+### QnA 답글 삭제 (DELETE)
 
 ```
-https://j3c206.p.ssafy.io/api/books/favorite/<int:id>/
+https://j3c206.p.ssafy.io/api/service_center/QnA/<int:qna_id>/reply
 ```
 
 - 응답
 
 ```json
 "삭제완료"
-or
-"이미 삭제되어 있습니다."
 ```
 
 
+
+## 고객센터 - FaQ
 
 ### FaQ 리스트 전체 조회(GET)
 
@@ -811,71 +957,7 @@ https://j3c206.p.ssafy.io/api/service_center/FaQ/<int:faq_id>/
 
 
 
-### QnA 답글 생성 (POST)
-
-```
-https://j3c206.p.ssafy.io/api/service_center/QnA/<int:qna_id>/reply
-```
-
-- body
-
-```json
-{
-    "content": "답글",
-}
-```
-
-- 응답
-
-```json
-{
-    "id": 14,
-    "content": "답글",
-    "create_date": "2020-09-24"
-}
-```
-
-
-
-### QnA 답글 수정 (PUT)
-
-```
-https://j3c206.p.ssafy.io/api/service_center/QnA/<int:qna_id>/reply
-```
-
-- body
-
-```json
-{
-    "content": "수정"
-}
-```
-
-- 응답
-
-```json
-{
-    "id": 14,
-    "content": "수정",
-    "create_date": "2020-09-24"
-}
-```
-
-
-
-### QnA 답글 삭제 (DELETE)
-
-```
-https://j3c206.p.ssafy.io/api/service_center/QnA/<int:qna_id>/reply
-```
-
-- 응답
-
-```json
-"삭제완료"
-```
-
-
+## 녹음, 학습 관련
 
 ### 학습용 대본 불러오기 (GET)
 
@@ -1038,6 +1120,8 @@ https://j3c206.p.ssafy.io/api/voices/train/category/<int:category_id>
 
 
 
+## 훈련된 목소리 모델 관련
+
 ### 사용 가능 목소리 모델 리스트 조회 (GET)
 
 ```
@@ -1116,75 +1200,7 @@ https://j3c206.p.ssafy.io/api/voices/voice/<int:voice_id>/
 
 
 
-### 북마크한 동화 목록 가져오기 (GET)
-
-```
-https://j3c206.p.ssafy.io/api/books/bookmark/
-```
-
-- 응답
-
-```json
-[
-    {
-        "id": 1,
-        "fairytale": {
-            "id": 1,
-            "title": "햇님과 바람의 내기",
-            "image": "/media/KakaoTalk_20200921_091027148.png"
-        }
-    }
-]
-```
-
-
-
-
-
-### 북마크 가져오기 (GET)
-
-```
-https://j3c206.p.ssafy.io/api/books/bookmark/<int:book_id>
-```
-
-- 응답
-
-```json
-[
-    {
-        "id": 1,
-        "page": 2
-    }
-]
-```
-
-> page가 북마크 번호입니다!
-
-
-
-### 북마크 저장하기 (POST)
-
-```
-https://j3c206.p.ssafy.io/api/books/bookmark/<int:book_id>
-```
-
-- body
-
-```json
-{
-    "id" : 2
-}
-```
-
-> 해당 대본 id 번호를 보내주시면 됩니다.
-
-- 응답
-
-```json
-'북마크 등록 완료'
-```
-
-
+## 목소리 음성 파일
 
 ### 목소리 음성 파일 추가하기 (POST)
 
