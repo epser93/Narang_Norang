@@ -13,7 +13,7 @@
 | books/favorite/                                   | 즐겨찾기목록                                    |                                    |                      | 전체삭제             |
 | books/favorite/<book_id>/                         |                                                 | 즐겨찾기 생성                      |                      | 즐겨찾기 삭제        |
 | books/bookmark/                                   | 내가 읽은 책 목록                               |                                    |                      |                      |
-| books/bookmark/<book_id>/                         | 페이지정보 읽기                                 | 페이지 정보 등록                   |                      |                      |
+| books/bookmark/<book_id>/                         | 북마크 조회                                     | 북마크 등록                        |                      | 북마크 삭제          |
 | service_center/FaQ/                               | 자주묻는 리스트                                 | 내용생성(관리자)                   |                      |                      |
 | service_center/FaQ/<faq_id>                       | 상세글 조회                                     |                                    | 내용수정(관리자)     | 내용삭제(관리자)     |
 | service_center/category/                          | 카테고리 목록                                   | 카테고리생성(관리자)               | 카테고리수정(관리자) | 카테고리삭제(관리자) |
@@ -595,6 +595,20 @@ https://j3c206.p.ssafy.io/api/books/bookmark/<int:book_id>
 
 ```json
 '북마크 등록 완료'
+```
+
+
+
+### 북마크 삭제하기 (DELETE)
+
+```
+https://j3c206.p.ssafy.io/api/books/bookmark/<int:book_id>
+```
+
+- 응답
+
+```json
+'삭제완료'
 ```
 
 

@@ -95,7 +95,6 @@ fs = OverwriteStorage()
 
 # 삭제예정
 class AddVoiceStorage(APIView):
-
     def post(self, request, f_id, s_id, m_id):
         fairytale = Fairytale.objects.get(pk=f_id)
         scenario = Scenario.objects.get(pk=s_id)
@@ -114,6 +113,8 @@ class AddVoiceStorage(APIView):
         voice_storage.save()
 
         return Response('ok')
+
+
 class BookMarkAPI(APIView):
     def get(self, request):
         bookmarks = BookMark.objects.filter(user=request.user)
@@ -137,6 +138,11 @@ class BookmarkDetailAPI(APIView):
         bookmark = BookMark.objects.filter(fairytale=pk).filter(user=request.user)
         serializer = BookmarkDetailSerializer(bookmark, many=True)
         return Response(serializer.data)
+
+    def delete(self, request, pk):
+        bookmark = BookMark.objects.filter(fairytale=pk).filter(user=request.user)
+        bookmark.delete()
+        return Response("삭제완료")
 
 
 class FairytailSearch(APIView):
