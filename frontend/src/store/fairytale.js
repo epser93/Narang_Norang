@@ -41,8 +41,8 @@ export default {
           console.log(err)
         })
     },
-    getEbook({ rootGetters , commit }, bid) {
-      axios.get(SERVER.URL + SERVER.ROUTER.book + bid + '/voice/1/', rootGetters['user/config'])
+    getEbook({ rootGetters , commit }, { bid, vid }) {
+      axios.get(SERVER.URL + SERVER.ROUTER.book + bid + '/voice/' + vid + '/', rootGetters['user/config'])
         .then(({ data }) => {
           commit('SET_EBOOK', data)
         })
@@ -50,6 +50,15 @@ export default {
           console.log(err)
         })
     },
+    getSearch({ rootGetters , commit }, search) {
+      axios.get(SERVER.URL + SERVER.ROUTER.search + search + '/', rootGetters['user/config'])
+        .then(({ data }) => {
+          commit('SET_FAIRYTALES', data)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    }
   },
 
 }

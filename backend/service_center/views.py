@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -6,7 +5,6 @@ from .models import QnA, FaQ, QnaReply
 from .serializers import QnASerializer, FaQSerializer, QnAReplySerializer
 
 
-# Create your views here.
 class QnAList(APIView):
     def get(self, request, format=None):
         if request.user.is_staff:
@@ -25,7 +23,10 @@ class QnAList(APIView):
 
 class QnADetail(APIView):
     def get(self, request, pk):
-        qna = QnA.objects.get(pk=pk, user=request.user)
+        if request.user.is_staff:
+            qna = QnA.objects.get(pk=pk)
+        else:
+            qna = QnA.objects.get(pk=pk, user=request.user)
         serializer = QnASerializer(qna)
         return Response(serializer.data)
 
@@ -37,10 +38,14 @@ class QnADetail(APIView):
 
     def delete(self, request, pk):
         qna = QnA.objects.get(pk=pk)
+        if qna.is_answer:
+            return Response("답변이 달린글은 삭제 불가능 합니다.", status=status.HTTP_400_BAD_REQUEST) 
+
         if request.user.is_staff or request.user == qna.user:
             qna.delete()
             return Response("삭제완료", status=status.HTTP_200_OK)
         return Response("권한없음", status=status.HTTP_403_FORBIDDEN)
+
 
 class FaQList(APIView):
     def get(self, request):
@@ -77,6 +82,7 @@ class FaQDetail(APIView):
             faq.delete()
             return Response("삭제완료", status=status.HTTP_200_OK)
         return Response("권한없음", status=status.HTTP_403_FORBIDDEN)
+
 
 class QnAReply(APIView):
     def post(self, request, pk):

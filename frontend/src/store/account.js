@@ -1,6 +1,8 @@
 import axios from 'axios'
 import cookies from 'vue-cookies'
 import SERVER from '@/api/drf'
+import router from '@/router'
+import swal from 'sweetalert'
 
 export default {
   namespaced: true,
@@ -9,7 +11,7 @@ export default {
     authToken: cookies.get('auth-token'),
     // 1. 받아올 거 선언
     userInfo: '',
-    changedUserInfo: '',
+    subscribes: ''
   },
 
   getters: {
@@ -25,6 +27,14 @@ export default {
       }
     },
 
+    formconfig(state) {
+      return {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'Authorization': `JWT ${state.authToken}`
+        }
+      }
+    },
   },
   // 2. 받아올 정보를 저장할 mutations 설정
   // state 받아올 거니까 써주기
@@ -35,6 +45,9 @@ export default {
     },
     SET_USERINFO(state, payload) {
       state.userInfo = payload
+    },
+    SET_SUBSCRIBES(state, payload) {
+      state.subscribes = payload
     },
   },
 
@@ -58,10 +71,63 @@ export default {
       axios.put(SERVER.URL + SERVER.ROUTER.user, bodydata, getters.config)
       .then(({ data }) => {
         commit('SET_USERINFO', data)
+        swal('개인정보가 수정되었습니다.', { buttons: '확인' })
       })
       .catch((err) => {
         console.log(err)
       })
-    }
+    },
+    startKakaoPay({ getters }) {
+      axios.post(SERVER.URL + SERVER.ROUTER.kakaopay, null, getters.config)
+      .then(({ data }) => {
+        cookies.set('tid', data.tid)
+        location.href = data.next_redirect_pc_url
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    },
+    progressKakaoPay({ getters }, body) {
+      axios.post(SERVER.URL + SERVER.ROUTER.kakaopay + 'approval/', body, getters.config)
+      .then(() => {
+        cookies.remove('tid')
+        router.push({name:'Main'})
+        swal({
+          title: "결제가 완료되었습니다.", 
+          text: "나랑노랑",
+          icon: "success",
+          buttons: '확인'
+        })
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    },
+    getsubscribes({ getters, commit }) {
+      axios.get(SERVER.URL + SERVER.ROUTER.subscribe, getters.config)
+      .then(({ data }) => {
+        commit('SET_SUBSCRIBES', data)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    },
+    delsubscribe({ getters, dispatch }, tid) {
+      axios.post(SERVER.URL + SERVER.ROUTER.kakaopay + 'refund/', tid, getters.config)
+      .then(() => {
+        dispatch('getUserInfo')
+        dispatch('getsubscribes')
+        swal({
+          title: "결제가 취소되었습니다.", 
+          text: "나랑노랑",
+          icon: "info",
+          buttons: '확인'
+        })
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    },
+    
   },
 }

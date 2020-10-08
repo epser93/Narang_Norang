@@ -34,8 +34,7 @@
             <img class="animated pulse infinite" src="@/assets/img/나랑노랑.png" alt="나랑노랑 로고" style="width: 95%;">
           </div>
           <div class="mt-4">
-            <img src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg" width="222" @click="loginWithKakao()" />
-            <!-- <button class="api-btn" @click="kakaoLogout()">로그아웃</button> -->
+            <img src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg" class="login-img" width="222" @click="loginWithKakao()" />
           </div>
         </div>
       </div>
@@ -69,17 +68,16 @@
 </template>
 
 <script>
-// import About from './About.vue'
 import { KinesisContainer, KinesisElement } from 'vue-kinesis'
 import { mapGetters } from 'vuex'
 import axios from 'axios'
 import cookies from 'vue-cookies'
+import swal from 'sweetalert'
 import SERVER from '@/api/drf'
 
 export default {
   name: 'Login',
   components: {
-    // About,
     KinesisContainer,
     KinesisElement,
   },
@@ -94,8 +92,15 @@ export default {
           axios.post(SERVER.URL + SERVER.ROUTER.login,{ "access_token": access_token })
             .then(({ data }) => {
               cookies.set('auth-token', data.token)
-              window.location.reload(true)
-              alert(data.user.username + "님 환영합니다.")
+              swal({
+                title: (data.user.first_name == '') ? data.user.username + '님 환영합니다!!' : data.user.first_name + '님 환영합니다!!', 
+                text: "나랑노랑",
+                icon: "success",
+                buttons: '확인'
+              })
+              setTimeout(function() {
+                window.location.reload(true)
+              }.bind(this), 1200)
             })
         },
         fail(err) {
@@ -104,15 +109,6 @@ export default {
       })
 
     },
-    // kakaoLogout() {
-    //   if (!window.Kakao.Auth.getAccessToken()) {
-    //     console.log('Not logged in.')
-    //     return
-    //   }
-    //   window.Kakao.Auth.logout(function() {
-    //     console.log('logout ok\naccess token -> ' + window.Kakao.Auth.getAccessToken())
-    //   })
-    // }
   },
 }
 </script>
@@ -122,7 +118,18 @@ export default {
   margin-top: 60px;
 }
 
-.kakao-login {
+.login-img {
   cursor: pointer;
+}
+
+@keyframes pulse {
+  from {
+    background-color: transparent;
+    transform: scale(.8)
+  }
+  to {
+    background-color: transparent;
+    transform: scale(.9)
+  }
 }
 </style>

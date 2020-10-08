@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div v-if="userInfo" class="container">
     <b-row class="justify-content-lg-center">
       <b-col col lg="8">
         <!-- email 잠금 필요 -->
@@ -13,11 +13,11 @@
               id="input-1"
               v-model="form.name"
               type="text"
-              required
+              disabled
             ></b-form-input>
           </b-form-group>
 
-          <b-form-group id="input-group-2" label="Your Name:" label-for="input-2">
+          <b-form-group id="input-group-2" label="별명:" label-for="input-2">
             <b-form-input
               id="input-2"
               v-model="form.nickname"
@@ -25,7 +25,7 @@
             ></b-form-input>
           </b-form-group>
 
-          <b-button variant="info" @click="onChange()">Submit</b-button>
+          <b-button variant="info" @click="onChange()">확인</b-button>
         </b-form>
       </b-col>
     </b-row>
@@ -50,13 +50,12 @@ export default {
     }
   },
   methods: {
-    ...mapActions('user', ['getUserInfo', 'putUserInfo']),
+    ...mapActions('user', [ 'putUserInfo']),
     onChange() {
       this.putUserInfo(this.form.nickname)
     },
   },
   created() {
-    this.getUserInfo()
     setTimeout(function() {
       this.form.name = this.userInfo.username
       this.form.nickname = this.userInfo.first_name

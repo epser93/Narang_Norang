@@ -9,18 +9,18 @@
 		<table class="table table-hover">
 			<thead>
 				<tr>
-					<th scope="col" cols="2">#</th>
+					<th scope="col" cols="1">#</th>
 					<th scope="col" cols="5">제목</th>
-					<th scope="col" cols="3">날짜</th>
-					<th scope="col" cols="2">답변</th>
+					<th scope="col" cols="2">날짜</th>
+					<th scope="col" cols="1">답변</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr v-for="(question, i) in questions" :key="question.id" @click="onDetail(question.id)">
-					<th scope="row">{{i+1}}</th>
+					<td scope="row">{{i+1}}</td>
 					<td>{{question.title}}</td>
 					<td>{{question.create_date}}</td>
-					<td>{{(question.is_answer) ? "완료" : "대기"}}</td>
+					<td>{{(question.is_answer) ? "답변완료" : "미답변"}}</td>
 				</tr>
 			</tbody>
 		</table>
@@ -56,5 +56,7 @@ export default {
 </script>
 
 <style>
-
+td {
+	cursor: pointer;
+}
 </style>

@@ -6,12 +6,7 @@ annotations/
 train2014/
 augmentation/
 checkpoints/train/
-
-
-## dataset ##
-tts/Tacotron-Korean/datasets/kss/
-tts/Tacotron-Korean/logs-tacotron/
-tts/Tacotron-Korean/training/
+file/
 
 
 # Created by https://www.toptal.com/developers/gitignore/api/django,python,visualstudiocode,venv
