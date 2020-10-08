@@ -41,7 +41,7 @@
           <hr>
         </b-card-text>
         <b-card-text v-if="userInfo.is_subscribed" class="my-2">
-          <span class="mr-auto" v-b-modal.kakao-membership>나랑노랑 멤버십</span>
+          <span class="mr-auto" @click="getsubscribes" v-b-modal.kakao-membership>나랑노랑 멤버십</span>
           <hr>
         </b-card-text>
         <b-card-text v-else class="my-2">
