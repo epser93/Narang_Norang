@@ -3,7 +3,7 @@ from . import views
 
 urlpatterns = [
     path('user/', views.UserAPI.as_view()),
-    path('kakao/', views.KakaoLogin.as_view()),
+    path('login/', views.KakaoLogin.as_view()),
     path('kakaopay/', views.kakaopay),
     path('kakaopay/approval/', views.kakaopay_approval),
     path('kakaopay/info/', views.kakaopay_info),
