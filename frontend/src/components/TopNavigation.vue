@@ -154,7 +154,8 @@ export default {
         router.push({name: 'Login'})
         swal({
           title: "다음에 또 만나요.",
-          text: "나랑노랑"
+          text: "나랑노랑",
+          buttons: '확인'
         })
         return
       }
@@ -164,7 +165,8 @@ export default {
         router.push({name: 'Login'})
         swal({
           title: "다음에 또 만나요.",
-          text: "나랑노랑"
+          text: "나랑노랑",
+          buttons: '확인'
         })
       })
     },

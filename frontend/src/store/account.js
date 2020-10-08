@@ -92,7 +92,12 @@ export default {
       .then(() => {
         cookies.remove('tid')
         router.push({name:'Main'})
-        swal('결제가 완료 되었습니다.', { buttons: '확인' })
+        swal({
+          title: "결제가 완료되었습니다.", 
+          text: "나랑노랑",
+          icon: "success",
+          buttons: '확인'
+        })
       })
       .catch((err) => {
         console.log(err)

@@ -35,7 +35,7 @@
       </form>
 
       <template v-slot:modal-footer="{ cancel, ok }">
-        <b-button @click="cancel();" variant="outline-secondary">닫기</b-button>
+        <b-button @click="cancel(); onCancle();" variant="outline-secondary">닫기</b-button>
         <b-button @click="ok(); onUpdate();" variant="outline-primary">수정</b-button>
       </template>
     
@@ -81,7 +81,10 @@ export default {
           this.delVoice(vid)
         }
       })
-    }
+    },
+    onCancle() {
+      this.form.name = ''
+    },
   },
   created() {
     this.getVoices()

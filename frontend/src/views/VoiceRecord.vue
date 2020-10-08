@@ -141,7 +141,7 @@ export default {
       this.now_record = this.recordings[this.index]
       this.is_loading = false
 
-    }.bind(this), 1000)
+    }.bind(this), 1500)
   }
 }
 </script>

@@ -35,7 +35,7 @@
       </form>
 
     <template v-slot:modal-footer="{ cancel, ok }">
-      <b-button @click="cancel();" variant="outline-secondary">닫기</b-button>
+      <b-button @click="cancel(); onCancle();" variant="outline-secondary">닫기</b-button>
       <b-button @click="ok(); handleSubmit();" variant="outline-primary">수정</b-button>
     </template>
     
@@ -73,7 +73,7 @@
       </b-button>
 
       <template v-slot:modal-footer="{ cancel }">
-        <b-button @click="cancel();" variant="outline-secondary">닫기</b-button>
+        <b-button @click="cancel(); onCancle();" variant="outline-secondary">닫기</b-button>
       </template>
     </b-modal>
   </div>
@@ -127,6 +127,7 @@ export default {
     onDelete(tid) {
       swal({
         title: "정말 삭제하시겠습니까??",
+        icon: "warning",
         buttons: ['닫기', '확인'],
       })
       .then((willDelete) => {
@@ -134,7 +135,10 @@ export default {
           this.delTrain(tid)
         }
       })
-    }
+    },
+    onCancle() {
+      this.form.name = ''
+    },
   },
   created() {
     this.getTrains()
