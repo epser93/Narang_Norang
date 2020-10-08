@@ -72,6 +72,7 @@ import { KinesisContainer, KinesisElement } from 'vue-kinesis'
 import { mapGetters } from 'vuex'
 import axios from 'axios'
 import cookies from 'vue-cookies'
+import swal from 'sweetalert'
 import SERVER from '@/api/drf'
 
 export default {
@@ -91,8 +92,14 @@ export default {
           axios.post(SERVER.URL + SERVER.ROUTER.login,{ "access_token": access_token })
             .then(({ data }) => {
               cookies.set('auth-token', data.token)
-              window.location.reload(true)
-              alert((data.user.first_name == '') ? data.user.username : data.user.first_name + "님 환영합니다.")
+              swal({
+                title: (data.user.first_name == '') ? data.user.username + '님 환영합니다!!' : data.user.first_name + '님 환영합니다!!', 
+                text: "나랑노랑",
+                icon: "success"
+              })
+              setTimeout(function() {
+                window.location.reload(true)
+              }.bind(this), 1200)
             })
         },
         fail(err) {

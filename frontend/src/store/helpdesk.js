@@ -1,6 +1,7 @@
 import axios from 'axios'
 import SERVER from '@/api/drf'
 import router from '@/router'
+import swal from 'sweetalert'
 
 export default {
   namespaced: true,
@@ -65,7 +66,7 @@ export default {
       axios.delete(SERVER.URL + SERVER.ROUTER.qna + index + '/', rootGetters['user/config'])
         .then(() => {
           router.push({name:'QA'})
-          alert("삭제가 완료되었습니다.")
+          swal("삭제가 완료되었습니다.", { buttons: '확인' })
         })
         .catch((err) => {
           console.log(err)
@@ -75,7 +76,7 @@ export default {
       axios.post(SERVER.URL + SERVER.ROUTER.qna + index + '/reply/', body, rootGetters['user/config'])
         .then(() => {
           router.push({name:'QA'})
-          alert("답변이 완료되었습니다.")
+          swal("답변이 완료되었습니다.", { buttons: '확인' })
         })
         .catch((err) => {
           console.log(err)
@@ -94,7 +95,7 @@ export default {
       axios.post(SERVER.URL + SERVER.ROUTER.faq, body, rootGetters['user/config'])
         .then(() => {
           window.location.reload(true)
-          alert("추가가 완료되었습니다.")
+          swal("추가가 완료되었습니다.", { buttons: '확인' })
         })
         .catch((err) => {
           console.log(err)
@@ -104,7 +105,7 @@ export default {
       axios.put(SERVER.URL + SERVER.ROUTER.faq + index + '/', body, rootGetters['user/config'])
         .then(() => {
           window.location.reload(true)
-          alert("수정이 완료되었습니다.")
+          swal("수정이 완료되었습니다.", { buttons: '확인' })
         })
         .catch((err) => {
           console.log(err)
@@ -114,7 +115,7 @@ export default {
       axios.delete(SERVER.URL + SERVER.ROUTER.faq + index + '/', rootGetters['user/config'])
         .then(() => {
           window.location.reload(true)
-          alert("삭제가 완료되었습니다.")
+          swal("삭제가 완료되었습니다.", { buttons: '확인' })
         })
         .catch((err) => {
           console.log(err)

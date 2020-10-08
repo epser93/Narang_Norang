@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import swal from 'sweetalert'
 import { mapState, mapActions } from 'vuex'
 
 export default {
@@ -56,14 +57,14 @@ export default {
       if (this.form.title && this.form.content) {
         this.postQuestion(this.form)
       } else {
-        alert("다시 확인 해주세요.")
+        swal("다시 확인 해주세요.", { buttons: '확인' })
       }
     },
     onUpdate() {
       if (this.form.title && this.form.content) {
         this.putQuestion({ index: this.$route.params.qid, body: this.form})
       } else {
-        alert("다시 확인 해주세요.")
+        swal("다시 확인 해주세요.", { buttons: '확인' })
       }
     }
   },

@@ -1,5 +1,6 @@
 import axios from 'axios'
 import SERVER from '@/api/drf'
+import swal from 'sweetalert'
 
 export default {
   namespaced: true,
@@ -28,7 +29,7 @@ export default {
       axios.post(SERVER.URL + SERVER.ROUTER.favorite + bid + '/', null, rootGetters['user/config'])
       .then(() => {
         dispatch('getFavorites')
-        alert('추가되었습니다.')
+        swal('추가되었습니다.', { buttons: '확인' })
       })
       .catch((err) => {
         console.log(err)
@@ -38,7 +39,7 @@ export default {
       axios.delete(SERVER.URL + SERVER.ROUTER.favorite + bid + '/', rootGetters['user/config'])
       .then(() => {
         dispatch('getFavorites')
-        alert('삭제되었습니다.')
+        swal('삭제되었습니다.', { buttons: '확인' })
       })
       .catch((err) => {
         console.log(err)

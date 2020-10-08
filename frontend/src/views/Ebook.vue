@@ -53,6 +53,7 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 import booklet  from 'vue-booklet'
+import swal from 'sweetalert'
 
 export default {
   name: 'EBook',
@@ -175,15 +176,21 @@ export default {
         this.index = 3*(this.nowPage-1)
         this.$refs.Book.movePage(1)
       } else {
-        if (confirm("이어서 읽으시겠습니까?") == true) {
-          this.nowPage = this.bookmark[0].page-1 
-          this.index = 3*(this.nowPage-1)
-          this.$refs.Book.movePage(this.bookmark[0].page)
-        } else {
-          this.nowPage = 0
-          this.index = 3*(this.nowPage-1)
-          this.$refs.Book.movePage(1)
-        }
+        swal({
+          title: "이어서 읽으시겠습니까?",
+          buttons: ['닫기', '확인'],
+        })
+        .then((willDelete) => {
+          if (willDelete) {
+            this.nowPage = this.bookmark[0].page-1 
+            this.index = 3*(this.nowPage-1)
+            this.$refs.Book.movePage(this.bookmark[0].page)
+          } else {
+            this.nowPage = 0
+            this.index = 3*(this.nowPage-1)
+            this.$refs.Book.movePage(1)
+          }
+        })
       }
     }.bind(this), 200)
   },

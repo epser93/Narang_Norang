@@ -1,6 +1,7 @@
 import axios from 'axios'
 import SERVER from '@/api/drf'
 import router from '@/router'
+import swal from 'sweetalert'
 
 export default {
 	namespaced: true,
@@ -66,7 +67,7 @@ export default {
 			axios.put(SERVER.URL + SERVER.ROUTER.train + index + '/', body, rootGetters['user/config'])
 			.then(() => {
         dispatch('getTrains')
-        alert('목소리 이름이 수정되었습니다.')
+        swal('목소리 이름이 수정되었습니다.', { buttons: '확인' })
 			})
 			.catch((err) => {
 				console.log(err)
@@ -76,7 +77,7 @@ export default {
 			axios.delete(SERVER.URL + SERVER.ROUTER.train + vid + '/', rootGetters['user/config'])
         .then(() => {
           dispatch('getTrains')
-          alert('목소리가 삭제되었습니다.')
+          swal('목소리가 삭제되었습니다.', { buttons: '확인' })
         })
         .catch((err) => {
           console.log(err)
@@ -86,7 +87,7 @@ export default {
 			axios.post(SERVER.URL + SERVER.ROUTER.train + vid + '/', null, rootGetters['user/config'])
         .then(() => {
           router.push({name:'Voice'})
-					alert('학습을 시작합니다.')
+					swal('학습을 시작합니다.', { buttons: '확인' })
         })
         .catch((err) => {
           console.log(err)
@@ -123,7 +124,7 @@ export default {
 			axios.put(SERVER.URL + SERVER.ROUTER.voice + 'voice/' + index + '/', body, rootGetters['user/config'])
 			.then(() => {
         dispatch('getVoices')
-        alert('목소리 이름이 수정되었습니다.')
+        swal('목소리 이름이 수정되었습니다.', { buttons: '확인' })
 			})
 			.catch((err) => {
 				console.log(err)
@@ -133,7 +134,7 @@ export default {
 			axios.delete(SERVER.URL + SERVER.ROUTER.voice + 'voice/' + vid + '/', rootGetters['user/config'])
         .then(() => {
           dispatch('getVoices')
-          alert('목소리가 삭제되었습니다.')
+          swal('목소리가 삭제되었습니다.', { buttons: '확인' })
         })
         .catch((err) => {
           console.log(err)
@@ -143,7 +144,7 @@ export default {
 			axios.post(SERVER.URL + SERVER.ROUTER.voice + 'voice/' + vid + '/', null, rootGetters['user/config'])
 			.then(() => {
         dispatch('user/getUserInfo', null, { root: true })
-        alert('현재 목소리가 변경되었습니다.')
+        swal('현재 목소리가 변경되었습니다.', { buttons: '확인' })
 			})
 			.catch((err) => {
 				console.log(err)

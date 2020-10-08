@@ -122,6 +122,8 @@
 
 <script>
 import cookies from 'vue-cookies'
+import swal from 'sweetalert'
+import router from '@/router'
 import { mapState, mapActions } from 'vuex'
 
 export default {
@@ -149,30 +151,50 @@ export default {
     kakaoLogout() {
       if (!window.Kakao.Auth.getAccessToken()) {
         cookies.remove('auth-token')
-        window.location.reload(true)
-        alert("로그아웃 되었습니다.")
+        router.push({name: 'Login'})
+        swal({
+          title: "다음에 또 만나요.",
+          text: "나랑노랑"
+        })
         return
       }
       window.Kakao.Auth.logout(function() {
         // console.log('logout ok\naccess token -> ' + window.Kakao.Auth.getAccessToken())
         cookies.remove('auth-token')
-        window.location.reload(true)
-        alert("로그아웃 되었습니다.")
+        router.push({name: 'Login'})
+        swal({
+          title: "다음에 또 만나요.",
+          text: "나랑노랑"
+        })
       })
     },
     onRefund(tid) {
-      if (confirm("정말 결제를 취소하시겠습니까??") == true) { 
-        this.delsubscribe({ tid: tid})
-      }
+      swal({
+        title: "결제 취소",
+        text: "정말 결제를 취소하시겠습니까??",
+        buttons: ['닫기', '확인'],
+      })
+      .then((willDelete) => {
+        if (willDelete) {
+          this.delsubscribe({ tid: tid})
+        }
+      })
     },
     onChangeVoice(vid) {
-      if (confirm("목소리를 변경하시겠습니까??") == true) { 
-        if (this.current_voice.id == vid) {
-          alert("현재 목소리로는 변경할 수 없습니다.")
-        } else {
-          this.postVoice(vid)
+      swal({
+        title: "목소리 변경",
+        text: "목소리를 변경하시겠습니까??",
+        buttons: ['닫기', '확인'],
+      })
+      .then((willDelete) => {
+        if (willDelete) {
+          if (this.current_voice.id == vid) {
+            swal("현재 목소리로는 변경할 수 없습니다.", { buttons: '확인' })
+          } else {
+            this.postVoice(vid)
+          }
         }
-      }
+      })
     },
   },
   created() {

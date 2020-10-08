@@ -24,7 +24,7 @@ export default {
     return {
       height: screen.height - 180
     }
-  }
+  },
 }
 </script>
 
