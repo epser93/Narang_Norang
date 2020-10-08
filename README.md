@@ -202,7 +202,7 @@ npm run serve
 
 
 
-## RESTAPI
+## RESTAPI문서
 
 > 아래 링크 참조
 
