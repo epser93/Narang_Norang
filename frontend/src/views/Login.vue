@@ -95,7 +95,8 @@ export default {
               swal({
                 title: (data.user.first_name == '') ? data.user.username + '님 환영합니다!!' : data.user.first_name + '님 환영합니다!!', 
                 text: "나랑노랑",
-                icon: "success"
+                icon: "success",
+                buttons: '확인'
               })
               setTimeout(function() {
                 window.location.reload(true)

@@ -2,7 +2,7 @@ export default{
     URL: 'https://j3c206.p.ssafy.io/api/',
     ROUTER: {
       //user
-      login: 'accounts/kakao/',
+      login: 'accounts/login/',
       user: 'accounts/user/',
       kakaopay: 'accounts/kakaopay/',
       subscribe: 'accounts/subscribes/',

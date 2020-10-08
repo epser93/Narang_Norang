@@ -1,52 +1,58 @@
 <template>
-  <div v-if="ebook">
-    <div style="width: 80%; margin: 0 auto;">
-      <booklet :displayPageNumber="false" :enableSelectPage="false" :displayButton="false" :onFlipEnd="this.onFlipEnd" ref="Book">
-        <div class="page cover">
-          <article class="content" style="background-color: #bca98a;">
-            <h1>{{ book_name }}</h1>
-          </article>
-        </div>
-        <div class="page" v-for="(page, i) in pages" :key="i">
-          <article class="content" style="background-color: white;">
-            <b-icon icon="bookmarks" scale="1.5" class="float-right"></b-icon>
-            <div v-for="(item, j) in itemsForList" :key="j">
-              <h3 @click="readMe(3*i + j)"><text-highlight :queries="queries" class="my-5" :id="`index${3*i + j}`">
-                {{ item.scenario.content }}
-              </text-highlight></h3>
-            </div>
-          </article>
-          <article class="content" style="background-color: white;">
-          </article>
-        </div>
-        <div class="page back">
-          <article class="content" style="background-color: #bca98a;" />
-          <article class="content" style="background-color: #bca98a;" />
-        </div>
-      </booklet>
+  <div>
+    <div v-if="is_loading" class="loading-image" style="margin-top: 280px;">
+      <h1>잠시만 기다려 주세요.</h1><b-icon icon="three-dots" animation="cylon" font-scale="4"></b-icon>
     </div>
 
-    <b-button @click="$router.go(-1)" variant="outline-secondary" class="my-2 mr-2">
-      <b-icon icon="arrow-left" aria-hidden="true"></b-icon> 뒤로가기
-    </b-button>
+    <div v-else>
+      <div style="width: 80%; margin: 0 auto;">
+        <booklet :displayPageNumber="false" :enableSelectPage="false" :displayButton="false" :onFlipEnd="this.onFlipEnd" ref="Book">
+          <div class="page cover">
+            <article class="content" style="background-color: #bca98a;">
+              <h1>{{ book_name }}</h1>
+            </article>
+          </div>
+          <div class="page" v-for="(page, i) in pages" :key="i">
+            <article class="content" style="background-color: white;">
+              <b-icon icon="bookmarks" scale="1.5" class="float-right"></b-icon>
+              <div v-for="(item, j) in itemsForList" :key="j">
+                <h3 @click="readMe(3*i + j)" class="my-5" :id="`index${3*i + j}`"><text-highlight :queries="queries">
+                  {{ item.scenario.content }}
+                </text-highlight></h3>
+              </div>
+            </article>
+            <article class="content" style="background-color: white;">
+            </article>
+          </div>
+          <div class="page back">
+            <article class="content" style="background-color: #bca98a;" />
+            <article class="content" style="background-color: #bca98a;" />
+          </div>
+        </booklet>
+      </div>
 
-    <b-button size="lg" variant="secondary" class="mb-2 mx-3" @click="toPrev()">
-      <b-icon icon="arrow-left" aria-label="Help"></b-icon>
-    </b-button>
-  
-    <b-button v-if="(this.nowPage == 0) || (this.nowPage > this.pages)" size="lg" variant="secondary" class="mb-2 mx-3" @click="restart">
-      <b-icon icon="app" aria-label="Help" v-if="playing"></b-icon>
-      <b-icon icon="play" aria-label="Help" v-else></b-icon>
-    </b-button>
-    <b-button v-else size="lg" variant="secondary" class="mb-2 mx-3" @click="start">
-      <b-icon icon="app" aria-label="Help" v-if="playing"></b-icon>
-      <b-icon icon="play" aria-label="Help" v-else></b-icon>
-    </b-button>
+      <b-button @click="$router.go(-1)" variant="outline-secondary" class="my-2 mr-2">
+        <b-icon icon="arrow-left" aria-hidden="true"></b-icon> 뒤로가기
+      </b-button>
 
-    <b-button size="lg" variant="secondary" class="mb-2 mx-3"  @click="toNext()">
-      <b-icon icon="arrow-right" aria-label="Help"></b-icon>
-    </b-button>
+      <b-button size="lg" variant="secondary" class="mb-2 mx-3" @click="toPrev()">
+        <b-icon icon="arrow-left" aria-label="Help"></b-icon>
+      </b-button>
+    
+      <b-button v-if="(this.nowPage == 0) || (this.nowPage > this.pages)" size="lg" variant="secondary" class="mb-2 mx-3" @click="restart">
+        <b-icon icon="app" aria-label="Help" v-if="playing"></b-icon>
+        <b-icon icon="play" aria-label="Help" v-else></b-icon>
+      </b-button>
+      <b-button v-else size="lg" variant="secondary" class="mb-2 mx-3" @click="start">
+        <b-icon icon="app" aria-label="Help" v-if="playing"></b-icon>
+        <b-icon icon="play" aria-label="Help" v-else></b-icon>
+      </b-button>
 
+      <b-button size="lg" variant="secondary" class="mb-2 mx-3"  @click="toNext()">
+        <b-icon icon="arrow-right" aria-label="Help"></b-icon>
+      </b-button>
+
+    </div>
   </div>
 </template>
 
@@ -88,6 +94,7 @@ export default {
       index: 0,
       playing: false,
       is_paged: true,
+      is_loading: true,
       direction: '',
       perPage: 3,
       nowPage: 0,
@@ -171,6 +178,7 @@ export default {
     this.getEbook({bid: this.bid, vid: this.vid})
     this.getBookmark(this.bid)
     setTimeout(function() {
+      this.is_loading = false
       if ((this.bookmark.length == 0) || (this.bookmark[0].page == 1)) {
         this.nowPage = 0
         this.index = 3*(this.nowPage-1)
@@ -192,7 +200,7 @@ export default {
           }
         })
       }
-    }.bind(this), 200)
+    }.bind(this), 1500)
   },
   destroyed() {
     if (this.nowPage > this.pages) {
@@ -204,3 +212,12 @@ export default {
   }
 }
 </script>
+
+<style>
+  .loading-image {
+    margin-top: 130px;
+  }
+  mark, .mark {
+    padding: 0;
+  }
+</style>

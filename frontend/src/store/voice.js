@@ -50,8 +50,8 @@ export default {
         .then(({ data }) => {
           router.push({name:'REC', params:{vid: data.id}})
         })
-        .catch((err) => {
-          console.log(err)
+        .catch(() => {
+          swal('중복된 목소리 이름입니다.', { buttons: '확인' })
         })
 		},
 		getTrain({ rootGetters , commit }, vid) {
@@ -86,8 +86,13 @@ export default {
 		startTrain({ rootGetters }, vid) {
 			axios.post(SERVER.URL + SERVER.ROUTER.train + vid + '/', null, rootGetters['user/config'])
         .then(() => {
-          router.push({name:'Voice'})
-					swal('학습을 시작합니다.', { buttons: '확인' })
+					router.push({name:'Voice'})
+					swal({
+						title: "학습을 시작합니다.", 
+						text: "나랑노랑",
+						icon: "success",
+						buttons: '확인'
+					})
         })
         .catch((err) => {
           console.log(err)
