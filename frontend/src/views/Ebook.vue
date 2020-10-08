@@ -102,7 +102,7 @@ export default {
   },
   methods: {
     ...mapActions('book', ['getEbook', ]),
-    ...mapActions('bookmark', ['getBookmark', 'postBookmark']),
+    ...mapActions('bookmark', ['getBookmark', 'postBookmark','delBookmark']),
     start() {
       if(this.playing) {
         this.audio.pause();
@@ -182,7 +182,6 @@ export default {
       if ((this.bookmark.length == 0) || (this.bookmark[0].page == 1)) {
         this.nowPage = 0
         this.index = 3*(this.nowPage-1)
-        this.$refs.Book.movePage(1)
       } else {
         swal({
           title: "이어서 읽으시겠습니까?",
@@ -203,8 +202,8 @@ export default {
     }.bind(this), 1500)
   },
   destroyed() {
-    if (this.nowPage > this.pages) {
-      this.postBookmark({ bid: this.bid, body: { id: 1 } })
+    if (this.nowPage >= this.pages) {
+      this.delBookmark(this.bid)
     } else {
       this.postBookmark({ bid: this.bid, body: { id: this.nowPage + 1 } })
     }

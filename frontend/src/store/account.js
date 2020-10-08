@@ -117,7 +117,12 @@ export default {
       .then(() => {
         dispatch('getUserInfo')
         dispatch('getsubscribes')
-        swal('결제가 취소 되었습니다.', { buttons: '확인' })
+        swal({
+          title: "결제가 취소되었습니다.", 
+          text: "나랑노랑",
+          icon: "info",
+          buttons: '확인'
+        })
       })
       .catch((err) => {
         console.log(err)

@@ -1,6 +1,6 @@
 <template>
     <div v-if="is_loading" class="loading-image" style="margin-top: 280px;">
-      <h1>잠시만 기다려 주세요.</h1><b-icon icon="three-dots" animation="cylon" font-scale="4"></b-icon>
+      <h1>결제를 진행 중입니다.</h1><b-icon icon="three-dots" animation="cylon" font-scale="4"></b-icon>
     </div>
 </template>
 

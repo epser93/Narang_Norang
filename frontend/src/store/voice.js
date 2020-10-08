@@ -50,8 +50,10 @@ export default {
         .then(({ data }) => {
           router.push({name:'REC', params:{vid: data.id}})
         })
-        .catch(() => {
-          swal('중복된 목소리 이름입니다.', { buttons: '확인' })
+        .catch((err) => {
+					if (err.response.status == 400) {
+						swal('중복된 목소리 이름입니다.', { buttons: '확인' })
+					}
         })
 		},
 		getTrain({ rootGetters , commit }, vid) {
@@ -70,7 +72,9 @@ export default {
         swal('목소리 이름이 수정되었습니다.', { buttons: '확인' })
 			})
 			.catch((err) => {
-				console.log(err)
+				if (err.response.status == 400) {
+					swal('중복된 목소리 이름입니다.', { buttons: '확인' })
+				}
 			})
 		},
 		delTrain({ rootGetters, dispatch }, vid) {
@@ -132,7 +136,9 @@ export default {
         swal('목소리 이름이 수정되었습니다.', { buttons: '확인' })
 			})
 			.catch((err) => {
-				console.log(err)
+				if (err.response.status == 400) {
+					swal('중복된 목소리 이름입니다.', { buttons: '확인' })
+				}
 			})
 		},
 		delVoice({ rootGetters, dispatch }, vid) {

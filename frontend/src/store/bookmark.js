@@ -22,7 +22,7 @@ export default {
     getBookmarks({ rootGetters , commit }) {
       axios.get(SERVER.URL + SERVER.ROUTER.mark, rootGetters['user/config'])
       .then(({ data }) => {
-          commit('SET_BOOKMARKS', data)
+        commit('SET_BOOKMARKS', data)
       })
       .catch((err) => {
           console.log(err)
@@ -40,6 +40,15 @@ export default {
     postBookmark({ rootGetters }, { bid, body }) {
       axios.post(SERVER.URL + SERVER.ROUTER.mark + bid + '/', body, rootGetters['user/config'])
         .then(() => {
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    delBookmark({ rootGetters, dispatch  }, bid) {
+      axios.delete(SERVER.URL + SERVER.ROUTER.mark + bid + '/', rootGetters['user/config'])
+        .then(() => {
+          dispatch('getBookmarks')
         })
         .catch((err) => {
           console.log(err)
