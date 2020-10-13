@@ -137,7 +137,7 @@ export default {
           this.recordings[i] = ''
         }
       }
-      this.index = (this.index == 20) ? 19 : this.index 
+      this.index = (this.index == 100) ? 99 : this.index 
       this.now_record = this.recordings[this.index]
       this.is_loading = false
 
