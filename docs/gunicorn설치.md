@@ -55,7 +55,6 @@ ExecStart=/home/ubuntu/anaconda3/envs/AI/bin/gunicorn --workers 3 AI_PJT3.wsgi:a
 
 [Install]
 WantedBy=multi-user.target
-
 ```
 
 ## 3. gunicorn 명령어

@@ -8,6 +8,16 @@
  pip install mysqlclient
 ```
 
+- ubuntu일경우
+
+```
+sudo apt-get install libmysqlclient-dev
+```
+
+
+
+
+
 
 
 ## 2. django settings.py 수정하기
