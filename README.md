@@ -6,7 +6,7 @@
 >
 > 소개영상 : https://youtu.be/PF1TWlqGhkM
 >
-> 시연영상 : https://youtu.be/W2ff6Ov0sDw
+> 시연영상 : https://youtu.be/Gg64l1emY6s
 
 
 
